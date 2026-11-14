@@ -159,7 +159,7 @@ const articles = {
     tag: "REAL-WORLD SECURITY AUDIT • 8 VULNERABILITIES DISCLOSED",
     title: "Studi Kasus Audit Nyata: 8 Temuan Kerentanan pada Web App Kalkulator/Solver Ransum Ternak",
     body: `
-      <p><strong>Konteks Audit (Redacted Target):</strong> Menggabungkan latar belakang saya di bidang <em>Nutrisi/Produksi Ternak (UNSOED)</em> dan <em>Application Security</em>, saya melakukan pengujian menyeluruh terhadap sebuah aplikasi web formulasi ransum pakan ternak berbasis Express.js. Hasilnya: ditemukan <strong>8 celah keamanan & logika bisnis (3 High, 4 Medium, 1 Low)</strong> yang seluruhnya berhasil direproduksi dan dilaporkan secara bertanggung jawab (<em>Responsible Disclosure</em>).</p>
+      <p><strong>Konteks Audit (Redacted Target):</strong> Menggabungkan latar belakang saya di bidang <em>D3 Budidaya Ternak (Fakultas Peternakan UNSOED)</em> dan <em>Application Security</em>, saya melakukan pengujian menyeluruh terhadap sebuah aplikasi web formulasi ransum pakan ternak berbasis Express.js. Hasilnya: ditemukan <strong>8 celah keamanan & logika bisnis (3 High, 4 Medium, 1 Low)</strong> yang seluruhnya berhasil direproduksi dan dilaporkan secara bertanggung jawab (<em>Responsible Disclosure</em>).</p>
       <h4>1. Ringkasan 8 Temuan Kerentanan</h4>
       <pre>[HIGH #1] Client & Solver DoS (Unbounded Input)
   ↳ Input Berat Badan (BB) diisi 0 atau negatif membuat kalkulator solver hang total (infinite loop/freeze).
@@ -307,7 +307,7 @@ const i18n = {
     exp2_role: "Full-Stack & AI Automation Developer",
     exp2_desc: "Merancang aplikasi web modern menggunakan Next.js, TypeScript, dan Node.js/NestJS. Mengembangkan jembatan otomatisasi berbasis <strong>Model Context Protocol (MCP)</strong> dengan 40+ tools untuk mengendalikan Android via ADB & Chrome CDP, serta membangun bot WhatsApp berbasis Google Gemini AI.",
     exp3_role: "100% Self-Taught Engineer & Mahasiswa Aktif UNSOED",
-    exp3_desc: "Mempelajari seluruh keahlian <strong>Software Engineering, Linux (Kali/Arch), AI Automation, dan Cybersecurity secara otodidak dari nol</strong> di sela-sela kuliah D3 Peternakan di Universitas Jenderal Soedirman (UNSOED). Kombinasi unik antara logika sains dan rekayasa keamanan siber ini terbukti menjadi keunggulan tersendiri saat membedah celah logika bisnis maupun arsitektur backend.",
+    exp3_desc: "Mempelajari seluruh keahlian <strong>Software Engineering, Linux (Kali/Arch), AI Automation, dan Cybersecurity secara otodidak dari nol</strong> di sela-sela kuliah D3 Budidaya Ternak (Fakultas Peternakan) di Universitas Jenderal Soedirman (UNSOED). Kombinasi unik antara logika sains dan rekayasa keamanan siber ini terbukti menjadi keunggulan tersendiri saat membedah celah logika bisnis maupun arsitektur backend.",
     srv_tag: "// LAYANAN PROFESIONAL",
     srv_title: "Solusi yang Bisa Saya Bantu",
     srv_subtitle: "Tersedia untuk rekrutmen perusahaan (Full-Time/Remote) maupun proyek lepas (Freelance).",
