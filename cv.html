@@ -160,22 +160,21 @@
     <section class="section">
       <h2 class="section-title">Ringkasan Profesional (Executive Summary)</h2>
       <p class="summary">
-        <strong>Software Developer</strong> dan <strong>Bug Bounty Hunter</strong> yang berfokus pada pengembangan aplikasi web modern (Next.js, TypeScript, Node.js, Python), otomasi berbasis AI/MCP, serta pengujian keamanan aplikasi (Application Security). Menggabungkan keahlian rekayasa perangkat lunak dengan pemahaman mendalam terhadap kerentanan <strong>OWASP Top 10</strong> untuk membangun sistem yang skalabel, efisien, dan aman sejak tahap perancangan (<em>Secure by Design</em>).
+        <strong>Self-Taught Software Developer</strong> dan <strong>Bug Bounty Hunter</strong> (mahasiswa aktif di <strong>Universitas Jenderal Soedirman / UNSOED</strong>) yang mempelajari rekayasa perangkat lunak, otomasi AI/MCP, dan <em>Application Security</em> secara otodidak dari nol. Menggabungkan ketajaman analisis domain dengan penguasaan teknis <strong>Next.js, TypeScript, Node.js, Python</strong>, serta pengujian kerentanan <strong>OWASP Top 10</strong> untuk membangun dan mengaudit sistem secara menyeluruh (<em>Secure by Design</em>).
       </p>
     </section>
 
     <section class="section">
-      <h2 class="section-title">Pengalaman & Riset (Experience)</h2>
+      <h2 class="section-title">Pengalaman & Riset Keamanan (Experience)</h2>
 
       <div class="exp-item">
         <div class="exp-head">
-          <div><span class="exp-title">Independent Security Researcher (Bug Bounty Hunter)</span> — <span class="exp-org">HackerOne (@zeonmaltius)</span></div>
+          <div><span class="exp-title">Independent Security Researcher (Bug Bounty Hunter)</span> — <span class="exp-org">HackerOne (@zeonmaltius) & Independent Audits</span></div>
           <span class="exp-date">2025 – Sekarang</span>
         </div>
         <ul class="bullets">
-          <li>Melakukan pengujian penetrasi aplikasi web dan analisis kerentanan berdasarkan standar <strong>OWASP Top 10</strong> (Broken Access Control/IDOR, XSS, SQL Injection, SSRF, dan Security Misconfiguration).</li>
+          <li><strong>Studi Kasus Audit Nyata (Web App Kalkulator/Solver Ransum Ternak):</strong> Menemukan dan melaporkan secara bertanggung jawab (<em>Responsible Disclosure</em>) <strong>8 celah keamanan & logika bisnis (3 High, 4 Medium, 1 Low)</strong>, meliputi kebocoran 38 <em>record</em> riwayat pengguna tanpa autentikasi (<code>GET /api/history</code>), mutasi database tanpa validasi (<code>POST /api/feeds</code> hingga memicu korupsi data <code>2.3e+289 kg</code>), <em>Solver DoS</em> pada input negatif, serta misconfiguration CORS wildcard (<code>*</code>) dan Security Headers.</li>
           <li>Membangun pipeline <em>reconnaissance</em> otomatis menggunakan <strong>Subfinder, Nuclei, Nmap, dan Shodan</strong> untuk pemetaan permukaan serangan (<em>attack surface mapping</em>) secara cepat dan akurat.</li>
-          <li>Menyusun laporan teknis kerentanan (Proof of Concept) beserta rekomendasi mitigasi (<em>remediation</em>) bagi tim engineering.</li>
         </ul>
       </div>
 
@@ -215,10 +214,23 @@
 
       <div class="exp-item">
         <div class="exp-head">
-          <div><span class="exp-title">Asynchronous Web Recon & Resilience Toolkit</span> <span class="exp-org">(Python Asyncio, Nuclei, Bash, Kali Linux)</span></div>
+          <div><span class="exp-title">Fata Termux Toolkit V2 & Asynchronous Recon Suite</span> <span class="exp-org">(Python Asyncio, Nuclei, Bash, Linux)</span></div>
         </div>
         <ul class="bullets">
-          <li>Mengembangkan skrip jaringan asinkron berkinerja tinggi di lingkungan Linux/Termux untuk pengujian beban HTTP/SSL dan otomasi pemindaian celah keamanan.</li>
+          <li>Mengembangkan CLI produktivitas (<code>github.com/UserFxxk/fata-termux-toolkit</code>) serta skrip jaringan asinkron berkinerja tinggi di lingkungan Linux/Termux untuk diagnostik jaringan dan otomasi pemindaian celah keamanan.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Pendidikan & Pembelajaran Mandiri (Education)</h2>
+      <div class="exp-item">
+        <div class="exp-head">
+          <div><span class="exp-title">Universitas Jenderal Soedirman (UNSOED)</span> — <span class="exp-org">Fakultas Peternakan (D3 Produksi Ternak)</span></div>
+          <span class="exp-date">Mahasiswa Aktif</span>
+        </div>
+        <ul class="bullets">
+          <li>Memadukan pemahaman domain sains/agrikultur dengan keahlian <strong>Software Engineering & Cybersecurity yang dipelajari 100% secara otodidak dari nol</strong> (terbukti efektif saat mengaudit logika matematis solver & celah keamanan backend pada aplikasi web formulasi pakan ternak).</li>
         </ul>
       </div>
     </section>

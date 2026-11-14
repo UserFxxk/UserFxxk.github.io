@@ -245,19 +245,19 @@
                 <div>
                   <span class="timeline-role" data-i18n="exp1_role">Independent Security Researcher (Bug Bounty Hunter)</span>
                   <h3 class="timeline-org">
-                    <i data-lucide="shield" class="icon-xs"></i> HackerOne (@zeonmaltius)
+                    <i data-lucide="shield" class="icon-xs"></i> HackerOne (@zeonmaltius) & Independent Audits
                   </h3>
                 </div>
                 <span class="timeline-date">2025 – Present</span>
               </div>
               <p class="timeline-desc" data-i18n="exp1_desc">
-                Melakukan pengujian penetrasi aplikasi web secara independen dan menganalisis celah keamanan berfokus pada standar <strong>OWASP Top 10</strong> (Broken Access Control/IDOR, XSS, SQLi, SSRF). Membangun workflow <em>reconnaissance</em> otomatis menggunakan Subfinder, Nuclei, dan Burp Suite untuk memetakan permukaan serangan secara akurat.
+                Melakukan pengujian penetrasi aplikasi web secara independen dan menganalisis celah keamanan berfokus pada <strong>OWASP Top 10</strong> serta logika bisnis. Berhasil menemukan & melaporkan secara bertanggung jawab <strong>8 kerentanan nyata (3 High, 4 Medium, 1 Low)</strong> pada aplikasi web solver formulasi pakan (kebocoran 38 record riwayat pengguna tanpa auth, korupsi database <code>2.3e+289 kg</code> via unvalidated API mutation, dan Solver DoS).
               </p>
               <div class="project-tags">
                 <span>Web Pentesting</span>
                 <span>OWASP Top 10</span>
-                <span>Burp Suite</span>
-                <span>Nuclei & Subfinder</span>
+                <span>Business Logic Flaws</span>
+                <span>Nuclei & Burp Suite</span>
               </div>
             </div>
           </div>
@@ -293,21 +293,21 @@
             <div class="timeline-card">
               <div class="timeline-header">
                 <div>
-                  <span class="timeline-role" data-i18n="exp3_role">Open Source Builder & Linux Security Tooling</span>
+                  <span class="timeline-role" data-i18n="exp3_role">100% Self-Taught Engineer & Mahasiswa Aktif UNSOED</span>
                   <h3 class="timeline-org">
-                    <i data-lucide="terminal-square" class="icon-xs"></i> GitHub (@UserFxxk)
+                    <i data-lucide="graduation-cap" class="icon-xs"></i> Universitas Jenderal Soedirman (UNSOED) — Fakultas Peternakan
                   </h3>
                 </div>
                 <span class="timeline-date">Ongoing</span>
               </div>
               <p class="timeline-desc" data-i18n="exp3_desc">
-                Bereksperimen dengan sistem operasi Kali Linux & Arch Linux, kustomisasi agen LLM berbasis Go (Scorp), serta pembuatan perkakas jaringan asinkron menggunakan Python untuk menguji ketahanan dan performa server.
+                Mempelajari seluruh keahlian <strong>Software Engineering, Linux (Kali/Arch), AI Automation, dan Cybersecurity secara otodidak dari nol</strong> di sela-sela kuliah D3 Peternakan di UNSOED. Kombinasi unik antara logika sains/nutrisi ternak dan rekayasa keamanan siber ini terbukti menjadi keunggulan tersendiri saat membedah celah logika bisnis maupun arsitektur backend.
               </p>
               <div class="project-tags">
-                <span>Python Asyncio</span>
-                <span>Golang</span>
+                <span>Self-Taught (Otodidak)</span>
+                <span>UNSOED</span>
+                <span>Cross-Disciplinary</span>
                 <span>Kali & Arch Linux</span>
-                <span>Shell Scripting</span>
               </div>
             </div>
           </div>
@@ -597,21 +597,21 @@
                 <i data-lucide="radar"></i>
               </div>
               <div class="project-links">
-                <a href="https://hackerone.com/zeonmaltius" target="_blank" rel="noopener" title="HackerOne Profile">
-                  <i data-lucide="shield"></i>
+                <a href="https://github.com/UserFxxk/fata-termux-toolkit" target="_blank" rel="noopener" title="Lihat Source Code di GitHub">
+                  <i data-lucide="github"></i>
                 </a>
               </div>
             </div>
-            <span class="project-type">Security Engineering</span>
-            <h3 class="project-title">Reconnaissance & Resilience Suite</h3>
+            <span class="project-type">Python CLI & Security Recon</span>
+            <h3 class="project-title">Fata Termux Toolkit V2 & Recon Suite</h3>
             <p class="project-desc" data-i18n="proj4_desc">
-              Rangkaian skrip Python asinkron dan pipeline Nuclei/Subfinder untuk memetakan permukaan serangan (attack surface), menguji ketahanan server, serta mengidentifikasi celah OWASP Top 10 secara efisien.
+              Toolkit produktivitas CLI berbasis Python, diagnostik jaringan, serta pipeline Nuclei/Subfinder untuk memetakan permukaan serangan (attack surface) dan mengidentifikasi celah OWASP Top 10.
             </p>
             <div class="project-tags">
-              <span>Python Asyncio</span>
+              <span>Python CLI</span>
               <span>Nuclei</span>
               <span>OWASP Top 10</span>
-              <span>OSINT</span>
+              <span>Termux / Linux</span>
             </div>
           </article>
         </div>
@@ -688,12 +688,12 @@
         <div class="writeups-grid">
           <article class="writeup-card">
             <div class="writeup-meta">
-              <span class="badge badge-green">AppSec / OWASP #1</span>
-              <span class="writeup-time">5 min read</span>
+              <span class="badge badge-green">Real Audit • 8 Temuan</span>
+              <span class="writeup-time">6 min read</span>
             </div>
-            <h3 class="writeup-title" data-i18n="wrt1_title">Membedah & Mencegah Celah IDOR (Broken Access Control) pada REST API</h3>
+            <h3 class="writeup-title" data-i18n="wrt1_title">Studi Kasus Audit Nyata: Membedah 8 Celah Keamanan pada Web App Solver Ransum Ternak</h3>
             <p class="writeup-excerpt" data-i18n="wrt1_desc">
-              Studi kasus bagaimana penyerang memanipulasi parameter objek di endpoint API, serta cara mengimplementasikan validasi kepemilikan (ownership middleware) di Node.js/NestJS.
+              Laporan audit independen (3 High, 4 Medium, 1 Low): Mulai dari kebocoran 38 record riwayat pengguna tanpa login, korupsi database 2.3e+289 kg akibat absennya validasi backend, hingga Solver DoS.
             </p>
             <button class="writeup-btn" data-article="idor">
               <span data-i18n="wrt_read">Baca Studi Kasus</span> <i data-lucide="book-open" class="icon-xs"></i>

@@ -156,32 +156,43 @@ if (quickForm) {
 // Article Reader Modal Logic
 const articles = {
   idor: {
-    tag: "APPSEC CASE STUDY • OWASP TOP 10 (#1)",
-    title: "Membedah & Mencegah Celah IDOR (Insecure Direct Object Reference) pada REST API",
+    tag: "REAL-WORLD SECURITY AUDIT • 8 VULNERABILITIES DISCLOSED",
+    title: "Studi Kasus Audit Nyata: 8 Temuan Kerentanan pada Web App Kalkulator/Solver Ransum Ternak",
     body: `
-      <p><strong>Ringkasan Masalah:</strong> Dalam banyak pengujian Bug Bounty di HackerOne, celah <em>Broken Access Control</em> (khususnya IDOR) masih menjadi temuan paling kritis. Celah ini terjadi ketika aplikasi hanya memeriksa apakah pengguna sudah login (<em>Authentication</em>), tetapi lupa memeriksa apakah pengguna tersebut berhak mengakses ID data yang diminta (<em>Authorization</em>).</p>
-      <h4>1. Contoh Pola Kode yang Rentan (Vulnerable Endpoint)</h4>
-      <pre>// ❌ RENTAN: Mengambil invoice hanya berdasarkan req.params.id tanpa cek pemilik
-app.get('/api/v1/invoices/:id', requireAuth, async (req, res) => {
-  const invoice = await db.invoices.findUnique({
-    where: { id: req.params.id }
-  });
-  return res.json(invoice);
+      <p><strong>Konteks Audit (Redacted Target):</strong> Menggabungkan latar belakang saya di bidang <em>Nutrisi/Produksi Ternak (UNSOED)</em> dan <em>Application Security</em>, saya melakukan pengujian menyeluruh terhadap sebuah aplikasi web formulasi ransum pakan ternak berbasis Express.js. Hasilnya: ditemukan <strong>8 celah keamanan & logika bisnis (3 High, 4 Medium, 1 Low)</strong> yang seluruhnya berhasil direproduksi dan dilaporkan secara bertanggung jawab (<em>Responsible Disclosure</em>).</p>
+      <h4>1. Ringkasan 8 Temuan Kerentanan</h4>
+      <pre>[HIGH #1] Client & Solver DoS (Unbounded Input)
+  ↳ Input Berat Badan (BB) diisi 0 atau negatif membuat kalkulator solver hang total (infinite loop/freeze).
+
+[HIGH #2] Unvalidated Backend Mutation & Database Corruption
+  ↳ Endpoint POST /api/feeds menerima nilai Dry Matter (DM) -500% -> HTTP 200 OK.
+  ↳ Memicu perhitungan rusak permanen di database publik (tercatat sapi 2.3e+289 kg!).
+
+[HIGH #3] Broken Access Control / Unauthenticated Data Exposure
+  ↳ Endpoint GET /api/history dapat diakses tanpa login, membocorkan 38 record riwayat milik pengguna lain.
+
+[MEDIUM #4] Unauthenticated Database Pollution
+  ↳ Database bahan pakan dapat ditulis siapa saja tanpa autentikasi (ditemukan entri "plastik" pada kategori Mineral).
+
+[MEDIUM #5–#7] Misconfiguration (CORS, Cookie, & Headers)
+  ↳ CORS Wildcard (*) global, Cookie SameSite=None + wildcard domain, serta absennya CSP, HSTS, & X-Frame-Options.
+
+[LOW #8] Tech Stack Fingerprinting
+  ↳ Header x-powered-by: Express terekspos secara default.</pre>
+      <h4>2. Rekomendasi Mitigasi (Remediation) yang Diberikan</h4>
+      <pre>// ✅ 1. Validasi Skema Input Ketat di Backend (Zod / Joi)
+const FeedSchema = z.object({
+  name: z.string().min(2).max(80),
+  dryMatterPct: z.number().min(0.1).max(100), // Tolak angka negatif / >100%
+  bodyWeightKg: z.number().positive().max(2500) // Cegah Solver DoS & Float Overflow
+});
+
+// ✅ 2. Proteksi Endpoint Riwayat dengan Auth + Ownership Filter
+app.get('/api/history', requireAuth, async (req, res) => {
+  const records = await db.history.findMany({ where: { userId: req.user.id } });
+  return res.json(records);
 });</pre>
-      <p>Penyerang cukup mengganti parameter <code>/api/v1/invoices/1042</code> menjadi <code>1043</code> di Burp Suite Repeater untuk mengunduh data sensitif milik pengguna lain.</p>
-      <h4>2. Mitigasi & Arsitektur Aman (Secure by Design)</h4>
-      <pre>// ✅ AMAN: Mengikat query langsung dengan userId dari token JWT sesi aktif + UUIDv4
-app.get('/api/v1/invoices/:id', requireAuth, async (req, res) => {
-  const invoice = await db.invoices.findFirst({
-    where: {
-      id: req.params.id,
-      ownerId: req.user.id // Enforced Ownership Check
-    }
-  });
-  if (!invoice) return res.status(404).json({ error: 'Resource not found' });
-  return res.json(invoice);
-});</pre>
-      <p><strong>Takeaway:</strong> Selalu terapkan validasi kepemilikan di level <em>data-access layer</em>, gunakan identifier acak (UUID/ULID), dan tulis automated integration test untuk menguji akses lintas-akun.</p>
+      <p><strong>Pelajaran Penting:</strong> Validasi di sisi <em>frontend</em> saja tidak pernah cukup. Menggabungkan pemahaman domain bisnis (batas biologis berat ternak & persentase nutrisi) dengan pengujian keamanan <em>backend</em> mampu mengungkap celah fatal yang sering terlewat oleh <em>scanner</em> otomatis.</p>
     `
   },
   mcp: {
@@ -292,11 +303,11 @@ const i18n = {
     exp_title: "Pengalaman Kerja & Riset Keamanan",
     exp_subtitle: "Perjalanan saya dalam membangun produk digital, otomasi AI, dan menguji keamanan aplikasi.",
     exp1_role: "Independent Security Researcher (Bug Bounty Hunter)",
-    exp1_desc: "Melakukan pengujian penetrasi aplikasi web secara independen dan menganalisis celah keamanan berfokus pada standar <strong>OWASP Top 10</strong> (Broken Access Control/IDOR, XSS, SQLi, SSRF). Membangun workflow <em>reconnaissance</em> otomatis menggunakan Subfinder, Nuclei, dan Burp Suite.",
+    exp1_desc: "Melakukan pengujian penetrasi aplikasi web secara independen dan menganalisis celah keamanan berfokus pada <strong>OWASP Top 10</strong> serta logika bisnis. Berhasil menemukan & melaporkan secara bertanggung jawab <strong>8 kerentanan nyata (3 High, 4 Medium, 1 Low)</strong> pada aplikasi web solver formulasi pakan.",
     exp2_role: "Full-Stack & AI Automation Developer",
     exp2_desc: "Merancang aplikasi web modern menggunakan Next.js, TypeScript, dan Node.js/NestJS. Mengembangkan jembatan otomatisasi berbasis <strong>Model Context Protocol (MCP)</strong> dengan 40+ tools untuk mengendalikan Android via ADB & Chrome CDP, serta membangun bot WhatsApp berbasis Google Gemini AI.",
-    exp3_role: "Open Source Builder & Linux Security Tooling",
-    exp3_desc: "Bereksperimen dengan sistem operasi Kali Linux & Arch Linux, kustomisasi agen LLM berbasis Go (Scorp), serta pembuatan perkakas jaringan asinkron menggunakan Python.",
+    exp3_role: "100% Self-Taught Engineer & Mahasiswa Aktif UNSOED",
+    exp3_desc: "Mempelajari seluruh keahlian <strong>Software Engineering, Linux (Kali/Arch), AI Automation, dan Cybersecurity secara otodidak dari nol</strong> di sela-sela kuliah D3 Peternakan di Universitas Jenderal Soedirman (UNSOED). Kombinasi unik antara logika sains dan rekayasa keamanan siber ini terbukti menjadi keunggulan tersendiri saat membedah celah logika bisnis maupun arsitektur backend.",
     srv_tag: "// LAYANAN PROFESIONAL",
     srv_title: "Solusi yang Bisa Saya Bantu",
     srv_subtitle: "Tersedia untuk rekrutmen perusahaan (Full-Time/Remote) maupun proyek lepas (Freelance).",
@@ -362,11 +373,11 @@ const i18n = {
     exp_title: "Experience & Security Research",
     exp_subtitle: "My journey in building digital products, AI automation, and testing application security.",
     exp1_role: "Independent Security Researcher (Bug Bounty Hunter)",
-    exp1_desc: "Conducting independent web application penetration testing and vulnerability research focused on <strong>OWASP Top 10</strong> (IDOR, XSS, SQLi, SSRF). Building automated reconnaissance pipelines with Subfinder, Nuclei, and Burp Suite.",
+    exp1_desc: "Conducting independent web application penetration testing focused on <strong>OWASP Top 10</strong> and business logic flaws. Discovered and responsibly disclosed <strong>8 real-world vulnerabilities (3 High, 4 Medium, 1 Low)</strong> in a livestock feed formulation solver web app.",
     exp2_role: "Full-Stack & AI Automation Developer",
     exp2_desc: "Engineering modern web apps with Next.js, TypeScript, and Node.js/NestJS. Created a 40+ tool <strong>Model Context Protocol (MCP)</strong> bridge for Android ADB & Chrome CDP automation, plus Gemini AI WhatsApp assistants.",
-    exp3_role: "Open Source Builder & Linux Security Tooling",
-    exp3_desc: "Experimenting with Kali & Arch Linux environments, Go-based LLM system agents (Scorp), and asynchronous Python network benchmarking utilities.",
+    exp3_role: "100% Self-Taught Engineer & UNSOED Student",
+    exp3_desc: "Mastered <strong>Software Engineering, Linux (Kali/Arch), AI Automation, and Cybersecurity 100% self-taught from scratch</strong> while studying Animal Science at Universitas Jenderal Soedirman (UNSOED) — bridging domain logic with deep technical security analysis.",
     srv_tag: "// PROFESSIONAL SERVICES",
     srv_title: "How I Can Help You",
     srv_subtitle: "Available for full-time/remote engineering roles as well as freelance engagements.",
