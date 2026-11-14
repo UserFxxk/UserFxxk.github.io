@@ -11,7 +11,7 @@ Repository ini berisi kode sumber portofolio profesional **Fata Fatikhul Karim**
 - **LinkedIn Cover Banner Studio (`/banner.html`):** Generator sampul LinkedIn ukuran resmi `1584 × 396 px` dengan 3 pilihan tema (`https://userfxxk.github.io/banner.html`).
 
 ## 🔗 Tautan Profil
-- **LinkedIn:** [linkedin.com/in/fata-fatikhul-karim-587567357](https://www.linkedin.com/in/fata-fatikhul-karim-587567357)
+- **LinkedIn:** [linkedin.com/in/fata-fatikhul-karim](https://www.linkedin.com/in/fata-fatikhul-karim)
 - **GitHub:** [github.com/UserFxxk](https://github.com/UserFxxk)
 - **HackerOne:** [hackerone.com/zeonmaltius](https://hackerone.com/zeonmaltius)
 - **Email:** [fatafatikhul@gmail.com](mailto:fatafatikhul@gmail.com)

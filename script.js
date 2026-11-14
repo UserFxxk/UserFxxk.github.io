@@ -63,7 +63,7 @@ const termCommands = {
   },
   contact: {
     cmd: "./contact.sh",
-    resp: "LinkedIn : linkedin.com/in/fata-fatikhul-karim-587567357\nGitHub   : github.com/UserFxxk\nEmail    : fatafatikhul@gmail.com"
+    resp: "Portfolio: https://userfxxk.github.io\nLinkedIn : linkedin.com/in/fata-fatikhul-karim\nGitHub   : github.com/UserFxxk\nEmail    : fatafatikhul@gmail.com"
   }
 };
 
