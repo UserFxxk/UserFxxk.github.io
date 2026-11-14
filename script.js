@@ -153,6 +153,103 @@ if (quickForm) {
   });
 }
 
+// Article Reader Modal Logic
+const articles = {
+  idor: {
+    tag: "APPSEC CASE STUDY • OWASP TOP 10 (#1)",
+    title: "Membedah & Mencegah Celah IDOR (Insecure Direct Object Reference) pada REST API",
+    body: `
+      <p><strong>Ringkasan Masalah:</strong> Dalam banyak pengujian Bug Bounty di HackerOne, celah <em>Broken Access Control</em> (khususnya IDOR) masih menjadi temuan paling kritis. Celah ini terjadi ketika aplikasi hanya memeriksa apakah pengguna sudah login (<em>Authentication</em>), tetapi lupa memeriksa apakah pengguna tersebut berhak mengakses ID data yang diminta (<em>Authorization</em>).</p>
+      <h4>1. Contoh Pola Kode yang Rentan (Vulnerable Endpoint)</h4>
+      <pre>// ❌ RENTAN: Mengambil invoice hanya berdasarkan req.params.id tanpa cek pemilik
+app.get('/api/v1/invoices/:id', requireAuth, async (req, res) => {
+  const invoice = await db.invoices.findUnique({
+    where: { id: req.params.id }
+  });
+  return res.json(invoice);
+});</pre>
+      <p>Penyerang cukup mengganti parameter <code>/api/v1/invoices/1042</code> menjadi <code>1043</code> di Burp Suite Repeater untuk mengunduh data sensitif milik pengguna lain.</p>
+      <h4>2. Mitigasi & Arsitektur Aman (Secure by Design)</h4>
+      <pre>// ✅ AMAN: Mengikat query langsung dengan userId dari token JWT sesi aktif + UUIDv4
+app.get('/api/v1/invoices/:id', requireAuth, async (req, res) => {
+  const invoice = await db.invoices.findFirst({
+    where: {
+      id: req.params.id,
+      ownerId: req.user.id // Enforced Ownership Check
+    }
+  });
+  if (!invoice) return res.status(404).json({ error: 'Resource not found' });
+  return res.json(invoice);
+});</pre>
+      <p><strong>Takeaway:</strong> Selalu terapkan validasi kepemilikan di level <em>data-access layer</em>, gunakan identifier acak (UUID/ULID), dan tulis automated integration test untuk menguji akses lintas-akun.</p>
+    `
+  },
+  mcp: {
+    tag: "AI ENGINEERING • MODEL CONTEXT PROTOCOL",
+    title: "Arsitektur MCP Bridge: Menghubungkan AI Agent ke Perangkat Android Fisik & Stealth Browser",
+    body: `
+      <p><strong>Latar Belakang:</strong> Large Language Models (LLM) memiliki kemampuan penalaran tinggi, namun terisolasi dari perangkat fisik. Dengan membangun server <strong>Model Context Protocol (MCP)</strong> di Node.js, kita dapat mengekspos 40+ tool eksekusi kepada AI Agent seperti Claude Desktop, Cursor, atau OpenCode.</p>
+      <h4>1. Alur Komunikasi Sistem</h4>
+      <pre>[AI Agent / LLM] ⇄ (JSON-RPC stdio) ⇄ [Node.js MCP Server]
+                                           ├──► Android Bridge (ADB Wireless :5555)
+                                           └──► Browser Bridge (Chromium CDP :9223)</pre>
+      <h4>2. Teknik Pembacaan Layar & Aksi Presisi</h4>
+      <p>Alih-alih mengandalkan koordinat layar statis yang mudah meleset saat ukuran layar berubah, modul Android MCP memanggil <code>uiautomator dump</code> untuk mengekstrak pohon elemen XML (<em>Accessibility Tree</em>), menghitung titik tengah <code>bounds="[x1,y1][x2,y2]"</code>, lalu mengeksekusi <code>input tap</code> secara akurat berdasarkan teks tombol atau <code>resource-id</code>.</p>
+      <p>👉 <strong>Source Code Lengkap:</strong> <a href="https://github.com/UserFxxk/android-browser-mcp" target="_blank" style="color:#34d399;">github.com/UserFxxk/android-browser-mcp</a></p>
+    `
+  },
+  recon: {
+    tag: "BUG BOUNTY WORKFLOW • RECONNAISSANCE",
+    title: "Pipeline Reconnaissance Otomatis dengan Subfinder, Nuclei & Python Asyncio",
+    body: `
+      <p><strong>Strategi Bug Hunting:</strong> Kecepatan dan ketelitian memetakan permukaan serangan (<em>attack surface</em>) sangat menentukan keberhasilan menemukan celah sebelum peneliti lain.</p>
+      <h4>1. Tahapan Pipeline Otomatis</h4>
+      <pre># 1. Subdomain Enumeration pasif & cepat
+subfinder -d target.com -all -silent | anew subdomains.txt
+
+# 2. Probing host aktif & deteksi teknologi web
+cat subdomains.txt | httpx -silent -tech-detect -status-code -o live_hosts.txt
+
+# 3. Pemindaian terarah menggunakan template Nuclei
+nuclei -l live_hosts.txt -tags cve,misconfig,exposure -severity medium,high,critical</pre>
+      <h4>2. Pengujian Ketahanan & Custom Probing dengan Python Asyncio</h4>
+      <p>Untuk menguji batas <em>rate-limiting</em> dan perilaku respons server di bawah beban konkurensi tinggi, saya membangun engine berbasis <code>asyncio</code> dan raw SSL socket di Python yang mampu memantau distribusi latensi serta kode status HTTP secara <em>real-time</em> dari lingkungan Linux/Termux.</p>
+    `
+  }
+};
+
+const articleModal = document.getElementById("articleModal");
+const modalTag = document.getElementById("modalTag");
+const modalTitle = document.getElementById("modalTitle");
+const modalBody = document.getElementById("modalBody");
+const closeModalBtn = document.getElementById("closeModalBtn");
+
+document.querySelectorAll(".writeup-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const key = btn.getAttribute("data-article");
+    const data = articles[key];
+    if (!data) return;
+    modalTag.textContent = data.tag;
+    modalTitle.textContent = data.title;
+    modalBody.innerHTML = data.body;
+    articleModal.classList.add("open");
+  });
+});
+
+if (closeModalBtn) {
+  closeModalBtn.addEventListener("click", () => {
+    articleModal.classList.remove("open");
+  });
+}
+
+if (articleModal) {
+  articleModal.addEventListener("click", (e) => {
+    if (e.target === articleModal) {
+      articleModal.classList.remove("open");
+    }
+  });
+}
+
 // Mobile Menu Toggle
 const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 const navLinks = document.getElementById("navLinks");
@@ -171,6 +268,7 @@ const i18n = {
     nav_services: "Layanan",
     nav_skills: "Keahlian",
     nav_projects: "Proyek",
+    nav_writeups: "Writeups",
     nav_contact: "Kontak",
     hero_status: "Available for Full-Time, Freelance & Security Audits",
     hero_desc:
@@ -240,6 +338,7 @@ const i18n = {
     nav_services: "Services",
     nav_skills: "Skills",
     nav_projects: "Projects",
+    nav_writeups: "Writeups",
     nav_contact: "Contact",
     hero_status: "Available for Full-Time, Freelance & Security Audits",
     hero_desc:

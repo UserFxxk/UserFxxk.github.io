@@ -6,11 +6,17 @@
   <title>Fata Fatikhul Karim — Developer & Bug Bounty Hunter</title>
   <meta name="description" content="Portofolio Profesional Fata Fatikhul Karim — Full-Stack Developer, Automation Builder & Bug Bounty Hunter. Build it right, break it better." />
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
   <!-- Open Graph / LinkedIn Preview -->
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://userfxxk.github.io/" />
   <meta property="og:title" content="Fata Fatikhul Karim — Developer & Security Researcher" />
   <meta property="og:description" content="Full-Stack Developer & Bug Bounty Hunter. Spesialis Web Development, AI/MCP Automation, dan Application Security (OWASP Top 10)." />
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/290970013?v=4" />
+  <meta property="og:image" content="https://userfxxk.github.io/og-preview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://userfxxk.github.io/og-preview.png" />
 
   <!-- Google Fonts: Plus Jakarta Sans & Fira Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,8 +45,8 @@
         <a href="#about" data-i18n="nav_about">Tentang</a>
         <a href="#experience" data-i18n="nav_exp">Pengalaman</a>
         <a href="#services" data-i18n="nav_services">Layanan</a>
-        <a href="#skills" data-i18n="nav_skills">Keahlian</a>
         <a href="#projects" data-i18n="nav_projects">Proyek</a>
+        <a href="#writeups" data-i18n="nav_writeups">Writeups</a>
         <a href="#contact" data-i18n="nav_contact">Kontak</a>
       </nav>
 
@@ -520,8 +526,8 @@
                 <i data-lucide="smartphone"></i>
               </div>
               <div class="project-links">
-                <a href="https://github.com/UserFxxk" target="_blank" rel="noopener" title="GitHub">
-                  <i data-lucide="external-link"></i>
+                <a href="https://github.com/UserFxxk/android-browser-mcp" target="_blank" rel="noopener" title="Lihat Source Code di GitHub">
+                  <i data-lucide="github"></i>
                 </a>
               </div>
             </div>
@@ -545,20 +551,20 @@
                 <i data-lucide="message-square-code"></i>
               </div>
               <div class="project-links">
-                <a href="https://github.com/UserFxxk" target="_blank" rel="noopener" title="GitHub">
-                  <i data-lucide="external-link"></i>
+                <a href="https://github.com/UserFxxk/jarvis-whatsapp-ai" target="_blank" rel="noopener" title="Lihat Source Code di GitHub">
+                  <i data-lucide="github"></i>
                 </a>
               </div>
             </div>
             <span class="project-type">AI Integration</span>
-            <h3 class="project-title">Gemini AI WhatsApp Assistant</h3>
+            <h3 class="project-title">JARVIS — Gemini AI WhatsApp Assistant</h3>
             <p class="project-desc" data-i18n="proj2_desc">
-              Bot asisten cerdas WhatsApp berbasis multi-file auth state menggunakan library Baileys dan Google GenAI SDK untuk otomasi balasan kontekstual dan eksekusi tugas harian secara real-time.
+              Bot asisten cerdas WhatsApp berbasis multi-file auth state menggunakan library Baileys dan Google GenAI SDK (Gemini 2.5 Flash) untuk otomasi balasan kontekstual secara real-time.
             </p>
             <div class="project-tags">
               <span>JavaScript</span>
               <span>Baileys API</span>
-              <span>Google Gemini AI</span>
+              <span>Gemini 2.5 Flash</span>
               <span>Node.js</span>
             </div>
           </article>
@@ -671,6 +677,75 @@
         </div>
       </div>
     </section>
+
+    <!-- Technical Writeups & Case Studies Section (NEW) -->
+    <section class="section" id="writeups">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="wrt_tag">// CATATAN TEKNIS & RISET</span>
+          <h2 class="section-title" data-i18n="wrt_title">Security Writeups & Engineering Notes</h2>
+          <p class="section-subtitle" data-i18n="wrt_subtitle">
+            Dokumentasi cara berpikir saya dalam membedah celah keamanan dan merancang sistem otomasi.
+          </p>
+        </div>
+
+        <div class="writeups-grid">
+          <article class="writeup-card">
+            <div class="writeup-meta">
+              <span class="badge badge-green">AppSec / OWASP #1</span>
+              <span class="writeup-time">5 min read</span>
+            </div>
+            <h3 class="writeup-title" data-i18n="wrt1_title">Membedah & Mencegah Celah IDOR (Broken Access Control) pada REST API</h3>
+            <p class="writeup-excerpt" data-i18n="wrt1_desc">
+              Studi kasus bagaimana penyerang memanipulasi parameter objek di endpoint API, serta cara mengimplementasikan validasi kepemilikan (ownership middleware) di Node.js/NestJS.
+            </p>
+            <button class="writeup-btn" data-article="idor">
+              <span data-i18n="wrt_read">Baca Studi Kasus</span> <i data-lucide="book-open" class="icon-xs"></i>
+            </button>
+          </article>
+
+          <article class="writeup-card">
+            <div class="writeup-meta">
+              <span class="badge badge-purple">AI Agent & MCP</span>
+              <span class="writeup-time">6 min read</span>
+            </div>
+            <h3 class="writeup-title" data-i18n="wrt2_title">Arsitektur MCP Bridge: Menghubungkan LLM ke Perangkat Android & Browser</h3>
+            <p class="writeup-excerpt" data-i18n="wrt2_desc">
+              Membahas cara kerja komunikasi JSON-RPC pada Model Context Protocol untuk menerjemahkan instruksi AI menjadi perintah ADB wireless dan Chrome DevTools Protocol (CDP).
+            </p>
+            <button class="writeup-btn" data-article="mcp">
+              <span data-i18n="wrt_read">Baca Studi Kasus</span> <i data-lucide="book-open" class="icon-xs"></i>
+            </button>
+          </article>
+
+          <article class="writeup-card">
+            <div class="writeup-meta">
+              <span class="badge badge-green">Bug Bounty Recon</span>
+              <span class="writeup-time">4 min read</span>
+            </div>
+            <h3 class="writeup-title" data-i18n="wrt3_title">Pipeline Reconnaissance Otomatis dengan Subfinder, Nuclei & Python Asyncio</h3>
+            <p class="writeup-excerpt" data-i18n="wrt3_desc">
+              Strategi mempercepat pemetaan permukaan serangan (attack surface) pada program Bug Bounty menggunakan konkurensi asinkron dan template deteksi kustom.
+            </p>
+            <button class="writeup-btn" data-article="recon">
+              <span data-i18n="wrt_read">Baca Studi Kasus</span> <i data-lucide="book-open" class="icon-xs"></i>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Article Reader Modal -->
+    <div class="modal-backdrop" id="articleModal" aria-hidden="true">
+      <div class="modal-box">
+        <div class="modal-header">
+          <span class="modal-tag" id="modalTag">TECHNICAL WRITEUP</span>
+          <button class="modal-close" id="closeModalBtn" aria-label="Tutup">✕</button>
+        </div>
+        <h2 class="modal-title" id="modalTitle">Judul Artikel</h2>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
 
     <!-- Contact & Quick Hire Section -->
     <section class="section" id="contact">
