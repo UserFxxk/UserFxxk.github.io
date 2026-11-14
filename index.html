@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fata Fatikhul Karim — Developer & Bug Bounty Hunter</title>
+  <meta name="description" content="Portofolio Profesional Fata Fatikhul Karim — Full-Stack Developer, Automation Builder & Bug Bounty Hunter. Build it right, break it better." />
+  
+  <!-- Open Graph / LinkedIn Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Fata Fatikhul Karim — Developer & Security Researcher" />
+  <meta property="og:description" content="Full-Stack Developer & Bug Bounty Hunter. Spesialis Web Development, AI/MCP Automation, dan Application Security (OWASP Top 10)." />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/290970013?v=4" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background Ambient Glow -->
+  <div class="bg-grid"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-content">
+      <a href="#home" class="logo">
+        <span class="logo-bracket">&lt;</span>Fata<span class="logo-accent">Karim</span><span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about" data-i18n="nav_about">Tentang</a>
+        <a href="#experience" data-i18n="nav_exp">Pengalaman</a>
+        <a href="#services" data-i18n="nav_services">Layanan</a>
+        <a href="#skills" data-i18n="nav_skills">Keahlian</a>
+        <a href="#projects" data-i18n="nav_projects">Proyek</a>
+        <a href="#contact" data-i18n="nav_contact">Kontak</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="lang-btn" id="langToggle" aria-label="Ganti Bahasa">
+          <i data-lucide="globe" class="icon-sm"></i>
+          <span id="langLabel">ID</span>
+        </button>
+        <a href="cv.html" class="btn btn-outline btn-sm">
+          <i data-lucide="file-text" class="icon-sm"></i>
+          <span>CV / Resume</span>
+        </a>
+        <a href="https://www.linkedin.com/in/fata-fatikhul-karim-587567357" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+          <i data-lucide="linkedin" class="icon-sm"></i>
+          <span>LinkedIn</span>
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            <span data-i18n="hero_status">Available for Full-Time, Freelance & Security Audits</span>
+          </div>
+
+          <h1 class="hero-title">
+            Hi, I'm <span class="gradient-text">Fata Fatikhul Karim</span>
+          </h1>
+
+          <div class="typing-wrapper">
+            <span class="prompt-symbol">$</span>
+            <span class="typing-text" id="typingText">Full-Stack Developer | Bug Bounty Hunter</span>
+            <span class="cursor">|</span>
+          </div>
+
+          <p class="hero-description" data-i18n="hero_desc">
+            Seorang <strong>Software Developer</strong> yang gemar membangun <em>daily tools & AI automation</em>, sekaligus <strong>Bug Bounty Hunter</strong> di waktu luang. Saya percaya bahwa memahami cara kerja serangan membuat kita menjadi developer yang jauh lebih tangguh.
+          </p>
+
+          <blockquote class="hero-motto">
+            <i data-lucide="shield-check" class="icon-accent"></i>
+            <span>"Build it right, break it better."</span>
+          </blockquote>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">
+              <i data-lucide="code-2" class="icon-sm"></i>
+              <span data-i18n="btn_projects">Lihat Karya Saya</span>
+            </a>
+            <a href="cv.html" class="btn btn-ghost">
+              <i data-lucide="download" class="icon-sm"></i>
+              <span data-i18n="btn_cv">Lihat / Cetak CV (PDF)</span>
+            </a>
+            <a href="https://github.com/UserFxxk" target="_blank" rel="noopener" class="btn btn-outline">
+              <i data-lucide="github" class="icon-sm"></i>
+              <span>GitHub</span>
+            </a>
+            <a href="https://hackerone.com/zeonmaltius" target="_blank" rel="noopener" class="btn btn-outline">
+              <i data-lucide="bug" class="icon-sm"></i>
+              <span>HackerOne</span>
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num">15+</span>
+              <span class="stat-label" data-i18n="stat_tools">Tech & Sec Tools</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num">OWASP</span>
+              <span class="stat-label" data-i18n="stat_sec">Top 10 Focused</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num">40+</span>
+              <span class="stat-label" data-i18n="stat_fuel">MCP Automation Tools</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right: Profile Card + Interactive Terminal -->
+        <div class="hero-visual">
+          <div class="profile-card">
+            <div class="profile-header">
+              <img src="https://avatars.githubusercontent.com/u/290970013?v=4" alt="Fata Fatikhul Karim" class="profile-avatar" />
+              <div class="profile-meta">
+                <h2>Fata Fatikhul Karim</h2>
+                <p><i data-lucide="map-pin" class="icon-xs"></i> Purbalingga, Indonesia</p>
+                <div class="profile-badges">
+                  <span class="badge badge-purple">DevSecOps</span>
+                  <span class="badge badge-green">HackerOne: @zeonmaltius</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Mini Terminal -->
+            <div class="terminal-box">
+              <div class="terminal-bar">
+                <div class="terminal-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <span class="terminal-title">fata@kali-arch:~ (interactive)</span>
+              </div>
+              <div class="terminal-body" id="terminalOutput">
+                <div class="term-line"><span class="term-prompt">fata@secdev:~$</span> <span class="term-cmd">whoami</span></div>
+                <div class="term-resp">Fata Fatikhul Karim — Developer & Security Researcher</div>
+                <div class="term-line"><span class="term-prompt">fata@secdev:~$</span> <span class="term-cmd">cat philosophy.txt</span></div>
+                <div class="term-resp">"Sesuatu yang kau bayangkan dengan indah itulah kamu yang ada di semesta lain."</div>
+                <div class="term-line"><span class="term-prompt">fata@secdev:~$</span> <span class="term-hint" data-i18n="term_hint">Klik tombol di bawah untuk menjalankan perintah:</span></div>
+              </div>
+              <div class="terminal-actions">
+                <button class="term-btn" data-cmd="skills">./show-stack.sh</button>
+                <button class="term-btn" data-cmd="bounty">./bug-bounty.sh</button>
+                <button class="term-btn" data-cmd="contact">./contact.sh</button>
+                <button class="term-btn term-btn-clear" data-cmd="clear">clear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About / Value Proposition Section -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="about_tag">// TENTANG SAYA</span>
+          <h2 class="section-title" data-i18n="about_title">Menggabungkan Rekayasa Perangkat Lunak & Keamanan Siber</h2>
+          <p class="section-subtitle" data-i18n="about_subtitle">
+            Siapa yang tahu cara melindungi sistem, harus memahami bagaimana sistem tersebut diuji.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-icon icon-purple">
+              <i data-lucide="layers"></i>
+            </div>
+            <h3 data-i18n="pillar1_title">Full-Stack Web Development</h3>
+            <p data-i18n="pillar1_desc">
+              Membangun aplikasi web modern yang cepat, skalabel, dan bersih menggunakan ekosistem Next.js, TypeScript, Tailwind CSS, Node.js, dan NestJS.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon icon-green">
+              <i data-lucide="shield-alert"></i>
+            </div>
+            <h3 data-i18n="pillar2_title">Application Security & Bug Bounty</h3>
+            <p data-i18n="pillar2_desc">
+              Aktif berburu kerentanan keamanan di HackerOne. Berfokus pada analisis OWASP Top 10, reconnaissance otomatis, dan penerapan Secure SDLC.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-icon icon-blue">
+              <i data-lucide="bot"></i>
+            </div>
+            <h3 data-i18n="pillar3_title">Daily Tools & AI Automation</h3>
+            <p data-i18n="pillar3_desc">
+              Menciptakan perkakas otomatisasi berbasis CLI, Model Context Protocol (MCP), integrasi LLM (Gemini/OpenAI), serta bot produktivitas cerdas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience & Career Journey Section (NEW) -->
+    <section class="section section-alt" id="experience">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="exp_tag">// REKAM JEJAK</span>
+          <h2 class="section-title" data-i18n="exp_title">Pengalaman Kerja & Riset Keamanan</h2>
+          <p class="section-subtitle" data-i18n="exp_subtitle">
+            Perjalanan saya dalam membangun produk digital, otomasi AI, dan menguji keamanan aplikasi.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <!-- Timeline Item 1 -->
+          <div class="timeline-item">
+            <div class="timeline-dot dot-green-glow"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div>
+                  <span class="timeline-role" data-i18n="exp1_role">Independent Security Researcher (Bug Bounty Hunter)</span>
+                  <h3 class="timeline-org">
+                    <i data-lucide="shield" class="icon-xs"></i> HackerOne (@zeonmaltius)
+                  </h3>
+                </div>
+                <span class="timeline-date">2025 – Present</span>
+              </div>
+              <p class="timeline-desc" data-i18n="exp1_desc">
+                Melakukan pengujian penetrasi aplikasi web secara independen dan menganalisis celah keamanan berfokus pada standar <strong>OWASP Top 10</strong> (Broken Access Control/IDOR, XSS, SQLi, SSRF). Membangun workflow <em>reconnaissance</em> otomatis menggunakan Subfinder, Nuclei, dan Burp Suite untuk memetakan permukaan serangan secara akurat.
+              </p>
+              <div class="project-tags">
+                <span>Web Pentesting</span>
+                <span>OWASP Top 10</span>
+                <span>Burp Suite</span>
+                <span>Nuclei & Subfinder</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 2 -->
+          <div class="timeline-item">
+            <div class="timeline-dot dot-purple-glow"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div>
+                  <span class="timeline-role" data-i18n="exp2_role">Full-Stack & AI Automation Developer</span>
+                  <h3 class="timeline-org">
+                    <i data-lucide="code" class="icon-xs"></i> Freelance / Self-Employed
+                  </h3>
+                </div>
+                <span class="timeline-date">2025 – Present</span>
+              </div>
+              <p class="timeline-desc" data-i18n="exp2_desc">
+                Merancang aplikasi web modern menggunakan Next.js, TypeScript, dan Node.js/NestJS. Mengembangkan jembatan otomatisasi berbasis <strong>Model Context Protocol (MCP)</strong> dengan 40+ tools untuk mengendalikan Android via ADB & Chrome CDP, serta membangun asisten bot WhatsApp berbasis Google Gemini AI.
+              </p>
+              <div class="project-tags">
+                <span>Next.js & TypeScript</span>
+                <span>Node.js</span>
+                <span>MCP Server</span>
+                <span>Google Gemini AI</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Item 3 -->
+          <div class="timeline-item">
+            <div class="timeline-dot dot-blue-glow"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div>
+                  <span class="timeline-role" data-i18n="exp3_role">Open Source Builder & Linux Security Tooling</span>
+                  <h3 class="timeline-org">
+                    <i data-lucide="terminal-square" class="icon-xs"></i> GitHub (@UserFxxk)
+                  </h3>
+                </div>
+                <span class="timeline-date">Ongoing</span>
+              </div>
+              <p class="timeline-desc" data-i18n="exp3_desc">
+                Bereksperimen dengan sistem operasi Kali Linux & Arch Linux, kustomisasi agen LLM berbasis Go (Scorp), serta pembuatan perkakas jaringan asinkron menggunakan Python untuk menguji ketahanan dan performa server.
+              </p>
+              <div class="project-tags">
+                <span>Python Asyncio</span>
+                <span>Golang</span>
+                <span>Kali & Arch Linux</span>
+                <span>Shell Scripting</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services / What I Offer Section (NEW) -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="srv_tag">// LAYANAN PROFESIONAL</span>
+          <h2 class="section-title" data-i18n="srv_title">Solusi yang Bisa Saya Bantu</h2>
+          <p class="section-subtitle" data-i18n="srv_subtitle">
+            Tersedia untuk rekrutmen perusahaan (Full-Time/Remote) maupun proyek lepas (Freelance).
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-num">01</div>
+            <h3 data-i18n="srv1_title">Web Application Development</h3>
+            <p data-i18n="srv1_desc">
+              Pembuatan website profesional, dashboard bisnis, hingga aplikasi web full-stack kustom dengan performa tinggi, desain responsif, dan arsitektur kode yang bersih.
+            </p>
+            <ul class="service-features">
+              <li><i data-lucide="check" class="icon-xs icon-green"></i> Next.js, React, TypeScript & Tailwind CSS</li>
+              <li><i data-lucide="check" class="icon-xs icon-green"></i> REST API dengan Node.js / NestJS & PostgreSQL</li>
+              <li><i data-lucide="check" class="icon-xs icon-green"></i> Optimasi SEO, Kecepatan & Deployment Cloud</li>
+            </ul>
+            <a href="#contact" class="service-cta" data-service="Web Application Development">
+              <span data-i18n="srv_cta">Diskusikan Proyek</span> <i data-lucide="arrow-right" class="icon-xs"></i>
+            </a>
+          </div>
+
+          <div class="service-card service-card-featured">
+            <div class="service-badge">Most Popular</div>
+            <div class="service-num">02</div>
+            <h3 data-i18n="srv2_title">AI Agent, MCP & Bot Automation</h3>
+            <p data-i18n="srv2_desc">
+              Otomatisasi alur kerja repetitif bisnis Anda menggunakan integrasi Large Language Model (Gemini/OpenAI), bot WhatsApp pintar, dan otomasi browser/Android.
+            </p>
+            <ul class="service-features">
+              <li><i data-lucide="check" class="icon-xs icon-green"></i> Custom AI Chatbot (WhatsApp / Web)</li>
+              <li><i data-lucide="check" class="icon-xs icon-green"></i> Pembuatan Custom MCP Server untuk AI Agent</li>
+              <li><i data-lucide="check" class="icon-xs icon-green"></i> Web Scraping Stealth & Otomasi Perangkat (ADB)</li>
+            </ul>
+            <a href="#contact" class="service-cta" data-service="AI & Bot Automation">
+              <span data-i18n="srv_cta">Diskusikan Proyek</span> <i data-lucide="arrow-right" class="icon-xs"></i>
+            </a>
+          </div>
+
+          <div class="service-card">
+            <div class="service-num">03</div>
+            <h3 data-i18n="srv3_title">Web Security Audit & Pentesting</h3>
+            <p data-i18n="srv3_desc">
+              Pengujian keamanan menyeluruh terhadap website atau API Anda sebelum rilis publik untuk menemukan celah keamanan dan mencegah kebocoran data.
+            </p>
+            <ul class="service-features">
+              <li><i data-lucide="check" class="icon-xs icon-green"></i> Pengujian Berbasis Standar OWASP Top 10</li>
+              <li><i data-lucide="check" class="icon-xs icon-green"></i> Vulnerability Scanning & Subdomain Recon</li>
+              <li><i data-lucide="check" class="icon-xs icon-green"></i> Laporan PoC Lengkap & Panduan Patching</li>
+            </ul>
+            <a href="#contact" class="service-cta" data-service="Web Security Audit & Pentesting">
+              <span data-i18n="srv_cta">Diskusikan Proyek</span> <i data-lucide="arrow-right" class="icon-xs"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack & Skills Section -->
+    <section class="section section-alt" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="skills_tag">// ARSENAL TEKNOLOGI</span>
+          <h2 class="section-title" data-i18n="skills_title">Tech Stack & Security Arsenal</h2>
+          <p class="section-subtitle" data-i18n="skills_subtitle">
+            Teknologi yang saya gunakan sehari-hari untuk membangun aplikasi dan menguji keamanannya.
+          </p>
+        </div>
+
+        <!-- Skill Category Filter -->
+        <div class="filter-tabs" id="skillTabs">
+          <button class="tab-btn active" data-filter="all" data-i18n="tab_all">Semua</button>
+          <button class="tab-btn" data-filter="frontend">Frontend</button>
+          <button class="tab-btn" data-filter="backend">Backend & DB</button>
+          <button class="tab-btn" data-filter="security">Security & Recon</button>
+          <button class="tab-btn" data-filter="devops">DevOps & OS</button>
+        </div>
+
+        <div class="skills-grid" id="skillsGrid">
+          <!-- Frontend -->
+          <div class="skill-card" data-category="frontend">
+            <div class="skill-top">
+              <span class="skill-name">Next.js & React</span>
+              <span class="skill-badge">Frontend</span>
+            </div>
+            <p class="skill-detail">SSR, App Router, Modern UI Architecture</p>
+          </div>
+
+          <div class="skill-card" data-category="frontend">
+            <div class="skill-top">
+              <span class="skill-name">TypeScript / JavaScript</span>
+              <span class="skill-badge">Language</span>
+            </div>
+            <p class="skill-detail">Type-safe Development, ES6+, Async Runtime</p>
+          </div>
+
+          <div class="skill-card" data-category="frontend">
+            <div class="skill-top">
+              <span class="skill-name">Tailwind CSS & HTML5</span>
+              <span class="skill-badge">Styling</span>
+            </div>
+            <p class="skill-detail">Responsive Design, Custom Design Systems</p>
+          </div>
+
+          <!-- Backend & DB -->
+          <div class="skill-card" data-category="backend">
+            <div class="skill-top">
+              <span class="skill-name">Node.js & NestJS</span>
+              <span class="skill-badge">Backend</span>
+            </div>
+            <p class="skill-detail">RESTful API, Microservices, MCP Servers, Baileys</p>
+          </div>
+
+          <div class="skill-card" data-category="backend">
+            <div class="skill-top">
+              <span class="skill-name">Python & Go</span>
+              <span class="skill-badge">Scripting & Systems</span>
+            </div>
+            <p class="skill-detail">Async Recon Tools, Security Automation, CLI Agents</p>
+          </div>
+
+          <div class="skill-card" data-category="backend">
+            <div class="skill-top">
+              <span class="skill-name">PostgreSQL, MongoDB, Redis</span>
+              <span class="skill-badge">Database</span>
+            </div>
+            <p class="skill-detail">Relational Modeling, NoSQL, In-Memory Caching</p>
+          </div>
+
+          <!-- Security & Bug Bounty -->
+          <div class="skill-card skill-card-sec" data-category="security">
+            <div class="skill-top">
+              <span class="skill-name">Burp Suite & OWASP Top 10</span>
+              <span class="skill-badge badge-sec">AppSec</span>
+            </div>
+            <p class="skill-detail">Web App Penetration Testing, Traffic Interception</p>
+          </div>
+
+          <div class="skill-card skill-card-sec" data-category="security">
+            <div class="skill-top">
+              <span class="skill-name">Nuclei & Subfinder</span>
+              <span class="skill-badge badge-sec">Recon</span>
+            </div>
+            <p class="skill-detail">Automated Vulnerability Scanning & Subdomain Discovery</p>
+          </div>
+
+          <div class="skill-card skill-card-sec" data-category="security">
+            <div class="skill-top">
+              <span class="skill-name">Nmap, Wireshark & SQLMap</span>
+              <span class="skill-badge badge-sec">Network & DB</span>
+            </div>
+            <p class="skill-detail">Port Scanning, Packet Analysis, SQLi Assessment</p>
+          </div>
+
+          <div class="skill-card skill-card-sec" data-category="security">
+            <div class="skill-top">
+              <span class="skill-name">Shodan, OSINT & Hashcat</span>
+              <span class="skill-badge badge-sec">OSINT & Crypto</span>
+            </div>
+            <p class="skill-detail">Asset Intelligence, TheHarvester, Password Auditing</p>
+          </div>
+
+          <!-- DevOps & OS -->
+          <div class="skill-card" data-category="devops">
+            <div class="skill-top">
+              <span class="skill-name">Kali Linux & Arch Linux</span>
+              <span class="skill-badge">Environment</span>
+            </div>
+            <p class="skill-detail">Linux Hardening, Shell Scripting, Termux Chroot</p>
+          </div>
+
+          <div class="skill-card" data-category="devops">
+            <div class="skill-top">
+              <span class="skill-name">Docker, Git & GitHub Actions</span>
+              <span class="skill-badge">DevOps</span>
+            </div>
+            <p class="skill-detail">Containerization, CI/CD Pipelines, Vercel Cloud</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="proj_tag">// PORTOFOLIO KARYA</span>
+          <h2 class="section-title" data-i18n="proj_title">Proyek Pilihan & Eksperimen</h2>
+          <p class="section-subtitle" data-i18n="proj_subtitle">
+            Kombinasi pengembangan perangkat lunak, integrasi AI, dan peralatan riset keamanan.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">
+                <i data-lucide="smartphone"></i>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/UserFxxk" target="_blank" rel="noopener" title="GitHub">
+                  <i data-lucide="external-link"></i>
+                </a>
+              </div>
+            </div>
+            <span class="project-type">AI Automation & MCP</span>
+            <h3 class="project-title">Android & Stealth Browser MCP Bridge</h3>
+            <p class="project-desc" data-i18n="proj1_desc">
+              Server Model Context Protocol (MCP) berbasis Node.js yang memungkinkan AI Agent (Claude/Cursor/OpenCode) mengendalikan perangkat Android fisik via ADB wireless & Chrome CDP dengan 40+ tool otomatisasi.
+            </p>
+            <div class="project-tags">
+              <span>Node.js</span>
+              <span>MCP Protocol</span>
+              <span>ADB</span>
+              <span>Chrome CDP</span>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">
+                <i data-lucide="message-square-code"></i>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/UserFxxk" target="_blank" rel="noopener" title="GitHub">
+                  <i data-lucide="external-link"></i>
+                </a>
+              </div>
+            </div>
+            <span class="project-type">AI Integration</span>
+            <h3 class="project-title">Gemini AI WhatsApp Assistant</h3>
+            <p class="project-desc" data-i18n="proj2_desc">
+              Bot asisten cerdas WhatsApp berbasis multi-file auth state menggunakan library Baileys dan Google GenAI SDK untuk otomasi balasan kontekstual dan eksekusi tugas harian secara real-time.
+            </p>
+            <div class="project-tags">
+              <span>JavaScript</span>
+              <span>Baileys API</span>
+              <span>Google Gemini AI</span>
+              <span>Node.js</span>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">
+                <i data-lucide="terminal"></i>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/UserFxxk/scorp" target="_blank" rel="noopener" title="GitHub Repository">
+                  <i data-lucide="github"></i>
+                </a>
+              </div>
+            </div>
+            <span class="project-type">System Agent (Open Source)</span>
+            <h3 class="project-title">Scorp — Lightweight Go LLM Agent</h3>
+            <p class="project-desc" data-i18n="proj3_desc">
+              Eksplorasi & kustomisasi agen biner Go berukuran ringkas yang menjembatani Large Language Models langsung ke sistem operasi — meliputi shell, manajemen file, jaringan, dan analisis kode.
+            </p>
+            <div class="project-tags">
+              <span>Golang</span>
+              <span>LLM Agent</span>
+              <span>CLI Tool</span>
+              <span>Linux</span>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">
+                <i data-lucide="radar"></i>
+              </div>
+              <div class="project-links">
+                <a href="https://hackerone.com/zeonmaltius" target="_blank" rel="noopener" title="HackerOne Profile">
+                  <i data-lucide="shield"></i>
+                </a>
+              </div>
+            </div>
+            <span class="project-type">Security Engineering</span>
+            <h3 class="project-title">Reconnaissance & Resilience Suite</h3>
+            <p class="project-desc" data-i18n="proj4_desc">
+              Rangkaian skrip Python asinkron dan pipeline Nuclei/Subfinder untuk memetakan permukaan serangan (attack surface), menguji ketahanan server, serta mengidentifikasi celah OWASP Top 10 secara efisien.
+            </p>
+            <div class="project-tags">
+              <span>Python Asyncio</span>
+              <span>Nuclei</span>
+              <span>OWASP Top 10</span>
+              <span>OSINT</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Methodology / Bug Bounty Highlight -->
+    <section class="section section-alt" id="security">
+      <div class="container">
+        <div class="security-banner">
+          <div class="security-content">
+            <span class="section-tag">// SECURITY MINDSET</span>
+            <h2 data-i18n="sec_title">Pendekatan "Secure by Design"</h2>
+            <p data-i18n="sec_desc">
+              Sebagai developer yang juga aktif di <strong>HackerOne (@zeonmaltius)</strong>, saya menerapkan siklus pengujian keamanan di setiap baris kode yang saya tulis:
+            </p>
+            <ul class="sec-list">
+              <li>
+                <i data-lucide="check-circle-2" class="icon-green"></i>
+                <span data-i18n="sec_item1"><strong>Reconnaissance & Surface Mapping:</strong> Pemetaan subdomain, endpoint API, dan konfigurasi server dengan Subfinder & Shodan.</span>
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon-green"></i>
+                <span data-i18n="sec_item2"><strong>Vulnerability Discovery:</strong> Analisis celah Broken Access Control (IDOR), XSS, SQL Injection, dan SSRF menggunakan Burp Suite & Nuclei.</span>
+              </li>
+              <li>
+                <i data-lucide="check-circle-2" class="icon-green"></i>
+                <span data-i18n="sec_item3"><strong>Remediation & Hardening:</strong> Menulis patch yang aman, validasi input ketat, dan pembatasan rate-limit pada arsitektur backend.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="security-metrics">
+            <div class="sec-card">
+              <div class="sec-card-header">
+                <i data-lucide="shield" class="icon-accent"></i>
+                <span>Focus Areas</span>
+              </div>
+              <div class="sec-bars">
+                <div class="sec-bar-item">
+                  <div class="sec-bar-label"><span>Web App Pentesting (OWASP)</span><span>90%</span></div>
+                  <div class="sec-bar-track"><div class="sec-bar-fill" style="width: 90%"></div></div>
+                </div>
+                <div class="sec-bar-item">
+                  <div class="sec-bar-label"><span>Full-Stack Development</span><span>88%</span></div>
+                  <div class="sec-bar-track"><div class="sec-bar-fill" style="width: 88%"></div></div>
+                </div>
+                <div class="sec-bar-item">
+                  <div class="sec-bar-label"><span>Recon & OSINT Automation</span><span>92%</span></div>
+                  <div class="sec-bar-track"><div class="sec-bar-fill" style="width: 92%"></div></div>
+                </div>
+                <div class="sec-bar-item">
+                  <div class="sec-bar-label"><span>AI Agent & MCP Tooling</span><span>85%</span></div>
+                  <div class="sec-bar-track"><div class="sec-bar-fill" style="width: 85%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & Quick Hire Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="contact_tag">// MARI TERHUBUNG</span>
+          <h2 class="section-title" data-i18n="contact_title">Siap Berkolaborasi dalam Proyek Berikutnya?</h2>
+          <p class="section-subtitle" data-i18n="contact_desc">
+            Tertarik merekrut saya, berdiskusi tentang pengembangan web, otomasi AI, atau pengujian keamanan aplikasi? Kirim pesan langsung atau hubungi lewat kanal di bawah ini.
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <!-- Left: Direct Channels -->
+          <div class="contact-channels">
+            <a href="https://www.linkedin.com/in/fata-fatikhul-karim-587567357" target="_blank" rel="noopener" class="contact-item">
+              <i data-lucide="linkedin"></i>
+              <div>
+                <strong>LinkedIn (Utama)</strong>
+                <span>Fata Fatikhul Karim</span>
+              </div>
+            </a>
+
+            <div class="contact-item copy-email-card" id="copyEmailBtn" title="Klik untuk salin email">
+              <i data-lucide="mail"></i>
+              <div>
+                <strong>Email <span class="copy-hint" id="copyStatus">(Klik untuk salin)</span></strong>
+                <span>fatafatikhul@gmail.com</span>
+              </div>
+            </div>
+
+            <a href="https://github.com/UserFxxk" target="_blank" rel="noopener" class="contact-item">
+              <i data-lucide="github"></i>
+              <div>
+                <strong>GitHub</strong>
+                <span>github.com/UserFxxk</span>
+              </div>
+            </a>
+
+            <a href="https://hackerone.com/zeonmaltius" target="_blank" rel="noopener" class="contact-item">
+              <i data-lucide="bug"></i>
+              <div>
+                <strong>HackerOne</strong>
+                <span>hackerone.com/zeonmaltius</span>
+              </div>
+            </a>
+
+            <a href="https://instagram.com/fanoxta" target="_blank" rel="noopener" class="contact-item">
+              <i data-lucide="instagram"></i>
+              <div>
+                <strong>Instagram</strong>
+                <span>@fanoxta</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- Right: Quick Message Composer -->
+          <form class="quick-form" id="quickContactForm">
+            <h3 data-i18n="form_title">Kirim Pesan Cepat</h3>
+            <div class="form-group">
+              <label for="senderName" data-i18n="form_name">Nama / Perusahaan</label>
+              <input type="text" id="senderName" placeholder="Contoh: Budi — Tech Recruiter PT ABC" required />
+            </div>
+            <div class="form-group">
+              <label for="inquiryType" data-i18n="form_topic">Topik Keperluan</label>
+              <select id="inquiryType">
+                <option value="Full-Time / Remote Hiring">Tawaran Kerja (Full-Time / Remote)</option>
+                <option value="Web Application Development">Proyek Web Application Development</option>
+                <option value="AI & Bot Automation">Proyek AI Agent / Bot Automation</option>
+                <option value="Web Security Audit & Pentesting">Audit Keamanan Web / Pentesting</option>
+                <option value="Kolaborasi & Diskusi">Kolaborasi & Diskusi Umum</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="senderMsg" data-i18n="form_msg">Pesan Singkat</label>
+              <textarea id="senderMsg" rows="3" placeholder="Halo Fata, kami tertarik untuk berdiskusi mengenai..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              <i data-lucide="send" class="icon-sm"></i>
+              <span data-i18n="form_submit">Kirim via Email Sekarang</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© 2026 <strong>Fata Fatikhul Karim</strong>. Crafted with ☕ in Purbalingga.</p>
+      <p class="footer-quote">"Lakukan apa saja sesuai imajinasimu — Imajinasi adalah alat yang membuatmu berkembang!"</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

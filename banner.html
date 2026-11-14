@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkedIn Banner Generator — Fata Fatikhul Karim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #090d16;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: #131b2e;
+      border: 1px solid rgba(108, 99, 255, 0.3);
+      padding: 1rem 1.4rem;
+      border-radius: 14px;
+      margin-bottom: 1.75rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.2rem;
+      border-radius: 9px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .btn-back {
+      background: rgba(255,255,255,0.06);
+      color: #e2e8f0;
+      border-color: rgba(255,255,255,0.12);
+    }
+    .btn-download {
+      background: linear-gradient(135deg, #6c63ff, #4f46e5);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(108, 99, 255, 0.4);
+    }
+    .btn-download:hover { transform: translateY(-2px); }
+    .theme-selector {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .theme-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #cbd5e1;
+      padding: 0.5rem 1rem;
+      border-radius: 99px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .theme-btn.active {
+      background: #6c63ff;
+      border-color: #6c63ff;
+      color: #fff;
+    }
+    .canvas-wrap {
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1rem;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+    }
+    .note {
+      margin-top: 1rem;
+      font-size: 0.86rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <div>
+        <h1 style="font-size: 1.25rem; font-weight: 800;">🎨 LinkedIn Cover Banner Studio (1584 × 396 px)</h1>
+        <p style="font-size: 0.83rem; color: #94a3b8;">Didesain dengan Safe-Zone di sebelah kiri agar tidak tertutup foto profil LinkedIn.</p>
+      </div>
+      <div style="display: flex; gap: 0.65rem; flex-wrap: wrap;">
+        <a href="index.html" class="btn btn-back">← Kembali ke Portofolio</a>
+        <button class="btn btn-download" id="downloadBtn">⬇️ Download PNG (1584×396)</button>
+      </div>
+    </div>
+
+    <div class="theme-selector">
+      <button class="theme-btn active" data-theme="purple">🔮 Tema 1: Cyber Purple DevSecOps (Recommended)</button>
+      <button class="theme-btn" data-theme="emerald">🛡️ Tema 2: Emerald Bug Hunter</button>
+      <button class="theme-btn" data-theme="midnight">⚡ Tema 3: Midnight Minimalist</button>
+    </div>
+
+    <div class="canvas-wrap">
+      <canvas id="bannerCanvas" width="1584" height="396"></canvas>
+    </div>
+
+    <p class="note">
+      💡 <strong>Tips:</strong> Klik tombol <strong>Download PNG</strong> di atas, lalu buka aplikasi LinkedIn → Edit Profil → Klik foto sampul (bagian atas) → Unggah gambar ini.
+    </p>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('bannerCanvas');
+    const ctx = canvas.getContext('2d');
+    let currentTheme = 'purple';
+
+    const themes = {
+      purple: {
+        bg1: '#070a12',
+        bg2: '#12182b',
+        accent1: '#6c63ff',
+        accent2: '#10b981',
+        badgeBg: 'rgba(108, 99, 255, 0.18)',
+        badgeBorder: '#6c63ff'
+      },
+      emerald: {
+        bg1: '#060d0c',
+        bg2: '#0d1f1d',
+        accent1: '#10b981',
+        accent2: '#38bdf8',
+        badgeBg: 'rgba(16, 185, 129, 0.18)',
+        badgeBorder: '#10b981'
+      },
+      midnight: {
+        bg1: '#09090b',
+        bg2: '#18181b',
+        accent1: '#38bdf8',
+        accent2: '#a855f7',
+        badgeBg: 'rgba(56, 189, 248, 0.16)',
+        badgeBorder: '#38bdf8'
+      }
+    };
+
+    function drawBanner(themeKey) {
+      const t = themes[themeKey];
+      const W = canvas.width;
+      const H = canvas.height;
+
+      // 1. Background Gradient
+      const grad = ctx.createLinearGradient(0, 0, W, H);
+      grad.addColorStop(0, t.bg1);
+      grad.addColorStop(1, t.bg2);
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // 2. Subtle Cyber Grid
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 44) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += 44) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      // 3. Ambient Glow Circles
+      const glow1 = ctx.createRadialGradient(550, 80, 10, 550, 80, 320);
+      glow1.addColorStop(0, t.accent1 + '44');
+      glow1.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow1;
+      ctx.fillRect(0, 0, W, H);
+
+      const glow2 = ctx.createRadialGradient(1380, 320, 10, 1380, 320, 290);
+      glow2.addColorStop(0, t.accent2 + '38');
+      glow2.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow2;
+      ctx.fillRect(0, 0, W, H);
+
+      // 4. Left Safe Zone Decorative Element (Avatar sits around X: 36..280, Y: 180..396)
+      ctx.save();
+      ctx.font = '700 22px "Fira Code", monospace';
+      ctx.fillStyle = t.accent1;
+      ctx.fillText('<Fata', 55, 72);
+      ctx.fillStyle = t.accent2;
+      ctx.fillText('Karim/>', 124, 72);
+      ctx.restore();
+
+      // 5. Main Content (Shifted right X=380 so LinkedIn Profile Picture NEVER covers it)
+      const startX = 380;
+
+      // Top Motto Pill
+      ctx.fillStyle = t.badgeBg;
+      ctx.strokeStyle = t.badgeBorder;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(startX, 52, 410, 38, 19);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = '600 15px "Fira Code", monospace';
+      ctx.fillText('🛡️ "Build it right, break it better"', startX + 18, 76);
+
+      // Main Name
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 50px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('FATA FATIKHUL KARIM', startX, 152);
+
+      // Role Title
+      ctx.fillStyle = t.accent2;
+      ctx.font = '700 24px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Full-Stack Developer  •  AI Automation Builder  •  Bug Bounty Hunter', startX, 194);
+
+      // Tech Stack Pills
+      const pills = [
+        'Next.js & TypeScript',
+        'Node.js & NestJS',
+        'Python & Go',
+        'MCP & AI Agents',
+        'OWASP Top 10',
+        'Burp Suite & Nuclei'
+      ];
+      let pillX = startX;
+      const pillY = 232;
+      ctx.font = '600 15px "Fira Code", monospace';
+
+      pills.forEach((text) => {
+        const w = ctx.measureText(text).width + 28;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(pillX, pillY, w, 36, 8);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = '#cbd5e1';
+        ctx.fillText(text, pillX + 14, pillY + 23);
+        pillX += w + 12;
+      });
+
+      // Bottom Contact Bar
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '500 16px "Fira Code", monospace';
+      ctx.fillText('💻 github.com/UserFxxk    |    🐛 hackerone.com/zeonmaltius    |    ✉️ fatafatikhul@gmail.com', startX, 328);
+
+      // Right Decorative Terminal Card
+      const cardX = 1230;
+      const cardY = 58;
+      const cardW = 305;
+      const cardH = 150;
+      ctx.fillStyle = 'rgba(6, 9, 17, 0.85)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(cardX, cardY, cardW, cardH, 12);
+      ctx.fill();
+      ctx.stroke();
+
+      // Terminal dots
+      ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(cardX + 20, cardY + 20, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#f59e0b'; ctx.beginPath(); ctx.arc(cardX + 36, cardY + 20, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#10b981'; ctx.beginPath(); ctx.arc(cardX + 52, cardY + 20, 5, 0, Math.PI * 2); ctx.fill();
+
+      ctx.font = '500 13px "Fira Code", monospace';
+      ctx.fillStyle = t.accent2;
+      ctx.fillText('fata@secdev:~$ status', cardX + 18, cardY + 56);
+      ctx.fillStyle = '#e2e8f0';
+      ctx.fillText('[+] Code   : Clean & Scalable', cardX + 18, cardY + 84);
+      ctx.fillText('[+] Sec    : OWASP Hardened', cardX + 18, cardY + 108);
+      ctx.fillStyle = t.accent1;
+      ctx.fillText('[+] Status : Open to Work 🚀', cardX + 18, cardY + 132);
+    }
+
+    // Ensure fonts are loaded before initial draw
+    document.fonts.ready.then(() => {
+      drawBanner(currentTheme);
+    });
+    drawBanner(currentTheme);
+
+    document.querySelectorAll('.theme-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.theme-btn').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTheme = btn.getAttribute('data-theme');
+        drawBanner(currentTheme);
+      });
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = `linkedin-banner-fata-${currentTheme}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  </script>
+</body>
+</html>

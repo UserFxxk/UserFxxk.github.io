@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV / Resume — Fata Fatikhul Karim</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --text-dark: #0f172a;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #090d16;
+      color: var(--text-dark);
+      line-height: 1.55;
+      padding: 2rem 1rem;
+    }
+    .toolbar {
+      max-width: 850px;
+      margin: 0 auto 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      background: #131b2e;
+      padding: 0.85rem 1.25rem;
+      border-radius: 12px;
+      border: 1px solid rgba(108, 99, 255, 0.3);
+      color: #f8fafc;
+    }
+    .toolbar a, .toolbar button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+    }
+    .btn-back { background: rgba(255,255,255,0.08); color: #e2e8f0; }
+    .btn-print { background: #6c63ff; color: #fff; }
+    .resume-sheet {
+      max-width: 850px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 2.75rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .header {
+      border-bottom: 2px solid var(--text-dark);
+      padding-bottom: 1.15rem;
+      margin-bottom: 1.35rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .header h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+    }
+    .header .role {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 0.2rem;
+    }
+    .contact-info {
+      font-size: 0.83rem;
+      color: var(--text-body);
+      text-align: right;
+    }
+    .contact-info a { color: var(--text-dark); text-decoration: none; font-weight: 500; }
+    .section { margin-bottom: 1.35rem; }
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.75rem;
+    }
+    .summary { font-size: 0.9rem; color: var(--text-body); }
+    .exp-item { margin-bottom: 1rem; }
+    .exp-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    .exp-title { font-weight: 700; font-size: 0.96rem; color: var(--text-dark); }
+    .exp-org { font-weight: 600; color: var(--primary); font-size: 0.9rem; }
+    .exp-date { font-size: 0.8rem; color: var(--text-muted); font-family: 'Fira Code', monospace; }
+    ul.bullets {
+      margin-top: 0.35rem;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+      color: var(--text-body);
+    }
+    ul.bullets li { margin-bottom: 0.25rem; }
+    .skills-table {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 0.45rem 1rem;
+      font-size: 0.88rem;
+    }
+    .skill-cat { font-weight: 700; color: var(--text-dark); }
+    .skill-val { color: var(--text-body); }
+    @media (max-width: 640px) {
+      .resume-sheet { padding: 1.5rem; }
+      .contact-info { text-align: left; }
+      .skills-table { grid-template-columns: 1fr; gap: 0.2rem; }
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .toolbar { display: none !important; }
+      .resume-sheet { box-shadow: none; padding: 0; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <a href="index.html" class="btn-back">← Kembali ke Portofolio</a>
+    <span style="font-size: 0.85rem; color: #94a3b8;">Format ATS-Friendly & Siap Cetak A4</span>
+    <button class="btn-print" onclick="window.print()">🖨️ Simpan PDF / Cetak CV</button>
+  </div>
+
+  <div class="resume-sheet">
+    <header class="header">
+      <div>
+        <h1>FATA FATIKHUL KARIM</h1>
+        <div class="role">Full-Stack Developer & Application Security Researcher</div>
+      </div>
+      <div class="contact-info">
+        <div>📍 Purbalingga, Jawa Tengah, Indonesia</div>
+        <div>✉️ <a href="mailto:fatafatikhul@gmail.com">fatafatikhul@gmail.com</a></div>
+        <div>🔗 <a href="https://www.linkedin.com/in/fata-fatikhul-karim-587567357">linkedin.com/in/fata-fatikhul-karim-587567357</a></div>
+        <div>💻 <a href="https://github.com/UserFxxk">github.com/UserFxxk</a> | 🛡️ <a href="https://hackerone.com/zeonmaltius">hackerone.com/zeonmaltius</a></div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2 class="section-title">Ringkasan Profesional (Executive Summary)</h2>
+      <p class="summary">
+        <strong>Software Developer</strong> dan <strong>Bug Bounty Hunter</strong> yang berfokus pada pengembangan aplikasi web modern (Next.js, TypeScript, Node.js, Python), otomasi berbasis AI/MCP, serta pengujian keamanan aplikasi (Application Security). Menggabungkan keahlian rekayasa perangkat lunak dengan pemahaman mendalam terhadap kerentanan <strong>OWASP Top 10</strong> untuk membangun sistem yang skalabel, efisien, dan aman sejak tahap perancangan (<em>Secure by Design</em>).
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Pengalaman & Riset (Experience)</h2>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div><span class="exp-title">Independent Security Researcher (Bug Bounty Hunter)</span> — <span class="exp-org">HackerOne (@zeonmaltius)</span></div>
+          <span class="exp-date">2025 – Sekarang</span>
+        </div>
+        <ul class="bullets">
+          <li>Melakukan pengujian penetrasi aplikasi web dan analisis kerentanan berdasarkan standar <strong>OWASP Top 10</strong> (Broken Access Control/IDOR, XSS, SQL Injection, SSRF, dan Security Misconfiguration).</li>
+          <li>Membangun pipeline <em>reconnaissance</em> otomatis menggunakan <strong>Subfinder, Nuclei, Nmap, dan Shodan</strong> untuk pemetaan permukaan serangan (<em>attack surface mapping</em>) secara cepat dan akurat.</li>
+          <li>Menyusun laporan teknis kerentanan (Proof of Concept) beserta rekomendasi mitigasi (<em>remediation</em>) bagi tim engineering.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div><span class="exp-title">Full-Stack & AI Automation Developer</span> — <span class="exp-org">Freelance / Independent Builder</span></div>
+          <span class="exp-date">2025 – Sekarang</span>
+        </div>
+        <ul class="bullets">
+          <li>Merancang dan mengembangkan aplikasi web responsif serta RESTful API menggunakan <strong>Next.js, TypeScript, Tailwind CSS, Node.js, dan NestJS</strong>.</li>
+          <li>Mengembangkan perkakas otomatisasi sistem berbasis <strong>Model Context Protocol (MCP)</strong> yang menghubungkan AI Agent (Claude/Cursor) dengan perangkat Android fisik via ADB dan browser Chromium headless.</li>
+          <li>Membangun bot produktivitas dan asisten otomatis menggunakan integrasi <strong>Google Gemini AI SDK</strong> dan WhatsApp Web API (Baileys).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Proyek Unggulan (Key Technical Projects)</h2>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div><span class="exp-title">Android & Stealth Browser MCP Automation Bridge</span> <span class="exp-org">(Node.js, ADB, Chrome CDP, MCP)</span></div>
+        </div>
+        <ul class="bullets">
+          <li>Membangun 40+ <em>automation tools</em> pada server MCP lokal/VPS untuk mengontrol perangkat Android secara penuh (UI dump, tap, swipe, form fill, screenshot) dan navigasi browser anti-bot.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div><span class="exp-title">AI-Powered WhatsApp Assistant Bot</span> <span class="exp-org">(Node.js, Baileys, Google GenAI)</span></div>
+        </div>
+        <ul class="bullets">
+          <li>Mengintegrasikan LLM Gemini ke dalam ekosistem WhatsApp menggunakan <em>multi-file auth state</em> untuk otomasi respons percakapan cerdas secara <em>real-time</em>.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div><span class="exp-title">Asynchronous Web Recon & Resilience Toolkit</span> <span class="exp-org">(Python Asyncio, Nuclei, Bash, Kali Linux)</span></div>
+        </div>
+        <ul class="bullets">
+          <li>Mengembangkan skrip jaringan asinkron berkinerja tinggi di lingkungan Linux/Termux untuk pengujian beban HTTP/SSL dan otomasi pemindaian celah keamanan.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Keahlian Teknis (Technical Arsenal)</h2>
+      <div class="skills-table">
+        <div class="skill-cat">Frontend Development</div>
+        <div class="skill-val">HTML5, CSS3, JavaScript (ES6+), TypeScript, Next.js, React, Tailwind CSS</div>
+
+        <div class="skill-cat">Backend & Database</div>
+        <div class="skill-val">Node.js, NestJS, Python (Asyncio), Go, PostgreSQL, MongoDB, Redis, REST API</div>
+
+        <div class="skill-cat">Application Security</div>
+        <div class="skill-val">OWASP Top 10, Burp Suite, Nuclei, Subfinder, Nmap, SQLMap, Wireshark, Hashcat, Shodan, OSINT</div>
+
+        <div class="skill-cat">DevOps, AI & OS</div>
+        <div class="skill-val">Docker, Git, GitHub Actions, Vercel, Model Context Protocol (MCP), Kali Linux, Arch Linux</div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
