@@ -800,6 +800,197 @@ body {
 .sec-bar-track { height: 8px; background: rgba(255, 255, 255, 0.07); border-radius: 99px; overflow: hidden; }
 .sec-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent-green)); border-radius: 99px; }
 
+/* Live Domain Recon Scanner */
+.scanner-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 940px;
+  margin: 0 auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.scanner-form {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.scanner-input-wrap {
+  flex: 1;
+  min-width: 240px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.scanner-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--primary);
+}
+
+.scanner-input-wrap input {
+  width: 100%;
+  background: #060911;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 0.8rem 1rem 0.8rem 2.75rem;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.scanner-input-wrap input:focus {
+  border-color: var(--primary);
+}
+
+.scanner-presets {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.95rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.preset-chip {
+  background: rgba(108, 99, 255, 0.12);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+  color: #c7d2fe;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset-chip:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.scanner-results {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.scan-summary-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  flex-wrap: wrap;
+  background: #070b14;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.15rem 1.35rem;
+  margin-bottom: 1.25rem;
+}
+
+.scan-score-badge {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 1.55rem;
+  font-weight: 800;
+  background: rgba(16, 185, 129, 0.18);
+  border: 2px solid var(--accent-green);
+  color: #34d399;
+  flex-shrink: 0;
+}
+
+.scan-summary-meta {
+  flex: 1;
+  min-width: 200px;
+}
+
+.scan-summary-meta h3 {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+}
+
+.scan-summary-meta p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.scan-Findings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.scan-check-card {
+  background: #080c16;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.scan-check-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.scan-status-pill {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+}
+
+.pill-pass { background: rgba(16, 185, 129, 0.16); color: #34d399; }
+.pill-warn { background: rgba(245, 158, 11, 0.16); color: #fbbf24; }
+.pill-fail { background: rgba(239, 68, 68, 0.16); color: #f87171; }
+
+.scan-check-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  word-break: break-word;
+}
+
+.scan-records-panel {
+  background: #050810;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+}
+
+.scan-records-panel h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent-green);
+  margin-bottom: 0.65rem;
+}
+
+.scan-records-panel pre {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
 /* Writeups & Modal */
 .writeups-grid {
   display: grid;

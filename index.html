@@ -46,6 +46,7 @@
         <a href="#experience" data-i18n="nav_exp">Pengalaman</a>
         <a href="#services" data-i18n="nav_services">Layanan</a>
         <a href="#projects" data-i18n="nav_projects">Proyek</a>
+        <a href="#scanner" data-i18n="nav_scanner">Live Scanner</a>
         <a href="#writeups" data-i18n="nav_writeups">Writeups</a>
         <a href="#contact" data-i18n="nav_contact">Kontak</a>
       </nav>
@@ -603,15 +604,15 @@
               </div>
             </div>
             <span class="project-type">AppSec & Bug Bounty CLI</span>
-            <h3 class="project-title">Fata Recon & AppSec Audit Suite v2.0</h3>
+            <h3 class="project-title">Fata Recon & AppSec Audit Suite v3.0</h3>
             <p class="project-desc" data-i18n="proj4_desc">
-              Perkakas CLI Python zero-dependency untuk audit Security Headers (CSP/HSTS/XFO), inspeksi misconfiguration CORS & Cookie, enumerasi subdomain pasif via crt.sh CT Logs, dan pemindaian endpoint API konkuren lengkap dengan generator laporan Markdown otomatis.
+              Perkakas CLI Python zero-dependency untuk audit Security Headers, inspeksi CORS/Cookie, enumerasi subdomain pasif multi-source (OTX + HackerTarget + crt.sh), API Boundary Fuzzer (0, -500, 1e308), dan generator laporan PoC & Remediasi otomatis.
             </p>
             <div class="project-tags">
-              <span>Python CLI</span>
-              <span>crt.sh Recon</span>
+              <span>Python CLI v3.0</span>
+              <span>Boundary Fuzzer</span>
+              <span>OSINT Recon</span>
               <span>OWASP Audit</span>
-              <span>CORS & Headers</span>
             </div>
           </article>
         </div>
@@ -668,6 +669,61 @@
                   <div class="sec-bar-track"><div class="sec-bar-fill" style="width: 85%"></div></div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Live Domain Recon & DNS Security Scanner (NEW SaaS Tool) -->
+    <section class="section" id="scanner">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="scan_tag">// LIVE INTERACTIVE SECURITY TOOL</span>
+          <h2 class="section-title" data-i18n="scan_title">Live Domain Recon & Anti-Spoofing Scanner</h2>
+          <p class="section-subtitle" data-i18n="scan_subtitle">
+            Coba langsung mini-tool reconnaissance saya di browser! Masukkan nama domain untuk memetakan infrastruktur DNS, mengaudit celah Email Spoofing (SPF & DMARC), serta memeriksa otorisasi sertifikat SSL (CAA) secara real-time.
+          </p>
+        </div>
+
+        <div class="scanner-box">
+          <form class="scanner-form" id="liveScanForm">
+            <div class="scanner-input-wrap">
+              <i data-lucide="globe" class="icon-sm scanner-icon"></i>
+              <input type="text" id="scanDomainInput" placeholder="Masukkan domain (contoh: hackerone.com atau unsoed.ac.id)" value="hackerone.com" required />
+            </div>
+            <button type="submit" class="btn btn-primary" id="runScanBtn">
+              <i data-lucide="radar" class="icon-sm"></i>
+              <span data-i18n="scan_btn">Scan Domain Sekarang</span>
+            </button>
+          </form>
+
+          <div class="scanner-presets">
+            <span data-i18n="scan_try">Coba cepat:</span>
+            <button type="button" class="preset-chip" data-domain="hackerone.com">hackerone.com</button>
+            <button type="button" class="preset-chip" data-domain="unsoed.ac.id">unsoed.ac.id</button>
+            <button type="button" data-domain="github.com" class="preset-chip">github.com</button>
+            <button type="button" data-domain="example.com" class="preset-chip">example.com</button>
+          </div>
+
+          <div class="scanner-results" id="scanResultsBox" style="display: none;">
+            <div class="scan-summary-bar">
+              <div class="scan-score-badge" id="scanGradeBadge">A</div>
+              <div class="scan-summary-meta">
+                <h3 id="scanTargetTitle">hackerone.com</h3>
+                <p id="scanSummaryText">Mengambil data telemetri DNS & kebijakan keamanan...</p>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm" id="downloadScanReportBtn">
+                <i data-lucide="download" class="icon-xs"></i>
+                <span>Export Report (.md)</span>
+              </button>
+            </div>
+
+            <div class="scan-Findings-grid" id="scanFindingsGrid"></div>
+
+            <div class="scan-records-panel">
+              <h4><i data-lucide="terminal" class="icon-xs"></i> Raw Telemetry & DNS Records (Cloudflare DoH)</h4>
+              <pre id="scanRawOutput"></pre>
             </div>
           </div>
         </div>

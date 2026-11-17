@@ -153,6 +153,271 @@ if (quickForm) {
   });
 }
 
+// Live Domain Recon & Anti-Spoofing Scanner (Cloudflare DoH JSON API)
+const liveScanForm = document.getElementById("liveScanForm");
+const scanDomainInput = document.getElementById("scanDomainInput");
+const scanResultsBox = document.getElementById("scanResultsBox");
+const scanGradeBadge = document.getElementById("scanGradeBadge");
+const scanTargetTitle = document.getElementById("scanTargetTitle");
+const scanSummaryText = document.getElementById("scanSummaryText");
+const scanFindingsGrid = document.getElementById("scanFindingsGrid");
+const scanRawOutput = document.getElementById("scanRawOutput");
+const downloadScanReportBtn = document.getElementById("downloadScanReportBtn");
+
+let lastScanReportMd = "";
+let lastScannedDomain = "";
+
+async function queryDoH(name, type) {
+  const url = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(name)}&type=${encodeURIComponent(type)}`;
+  try {
+    const res = await fetch(url, { headers: { Accept: "application/dns-json" } });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.Answer || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function cleanDomainInput(raw) {
+  return raw
+    .trim()
+    .replace(/^https?:\/\//i, "")
+    .replace(/^www\./i, "")
+    .split("/")[0]
+    .split(":")[0]
+    .toLowerCase();
+}
+
+async function runLiveDomainScan(rawDomain) {
+  const domain = cleanDomainInput(rawDomain);
+  if (!domain || !domain.includes(".")) return;
+
+  lastScannedDomain = domain;
+  scanDomainInput.value = domain;
+  scanResultsBox.style.display = "block";
+  scanTargetTitle.textContent = domain;
+  scanSummaryText.textContent = "Memindai telemetri DNS & kebijakan anti-spoofing secara real-time...";
+  scanGradeBadge.textContent = "⏳";
+  scanFindingsGrid.innerHTML = "";
+  scanRawOutput.textContent = "[*] Querying Cloudflare DoH (A, AAAA, MX, NS, TXT, DMARC, CAA)...";
+
+  const [aRecs, aaaaRecs, mxRecs, nsRecs, txtRecs, dmarcRecs, caaRecs] = await Promise.all([
+    queryDoH(domain, "A"),
+    queryDoH(domain, "AAAA"),
+    queryDoH(domain, "MX"),
+    queryDoH(domain, "NS"),
+    queryDoH(domain, "TXT"),
+    queryDoH(`_dmarc.${domain}`, "TXT"),
+    queryDoH(domain, "CAA")
+  ]);
+
+  const ipv4List = aRecs.filter((r) => r.type === 1).map((r) => r.data);
+  const ipv6List = aaaaRecs.filter((r) => r.type === 28).map((r) => r.data);
+  const nsList = nsRecs.map((r) => r.data.replace(/\.$/, ""));
+  const mxList = mxRecs.map((r) => r.data.replace(/\.$/, ""));
+  const txtList = txtRecs.map((r) => r.data.replace(/^"|"$/g, ""));
+  const dmarcList = dmarcRecs.map((r) => r.data.replace(/^"|"$/g, ""));
+  const caaList = caaRecs.map((r) => r.data);
+
+  const spfRecord = txtList.find((t) => t.toLowerCase().includes("v=spf1")) || null;
+  const dmarcRecord = dmarcList.find((t) => t.toLowerCase().includes("v=dmarc1")) || null;
+
+  let score = 0;
+  const checks = [];
+
+  // 1. Host Resolution & IPv4/IPv6
+  if (ipv4List.length > 0) {
+    score += 20;
+    const v6Note = ipv6List.length > 0 ? ` + ${ipv6List.length} IPv6` : " (IPv4 only)";
+    if (ipv6List.length > 0) score += 10;
+    checks.push({
+      title: "Host & IP Resolution",
+      status: "PASS",
+      pill: "pill-pass",
+      desc: `Resolved: ${ipv4List.slice(0, 2).join(", ")}${v6Note}`
+    });
+  } else {
+    checks.push({
+      title: "Host & IP Resolution",
+      status: "FAIL",
+      pill: "pill-fail",
+      desc: "Tidak ditemukan A record aktif pada domain utama."
+    });
+  }
+
+  // 2. SPF Anti-Spoofing Audit
+  if (spfRecord) {
+    if (spfRecord.includes("-all")) {
+      score += 25;
+      checks.push({
+        title: "SPF Anti-Spoofing Policy",
+        status: "STRICT (-all)",
+        pill: "pill-pass",
+        desc: `Hardfail aktif: ${spfRecord.slice(0, 75)}`
+      });
+    } else if (spfRecord.includes("~all")) {
+      score += 18;
+      checks.push({
+        title: "SPF Anti-Spoofing Policy",
+        status: "SOFTFAIL (~all)",
+        pill: "pill-warn",
+        desc: `Softfail (~all) terdeteksi. Disarankan menggunakan -all.`
+      });
+    } else {
+      score += 5;
+      checks.push({
+        title: "SPF Anti-Spoofing Policy",
+        status: "WEAK",
+        pill: "pill-fail",
+        desc: `SPF ditemukan tanpa pembatasan ketat (-all/~all). Rentan email spoofing!`
+      });
+    }
+  } else {
+    checks.push({
+      title: "SPF Anti-Spoofing Policy",
+      status: "MISSING",
+      pill: "pill-fail",
+      desc: "Tidak ada TXT record v=spf1. Domain berisiko dipalsukan (Email Spoofing)."
+    });
+  }
+
+  // 3. DMARC Policy Audit
+  if (dmarcRecord) {
+    const low = dmarcRecord.toLowerCase();
+    if (low.includes("p=reject")) {
+      score += 30;
+      checks.push({
+        title: "DMARC Enforcement (_dmarc)",
+        status: "REJECT (Strong)",
+        pill: "pill-pass",
+        desc: `Proteksi penuh (p=reject): ${dmarcRecord.slice(0, 75)}`
+      });
+    } else if (low.includes("p=quarantine")) {
+      score += 22;
+      checks.push({
+        title: "DMARC Enforcement (_dmarc)",
+        status: "QUARANTINE",
+        pill: "pill-pass",
+        desc: `Proteksi aktif (p=quarantine): ${dmarcRecord.slice(0, 75)}`
+      });
+    } else {
+      score += 10;
+      checks.push({
+        title: "DMARC Enforcement (_dmarc)",
+        status: "MONITOR ONLY (p=none)",
+        pill: "pill-warn",
+        desc: `DMARC hanya memantau (p=none), belum memblokir email palsu.`
+      });
+    }
+  } else {
+    checks.push({
+      title: "DMARC Enforcement (_dmarc)",
+      status: "MISSING",
+      pill: "pill-fail",
+      desc: "Record _dmarc tidak ditemukan! Kombinasikan dengan SPF untuk mencegah phishing."
+    });
+  }
+
+  // 4. SSL Certificate Authority Authorization (CAA)
+  if (caaList.length > 0) {
+    score += 15;
+    checks.push({
+      title: "SSL CAA Restriction",
+      status: "ENFORCED",
+      pill: "pill-pass",
+      desc: `Membatasi penerbit sertifikat SSL: ${caaList.slice(0, 2).join(", ")}`
+    });
+  } else {
+    checks.push({
+      title: "SSL CAA Restriction",
+      status: "NOT SET",
+      pill: "pill-warn",
+      desc: "CAA record belum dipasang (opsional untuk membatasi CA penerbit SSL)."
+    });
+  }
+
+  // Compute Letter Grade
+  let grade = "C";
+  let badgeColor = "#fbbf24";
+  if (score >= 85) { grade = "A+"; badgeColor = "#10b981"; }
+  else if (score >= 70) { grade = "A"; badgeColor = "#10b981"; }
+  else if (score >= 55) { grade = "B"; badgeColor = "#38bdf8"; }
+  else if (score < 35) { grade = "D"; badgeColor = "#ef4444"; }
+
+  scanGradeBadge.textContent = grade;
+  scanGradeBadge.style.borderColor = badgeColor;
+  scanGradeBadge.style.color = badgeColor;
+  scanSummaryText.textContent = `Security Posture Score: ${score}/100 • Nameservers: ${nsList.slice(0, 2).join(", ") || "N/A"}`;
+
+  scanFindingsGrid.innerHTML = checks
+    .map(
+      (c) => `
+      <div class="scan-check-card">
+        <div class="scan-check-top">
+          <span>${c.title}</span>
+          <span class="scan-status-pill ${c.pill}">${c.status}</span>
+        </div>
+        <div class="scan-check-desc">${c.desc}</div>
+      </div>`
+    )
+    .join("");
+
+  const rawLines = [
+    `[+] Target Domain : ${domain}`,
+    `[+] Security Score: ${score}/100 (Grade ${grade})`,
+    `[+] IPv4 (A)      : ${ipv4List.join(", ") || "None"}`,
+    `[+] IPv6 (AAAA)   : ${ipv6List.join(", ") || "None"}`,
+    `[+] Nameservers   : ${nsList.join(", ") || "None"}`,
+    `[+] Mail (MX)     : ${mxList.join(", ") || "None"}`,
+    `[+] SPF Record    : ${spfRecord || "MISSING"}`,
+    `[+] DMARC Record  : ${dmarcRecord || "MISSING"}`,
+    `[+] CAA Records   : ${caaList.join(" | ") || "None"}`
+  ];
+  scanRawOutput.textContent = rawLines.join("\n");
+
+  lastScanReportMd = [
+    `# 🛡️ Live Domain Recon & Security Report: \`${domain}\``,
+    `- **Generated via:** Fata Fatikhul Karim Interactive Portfolio (https://userfxxk.github.io)`,
+    `- **Security Posture Score:** ${score}/100 (**Grade ${grade}**)`,
+    ``,
+    `## 1. Security Posture Checks`,
+    ...checks.map((c) => `- **${c.title} [${c.status}]:** ${c.desc}`),
+    ``,
+    `## 2. Raw DNS Telemetry`,
+    "```text",
+    ...rawLines,
+    "```"
+  ].join("\n");
+}
+
+if (liveScanForm) {
+  liveScanForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    runLiveDomainScan(scanDomainInput.value);
+  });
+}
+
+document.querySelectorAll(".preset-chip").forEach((chip) => {
+  chip.addEventListener("click", () => {
+    const d = chip.getAttribute("data-domain");
+    if (d) runLiveDomainScan(d);
+  });
+});
+
+if (downloadScanReportBtn) {
+  downloadScanReportBtn.addEventListener("click", () => {
+    if (!lastScanReportMd) return;
+    const blob = new Blob([lastScanReportMd], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `fata_recon_${lastScannedDomain.replace(/\./g, "_")}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+
 // Article Reader Modal Logic
 const articles = {
   idor: {
