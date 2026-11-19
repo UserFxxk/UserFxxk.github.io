@@ -311,15 +311,17 @@ async function runLiveDomainScan(rawDomain) {
 
   let grade = "C";
   let badgeColor = "#fbbf24";
-  if (score >= 85) { grade = "A+"; badgeColor = "#10b981"; }
-  else if (score >= 70) { grade = "A"; badgeColor = "#10b981"; }
-  else if (score >= 55) { grade = "B"; badgeColor = "#38bdf8"; }
-  else if (score < 35) { grade = "D"; badgeColor = "#ef4444"; }
+  if (score >= 95) { grade = "A+"; badgeColor = "#10b981"; }
+  else if (score >= 80) { grade = "A"; badgeColor = "#10b981"; }
+  else if (score >= 60) { grade = "B"; badgeColor = "#38bdf8"; }
+  else if (score < 40) { grade = "D"; badgeColor = "#ef4444"; }
 
+  const todayUtc = new Date().toISOString().slice(0, 10) + " UTC";
   scanGradeBadge.textContent = grade;
   scanGradeBadge.style.borderColor = badgeColor;
   scanGradeBadge.style.color = badgeColor;
-  scanSummaryText.textContent = `Passive DNS Posture Score: ${score}/100 • Nameservers: ${nsList.slice(0, 2).join(", ") || "N/A"}`;
+  scanTargetTitle.textContent = `${domain} (Snapshot: ${todayUtc})`;
+  scanSummaryText.textContent = `Passive DNS Posture Score: ${score}/100 (Grade ${grade}) • Nameservers: ${nsList.slice(0, 2).join(", ") || "N/A"}`;
 
   scanFindingsGrid.innerHTML = checks
     .map(
@@ -336,6 +338,7 @@ async function runLiveDomainScan(rawDomain) {
 
   const rawLines = [
     `[+] Target Domain : ${domain}`,
+    `[+] Snapshot Date : ${todayUtc}`,
     `[+] Posture Score : ${score}/100 (Grade ${grade})`,
     `[+] IPv4 (A)      : ${ipv4List.join(", ") || "None"}`,
     `[+] IPv6 (AAAA)   : ${ipv6List.join(", ") || "None"}`,

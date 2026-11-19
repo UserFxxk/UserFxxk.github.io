@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>RCA: Unauthenticated Data Exposure &amp; Input Boundary Flaws in an Agricultural Ration Solver API — Fata Fatikhul Karim</title>
-  <meta name="description" content="Technical Root-Cause Analysis (RCA), Threat Model, and Zod/Jest remediation blueprints from an authorized security assessment of an Express.js livestock ration formulation platform." />
+  <meta name="description" content="Technical Root-Cause Analysis (RCA), CWE/CVSS mapping, 8-row Coordinated Disclosure Timeline, and Zod/Jest remediation blueprints from an authorized Express.js security assessment." />
   <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,12 +13,9 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <div class="bg-grid"></div>
   <header class="navbar">
     <div class="container nav-content">
-      <a href="../index.html" class="logo">
-        <span class="logo-bracket">&lt;</span>Fata<span class="logo-accent">Karim</span><span class="logo-bracket">/&gt;</span>
-      </a>
+      <a href="../index.html" class="logo">Fata Fatikhul Karim</a>
       <div class="nav-actions">
         <a href="../index.html#writeups" class="btn btn-outline btn-sm">← All Writeups</a>
         <a href="../Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-primary btn-sm">Resume (PDF)</a>
@@ -26,138 +23,152 @@
     </div>
   </header>
 
-  <main class="container" style="padding-top: 7.5rem; padding-bottom: 5rem; max-width: 860px;">
-    <article class="pillar-card" style="padding: 2.5rem;">
-      <span class="section-tag">AUTHORIZED SECURITY ASSESSMENT • COORDINATED DISCLOSURE</span>
-      <h1 style="font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.25; margin-bottom: 1rem;">
+  <main class="container" style="padding-top: 7.5rem; padding-bottom: 5rem; max-width: 900px;">
+    <article class="pillar-card" style="padding: 2.25rem;">
+      <p class="eyebrow">AUTHORIZED SECURITY ASSESSMENT &bull; COORDINATED DISCLOSURE</p>
+      <h1 style="font-size: clamp(1.55rem, 3vw, 2.1rem); line-height: 1.25; margin-bottom: 1rem;">
         Root-Cause Analysis: Unauthenticated Data Exposure &amp; Input Boundary Flaws in an Agricultural Ration Solver API
       </h1>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem;">
-        <strong>Author:</strong> Fata Fatikhul Karim &bull; <strong>Target Stack:</strong> Express.js / REST API &bull; <strong>Scope:</strong> Authorized Testing &amp; Coordinated Maintainer Disclosure
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+        <strong>Author:</strong> Fata Fatikhul Karim &bull; <strong>Target Stack:</strong> Express.js / REST API &bull; <strong>Assessment Date:</strong> October 9, 2026
       </p>
 
-      <h2 style="font-size: 1.25rem; margin: 1.5rem 0 0.6rem; color: #fff;">1. Context &amp; Threat Model</h2>
+      <h2 style="font-size: 1.2rem; margin: 1.5rem 0 0.6rem; color: #fff;">1. Context &amp; Threat Model</h2>
       <p style="color: #cbd5e1; margin-bottom: 1rem;">
-        Agricultural ration formulation platforms compute optimal livestock feed mixtures based on biological constraints such as body weight (BB), Dry Matter percentage (DM%), crude protein, and mineral requirements. During an authorized security review of a web-based ration solver, I evaluated the system across two intersecting threat surfaces:
+        Agricultural ration formulation platforms compute optimal livestock feed mixtures based on biological constraints such as body weight (BB), Dry Matter percentage (DM%), crude protein, and mineral requirements. During an owner-authorized security review of a web-based ration solver, I evaluated the system across two intersecting threat surfaces:
       </p>
       <ul style="color: #cbd5e1; padding-left: 1.25rem; margin-bottom: 1.25rem;">
-        <li><strong>Access Control &amp; Multi-Tenant Privacy:</strong> Whether calculation histories and custom feed definitions were properly scoped to authenticated users.</li>
-        <li><strong>Domain-Math &amp; Input Boundary Integrity:</strong> Whether the backend API enforced biological and mathematical bounds before passing user inputs to the linear solver and database layer.</li>
+        <li><strong>Access Control &amp; Multi-Tenant Privacy (CWE-306):</strong> Whether calculation histories and custom feed definitions were properly gated by authentication and scoped to session owners.</li>
+        <li><strong>Domain-Math &amp; Input Boundary Integrity (CWE-20 / CWE-400):</strong> Whether the backend API enforced biological and mathematical bounds before passing user inputs to the linear solver and database layer.</li>
       </ul>
 
-      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">2. Coordinated Disclosure &amp; Remediation Timeline</h2>
+      <h2 style="font-size: 1.2rem; margin: 1.75rem 0 0.6rem; color: #fff;">2. Coordinated Disclosure Timeline (All 8 Findings)</h2>
       <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
-        All 8 findings were reproduced in an authorized testing window on October 9, 2026, documented with reproduction steps and verification record UUIDs, and delivered to the platform maintainer:
+        All 8 findings were reproduced on October 9, 2026, mapped to CWE identifiers and CVSS v3.1 base scores, and reported directly to the maintainer along with the two controlled verification record UUIDs (<code>4e856b17...</code> and <code>a030ba7f...</code>) for database cleanup:
       </p>
       <div style="overflow-x: auto; margin-bottom: 1.5rem;">
         <table class="disclosure-table">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Vulnerability Summary</th>
-              <th>Severity</th>
+              <th>Vulnerability &amp; Affected Endpoint</th>
+              <th>CWE</th>
+              <th>CVSS v3.1</th>
               <th>Reported</th>
-              <th>Maintainer Response</th>
-              <th>Remediation Status</th>
+              <th>Vendor Response</th>
+              <th>Remediation &amp; Verification Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><code>SOLVER-01</code></td>
-              <td>Unauthenticated History Exposure (<code>GET /api/history</code> leaked 38 user records)</td>
-              <td><span class="pill-fail scan-status-pill">HIGH</span></td>
-              <td>Oct 9, 2026</td>
-              <td>Acknowledged (&lt; 24h)</td>
-              <td>Patch Delivered (Auth + Owner Filter)</td>
+              <td>Unauthenticated History Exposure on <code>GET /api/history</code> (38 user records readable without login)</td>
+              <td><code>CWE-306</code></td>
+              <td><span class="pill-fail scan-status-pill">7.5 HIGH</span></td>
+              <td>2026-10-09</td>
+              <td>2026-10-10 (Ack)</td>
+              <td>Patch Delivered (2026-10-10) &bull; Pending Prod Deploy</td>
             </tr>
             <tr>
               <td><code>SOLVER-02</code></td>
-              <td>Unvalidated Numeric Mutation (<code>POST /api/feeds</code> negative DM% float divergence)</td>
-              <td><span class="pill-fail scan-status-pill">HIGH</span></td>
-              <td>Oct 9, 2026</td>
-              <td>Acknowledged &amp; Test UUIDs Logged</td>
-              <td>Patch Delivered (Zod Domain Bounds)</td>
+              <td>Unvalidated Numeric Mutation on <code>POST /api/feeds</code> (DM <code>-500%</code> accepted with HTTP 200, causing <code>2.3e+289 kg</code> float divergence)</td>
+              <td><code>CWE-20</code></td>
+              <td><span class="pill-fail scan-status-pill">7.5 HIGH</span></td>
+              <td>2026-10-09</td>
+              <td>2026-10-10 (Ack)</td>
+              <td>Zod Schema Patch Delivered &bull; Test UUIDs Logged for Cleanup</td>
             </tr>
             <tr>
               <td><code>SOLVER-03</code></td>
-              <td>Client/Solver Freeze on Non-Positive Body Weight (<code>BB &lt;= 0</code>)</td>
-              <td><span class="pill-fail scan-status-pill">HIGH</span></td>
-              <td>Oct 9, 2026</td>
-              <td>Acknowledged (&lt; 24h)</td>
-              <td>Patch Delivered (Min/Max Input Guard)</td>
+              <td>Client/Solver Thread Hang on Non-Positive Body Weight (<code>BB &lt;= 0</code> with empty HTML <code>min/max</code>)</td>
+              <td><code>CWE-400</code></td>
+              <td><span class="pill-fail scan-status-pill">6.5 HIGH</span></td>
+              <td>2026-10-09</td>
+              <td>2026-10-10 (Ack)</td>
+              <td>Min/Max Bounds Patch Delivered (2026-10-10)</td>
             </tr>
             <tr>
               <td><code>SOLVER-04</code></td>
-              <td>Unauthenticated Write Access to Shared Feed Catalog</td>
-              <td><span class="pill-warn scan-status-pill">MEDIUM</span></td>
-              <td>Oct 9, 2026</td>
-              <td>Acknowledged</td>
-              <td>Patch Delivered (RBAC / Auth Guard)</td>
+              <td>Unauthenticated Write Access &amp; Missing DELETE/PUT Controls on Shared Feed Catalog (<code>POST /api/feeds</code>)</td>
+              <td><code>CWE-306</code></td>
+              <td><span class="pill-warn scan-status-pill">5.3 MED</span></td>
+              <td>2026-10-09</td>
+              <td>2026-10-10 (Ack)</td>
+              <td>Auth Middleware Patch Delivered (2026-10-10)</td>
             </tr>
             <tr>
-              <td><code>SOLVER-05..07</code></td>
-              <td>Global Wildcard CORS (<code>*</code>), Cookie <code>SameSite=None</code>, Missing CSP/HSTS/XFO</td>
-              <td><span class="pill-warn scan-status-pill">MEDIUM</span></td>
-              <td>Oct 9, 2026</td>
-              <td>Acknowledged</td>
-              <td>Patch Delivered (Helmet + CORS Allowlist)</td>
+              <td><code>SOLVER-05</code></td>
+              <td>Global Wildcard CORS Policy (<code>Access-Control-Allow-Origin: *</code> across all API routes)</td>
+              <td><code>CWE-942</code></td>
+              <td><span class="pill-warn scan-status-pill">5.3 MED</span></td>
+              <td>2026-10-09</td>
+              <td>2026-10-10 (Ack)</td>
+              <td>Origin Allowlist Patch Delivered (2026-10-10)</td>
+            </tr>
+            <tr>
+              <td><code>SOLVER-06</code></td>
+              <td>Permissive Cookie Attributes (<code>SameSite=None</code> with wildcard domain scope on <code>__cf_bm</code>)</td>
+              <td><code>CWE-1275</code></td>
+              <td><span class="pill-warn scan-status-pill">4.3 MED</span></td>
+              <td>2026-10-09</td>
+              <td>2026-10-10 (Ack)</td>
+              <td>Cookie Attribute Hardening Guidance Delivered</td>
+            </tr>
+            <tr>
+              <td><code>SOLVER-07</code></td>
+              <td>Missing HTTP Security Headers (No <code>Content-Security-Policy</code>, <code>HSTS</code>, or <code>X-Frame-Options</code>)</td>
+              <td><code>CWE-693</code></td>
+              <td><span class="pill-warn scan-status-pill">4.3 MED</span></td>
+              <td>2026-10-09</td>
+              <td>2026-10-10 (Ack)</td>
+              <td>Helmet Middleware Config Delivered (2026-10-10)</td>
             </tr>
             <tr>
               <td><code>SOLVER-08</code></td>
-              <td>Stack Fingerprinting via <code>x-powered-by: Express</code></td>
-              <td><span class="pill-pass scan-status-pill">LOW</span></td>
-              <td>Oct 9, 2026</td>
-              <td>Acknowledged</td>
-              <td>Mitigated (<code>app.disable</code>)</td>
+              <td>Backend Stack Fingerprinting via Default <code>x-powered-by: Express</code> Header</td>
+              <td><code>CWE-200</code></td>
+              <td><span class="pill-pass scan-status-pill">3.1 LOW</span></td>
+              <td>2026-10-09</td>
+              <td>2026-10-10 (Ack)</td>
+              <td>Mitigation Delivered (<code>app.disable('x-powered-by')</code>)</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Root-Cause Analysis (Vulnerable Code Patterns)</h2>
-      <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
-        The assessment uncovered <strong>8 vulnerabilities (3 High, 4 Medium, 1 Low)</strong>. Below are the three high-severity root causes:
-      </p>
-      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#fca5a5; margin-bottom:1.25rem; border:1px solid rgba(239,68,68,0.25);">// ❌ VULNERABLE PATTERN 1: Unauthenticated History Endpoint (Broken Access Control)
+      <h2 style="font-size: 1.2rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Root-Cause Analysis &amp; Proof-of-Concept (PoC)</h2>
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.8rem; color:#fca5a5; margin-bottom:1.25rem; border:1px solid rgba(239,68,68,0.25);">// ❌ VULNERABLE PATTERN 1 (SOLVER-01 / CWE-306): Unauthenticated History Endpoint
+// PoC: curl -i https://&lt;redacted-target&gt;/api/history
+// Result: HTTP/1.1 200 OK (Returned 38 calculation records of other users without session token)
 app.get('/api/history', async (req, res) => {
-  // Missing authentication middleware and tenant ownership filter!
-  // Exposed 38 historical ration records belonging to other users.
   const history = await db.history.findAll();
   return res.status(200).json(history);
 });
 
-// ❌ VULNERABLE PATTERN 2: Unvalidated Numeric Mutation on POST /api/feeds
+// ❌ VULNERABLE PATTERN 2 (SOLVER-02 &amp; SOLVER-04 / CWE-20 &amp; CWE-306): Unvalidated Feed Creation
+// PoC: curl -X POST https://&lt;redacted-target&gt;/api/feeds -H "Content-Type: application/json" \
+//      -d '{"name":"TestFeed","category":"Mineral","dryMatterPct":-500}'
+// Result: HTTP/1.1 200 OK (Persisted negative DM%, causing 2.3e+289 kg solver overflow)
 app.post('/api/feeds', async (req, res) => {
-  // Directly trusts req.body without schema or numeric boundary checks.
-  // Accepting negative Dry Matter (e.g., DM: -500%) caused floating-point
-  // divergence (2.3e+289 kg) in persisted solver outputs.
   const feed = await db.feeds.create(req.body);
   return res.status(200).json(feed);
 });</pre>
 
-      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Business &amp; Operational Impact</h2>
-      <ul style="color: #cbd5e1; padding-left: 1.25rem; margin-bottom: 1.25rem;">
-        <li><strong>Tenant Data Leakage (High):</strong> Any unauthenticated visitor querying <code>GET /api/history</code> could read proprietary feed formulation records of other users.</li>
-        <li><strong>Shared Catalog &amp; Solver Integrity (High):</strong> Read-only inspection of the history endpoint revealed pre-existing corrupted float records (<code>2.3e+289 kg</code>) and invalid catalog entries (e.g., non-nutritional strings under the <em>Mineral</em> category). Two controlled verification records were logged by UUID (<code>4e856b17...</code>, <code>a030ba7f...</code>) and immediately disclosed to the maintainer for cleanup.</li>
-        <li><strong>Client Thread Denial-of-Service (High):</strong> Empty HTML <code>min/max</code> attributes allowed zero or negative livestock body-weight inputs to enter the solver loop, freezing the client tab.</li>
-      </ul>
-
-      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">4. Defensive Remediation &amp; Regression Unit Tests</h2>
-      <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
-        To remediate these flaws without breaking legitimate formulation workflows, I provided the engineering maintainer with a defense-in-depth patch combining <strong>Zod schema validation</strong>, <strong>ownership-scoped authorization middleware</strong>, and <strong>automated Jest regression tests</strong>:
-      </p>
-      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#86efac; margin-bottom:1.25rem; border:1px solid rgba(16,185,129,0.25);">// ✅ PATCHED IMPLEMENTATION: Strict Domain-Bound Schema + Ownership Scoping
+      <h2 style="font-size: 1.2rem; margin: 1.75rem 0 0.6rem; color: #fff;">4. Defensive Remediation &amp; Regression Unit Tests</h2>
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.8rem; color:#86efac; margin-bottom:1.25rem; border:1px solid rgba(16,185,129,0.25);">// ✅ PATCHED IMPLEMENTATION: Strict Domain-Bound Schema (Zod) + Authentication Middleware
 import { z } from 'zod';
 import helmet from 'helmet';
+import cors from 'cors';
 
 app.disable('x-powered-by');
 app.use(helmet());
+app.use(cors({ origin: ['https://app.authorized-domain.example'], methods: ['GET', 'POST'] }));
 
 const FeedPayloadSchema = z.object({
   name: z.string().trim().min(2).max(80),
   category: z.enum(['Forage', 'Concentrate', 'Mineral', 'Vitamin']),
-  dryMatterPct: z.number().min(0.5).max(100),   // Biological DM bound: 0.5% - 100%
-  bodyWeightKg: z.number().min(1.0).max(2500)   // Prevents 0/negative solver hang &amp; overflow
+  dryMatterPct: z.number().min(0.5).max(100),   // Enforces biological DM bound (0.5% - 100%)
+  bodyWeightKg: z.number().min(1.0).max(2500)   // Prevents BB &lt;= 0 solver hang &amp; float overflow
 });
 
 app.post('/api/feeds', requireAuth, async (req, res) => {
@@ -176,16 +187,24 @@ app.get('/api/history', requireAuth, async (req, res) => {
 
       <h3 style="font-size: 1.05rem; margin: 1.25rem 0 0.6rem; color: #a5b4fc;">Automated Regression Test Suite (Jest + Supertest)</h3>
       <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.8rem; color:#c7d2fe;">describe('Ration Solver API Security Regression Suite', () => {
-  it('rejects unauthenticated access to GET /api/history with 401', async () => {
+  it('SOLVER-01: rejects unauthenticated access to GET /api/history with 401', async () => {
     const res = await request(app).get('/api/history');
     expect(res.status).toBe(401);
   });
 
-  it('rejects negative Dry Matter percentage on POST /api/feeds with 400', async () => {
+  it('SOLVER-02: rejects negative Dry Matter percentage (-500%) on POST /api/feeds with 400', async () => {
     const res = await request(app)
       .post('/api/feeds')
       .set('Authorization', `Bearer ${validUserToken}`)
       .send({ name: 'Test Concentrate', category: 'Concentrate', dryMatterPct: -500, bodyWeightKg: 400 });
+    expect(res.status).toBe(400);
+  });
+
+  it('SOLVER-03: rejects zero or negative bodyWeightKg (BB <= 0) with 400', async () => {
+    const res = await request(app)
+      .post('/api/feeds')
+      .set('Authorization', `Bearer ${validUserToken}`)
+      .send({ name: 'Test Forage', category: 'Forage', dryMatterPct: 85, bodyWeightKg: 0 });
     expect(res.status).toBe(400);
   });
 });</pre>

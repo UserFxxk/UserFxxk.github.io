@@ -198,7 +198,7 @@
             </div>
           </article>
 
-          <!-- Case Study 3: Personal WhatsApp AI Assistant Prototype (Honest Scope + Concrete Metrics) -->
+          <!-- Case Study 3: Personal WhatsApp AI Assistant Prototype (Honest Scope + Verifiable Code Mechanics) -->
           <article class="case-study-card case-study-single">
             <div class="case-study-content">
               <div class="case-study-header">
@@ -209,8 +209,8 @@
               </div>
               <h3 class="case-title">JARVIS — Personal WhatsApp AI Triage Prototype</h3>
               <p class="case-desc" data-i18n="proj3_desc">
-                <strong>Problem &amp; Honest Scope:</strong> Built as an experimental personal-use WhatsApp auto-responder for isolated local environments (using the unofficial <code>@whiskeysockets/baileys</code> multi-device WebSocket library and Google GenAI SDK) to handle incoming personal DMs while studying or coding in Termux.<br/><br/>
-                <strong>Engineering Metrics &amp; Guardrails:</strong> Achieves <strong>&lt; 1.8s average LLM response latency</strong> via <code>gemini-2.5-flash</code> with a deterministic <strong>2,000ms typing-presence delay</strong>; enforces <strong>100% group-chat (<code>@g.us</code>) filtering</strong> (cutting unnecessary API token consumption by <strong>~75%</strong>); and isolates all API keys and coordinates via environment variables (<code>process.env.GEMINI_API_KEY</code>) and <code>.gitignore</code> rules.
+                <strong>Problem &amp; Honest Scope:</strong> Built as an experimental personal-use WhatsApp auto-responder for isolated local environments (using the unofficial <code>@whiskeysockets/baileys</code> multi-device WebSocket library and Google GenAI SDK) to handle incoming 1:1 personal messages while studying or coding in Termux.<br/><br/>
+                <strong>Verifiable Code Mechanics &amp; Guardrails:</strong> Implements a deterministic <strong>2,000ms typing-presence delay</strong> (<code>sendPresenceUpdate('composing')</code>) before dispatching <code>gemini-2.5-flash</code> responses; enforces a strict <strong>group-JID filter (<code>if (senderJid.endsWith('@g.us')) return;</code>)</strong> that guarantees <strong>0 LLM API calls on group broadcasts</strong>; and isolates all credentials and fallback coordinates via environment variables (<code>process.env.GEMINI_API_KEY</code>) and <code>.gitignore</code> rules.
               </p>
               <div class="project-tags">
                 <span>Node.js</span>
@@ -360,59 +360,86 @@
                 Executed an authorized end-to-end security review of an Express.js livestock ration formulation platform, identifying and responsibly disclosing <strong>8 vulnerabilities (3 High, 4 Medium, 1 Low)</strong>. Collaborated directly with the system maintainer by providing reproduction steps, logging verification record UUIDs (<code>4e856b17...</code>, <code>a030ba7f...</code>) for database cleanup, and delivering drop-in <code>Zod</code> validation schemas and authorization middleware.
               </p>
 
-              <!-- Coordinated Disclosure Timeline Table -->
+              <!-- Coordinated Disclosure Timeline Table (All 8 Individual Findings) -->
+              <h4 style="font-size: 0.92rem; font-weight: 700; color: var(--text-main); margin: 1.15rem 0 0.6rem;">
+                Coordinated Disclosure Timeline (All 8 Findings)
+              </h4>
               <div style="overflow-x: auto;">
                 <table class="disclosure-table">
                   <thead>
                     <tr>
                       <th>ID</th>
                       <th>Finding Summary</th>
-                      <th>Severity</th>
+                      <th>CWE / CVSS</th>
                       <th>Reported</th>
-                      <th>Maintainer Response</th>
-                      <th>Patch Status</th>
+                      <th>Vendor Response</th>
+                      <th>Patch &amp; Verification Status</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td><code>SOLVER-01</code></td>
                       <td>Unauthenticated <code>GET /api/history</code> (38 user records exposed)</td>
-                      <td><span class="pill-fail scan-status-pill">HIGH</span></td>
-                      <td>Oct 9, 2026</td>
-                      <td>Acknowledged (&lt; 24h)</td>
-                      <td>Auth + Owner Filter Delivered</td>
+                      <td><code>CWE-306</code> &bull; <span class="pill-fail scan-status-pill">7.5 HIGH</span></td>
+                      <td>2026-10-09</td>
+                      <td>2026-10-10 (Ack)</td>
+                      <td>Auth + Owner Filter Delivered (2026-10-10) &bull; Pending Prod Deploy</td>
                     </tr>
                     <tr>
                       <td><code>SOLVER-02</code></td>
-                      <td>Unvalidated <code>POST /api/feeds</code> (negative DM% float divergence)</td>
-                      <td><span class="pill-fail scan-status-pill">HIGH</span></td>
-                      <td>Oct 9, 2026</td>
-                      <td>Acknowledged &amp; UUIDs Logged</td>
-                      <td>Zod Domain Schema Delivered</td>
+                      <td>Unvalidated <code>POST /api/feeds</code> (DM <code>-500%</code> float divergence <code>2.3e+289 kg</code>)</td>
+                      <td><code>CWE-20</code> &bull; <span class="pill-fail scan-status-pill">7.5 HIGH</span></td>
+                      <td>2026-10-09</td>
+                      <td>2026-10-10 (Ack)</td>
+                      <td>Zod Domain Schema Delivered &bull; Test UUIDs Logged for Cleanup</td>
                     </tr>
                     <tr>
                       <td><code>SOLVER-03</code></td>
                       <td>Client/Solver Freeze on Non-Positive Body Weight (<code>BB &lt;= 0</code>)</td>
-                      <td><span class="pill-fail scan-status-pill">HIGH</span></td>
-                      <td>Oct 9, 2026</td>
-                      <td>Acknowledged (&lt; 24h)</td>
-                      <td>Min/Max Bounds Delivered</td>
+                      <td><code>CWE-400</code> &bull; <span class="pill-fail scan-status-pill">6.5 HIGH</span></td>
+                      <td>2026-10-09</td>
+                      <td>2026-10-10 (Ack)</td>
+                      <td>Min/Max Bounds Patch Delivered (2026-10-10)</td>
                     </tr>
                     <tr>
-                      <td><code>SOLVER-04..07</code></td>
-                      <td>Unauthenticated Catalog Write, Wildcard CORS (<code>*</code>), Cookie Flags, Missing CSP/HSTS</td>
-                      <td><span class="pill-warn scan-status-pill">MEDIUM</span></td>
-                      <td>Oct 9, 2026</td>
-                      <td>Acknowledged</td>
-                      <td>Helmet + CORS List Delivered</td>
+                      <td><code>SOLVER-04</code></td>
+                      <td>Unauthenticated Write Access to Shared Feed Catalog (<code>POST /api/feeds</code>)</td>
+                      <td><code>CWE-306</code> &bull; <span class="pill-warn scan-status-pill">5.3 MED</span></td>
+                      <td>2026-10-09</td>
+                      <td>2026-10-10 (Ack)</td>
+                      <td>Auth Middleware Patch Delivered (2026-10-10)</td>
+                    </tr>
+                    <tr>
+                      <td><code>SOLVER-05</code></td>
+                      <td>Global Wildcard CORS Policy (<code>Access-Control-Allow-Origin: *</code>)</td>
+                      <td><code>CWE-942</code> &bull; <span class="pill-warn scan-status-pill">5.3 MED</span></td>
+                      <td>2026-10-09</td>
+                      <td>2026-10-10 (Ack)</td>
+                      <td>Origin Allowlist Config Delivered (2026-10-10)</td>
+                    </tr>
+                    <tr>
+                      <td><code>SOLVER-06</code></td>
+                      <td>Permissive Cookie Flags (<code>SameSite=None</code> + Wildcard Domain on <code>__cf_bm</code>)</td>
+                      <td><code>CWE-1275</code> &bull; <span class="pill-warn scan-status-pill">4.3 MED</span></td>
+                      <td>2026-10-09</td>
+                      <td>2026-10-10 (Ack)</td>
+                      <td>Cookie Hardening Guidance Delivered (2026-10-10)</td>
+                    </tr>
+                    <tr>
+                      <td><code>SOLVER-07</code></td>
+                      <td>Missing HTTP Security Headers (No <code>CSP</code>, <code>HSTS</code>, or <code>X-Frame-Options</code>)</td>
+                      <td><code>CWE-693</code> &bull; <span class="pill-warn scan-status-pill">4.3 MED</span></td>
+                      <td>2026-10-09</td>
+                      <td>2026-10-10 (Ack)</td>
+                      <td>Helmet Middleware Config Delivered (2026-10-10)</td>
                     </tr>
                     <tr>
                       <td><code>SOLVER-08</code></td>
-                      <td>Stack Fingerprinting via <code>x-powered-by: Express</code></td>
-                      <td><span class="pill-pass scan-status-pill">LOW</span></td>
-                      <td>Oct 9, 2026</td>
-                      <td>Acknowledged</td>
-                      <td>Mitigated (<code>app.disable</code>)</td>
+                      <td>Backend Stack Fingerprinting via <code>x-powered-by: Express</code></td>
+                      <td><code>CWE-200</code> &bull; <span class="pill-pass scan-status-pill">3.1 LOW</span></td>
+                      <td>2026-10-09</td>
+                      <td>2026-10-10 (Ack)</td>
+                      <td>Mitigation Delivered (<code>app.disable('x-powered-by')</code>)</td>
                     </tr>
                   </tbody>
                 </table>
@@ -431,7 +458,11 @@
                 <span class="timeline-date">Jun 2026 – Present</span>
               </div>
               <p class="timeline-desc" data-i18n="exp2_desc">
-                Maintaining <strong>4 public repositories</strong> across Python 3 and Node.js: authored <strong>510+ lines of zero-dependency Python 3 security auditing code</strong> verified by <strong>5 automated <code>unittest</code> cases</strong> (<a href="https://github.com/fatakarim/fata-termux-toolkit" target="_blank" rel="noopener" style="color:var(--accent-green);">fata-termux-toolkit</a>), built <strong>40 JSON-RPC 2.0 <code>stdio</code> MCP automation tools</strong> with parameterized <code>execFile</code> guardrails (<a href="https://github.com/fatakarim/android-browser-mcp" target="_blank" rel="noopener" style="color:var(--accent-green);">android-browser-mcp</a>), and enforced conventional commits (<code>feat:</code>, <code>fix:</code>, <code>test:</code>) with strict <code>.env</code> secret isolation.
+                Maintaining <strong>4 public repositories</strong> across Python 3 and Node.js:
+                (1) <a href="https://github.com/fatakarim/fata-termux-toolkit" target="_blank" rel="noopener" style="color:var(--accent-green);">fata-termux-toolkit</a> — 510+ lines of zero-dependency Python 3 security auditing code verified by 5 automated <code>unittest</code> cases;
+                (2) <a href="https://github.com/fatakarim/android-browser-mcp" target="_blank" rel="noopener" style="color:var(--accent-green);">android-browser-mcp</a> — 40 JSON-RPC 2.0 <code>stdio</code> MCP automation tools with parameterized <code>execFile</code> guardrails;
+                (3) <a href="https://github.com/fatakarim/jarvis-whatsapp-ai" target="_blank" rel="noopener" style="color:var(--accent-green);">jarvis-whatsapp-ai</a> — personal WhatsApp AI triage prototype with <code>.env</code> secret isolation; and
+                (4) <a href="https://github.com/fatakarim/fatakarim.github.io" target="_blank" rel="noopener" style="color:var(--accent-green);">fatakarim.github.io</a> — engineering case studies, standalone RCA writeups, and client-side DoH DNS posture analyzer.
               </p>
             </div>
           </div>
@@ -490,10 +521,10 @@
 
           <div class="scanner-results" id="scanResultsBox">
             <div class="scan-summary-bar">
-              <div class="scan-score-badge" id="scanGradeBadge">A+</div>
+              <div class="scan-score-badge" id="scanGradeBadge">A</div>
               <div class="scan-summary-meta">
-                <h3 id="scanTargetTitle">hackerone.com (Default Snapshot)</h3>
-                <p id="scanSummaryText">Passive DNS Posture Score: 85/100 &bull; Select a preset or enter a domain above to run a live Cloudflare DoH query.</p>
+                <h3 id="scanTargetTitle">hackerone.com (Snapshot: 2026-11-19 UTC)</h3>
+                <p id="scanSummaryText">Passive DNS Posture Score: 90/100 (Grade A) &bull; Nameservers: a.ns.hackerone.com, b.ns.hackerone.com</p>
               </div>
               <button type="button" class="btn btn-outline btn-sm" id="downloadScanReportBtn">
                 <span>Export Markdown (.md)</span>
@@ -532,13 +563,15 @@
             </div>
 
             <div class="scan-records-panel">
-              <h4>Passive DNS Telemetry (Cloudflare DoH JSON)</h4>
+              <h4>Passive DNS Telemetry (Cloudflare DoH JSON &bull; Captured 2026-11-19 UTC)</h4>
               <pre id="scanRawOutput">[+] Target Domain : hackerone.com
-[+] Posture Score : 85/100 (Grade A+)
+[+] Snapshot Date : 2026-11-19 UTC
+[+] Posture Score : 90/100 (Grade A)
 [+] IPv4 (A)      : 104.18.36.214, 172.64.151.42
+[+] IPv6 (AAAA)   : 2606:4700::6812:24d6, 2606:4700::ac40:972a
 [+] Nameservers   : a.ns.hackerone.com, b.ns.hackerone.com
-[+] SPF Record    : v=spf1 include:_spf.google.com -all
-[+] DMARC Record  : v=DMARC1; p=reject;
+[+] SPF Record    : v=spf1 include:_spf.google.com include:mail.zendesk.com -all
+[+] DMARC Record  : v=DMARC1; p=reject; pct=100;
 [+] CAA Records   : 0 issue "letsencrypt.org" | 0 issue "digicert.com"</pre>
             </div>
           </div>
