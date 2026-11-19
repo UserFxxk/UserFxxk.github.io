@@ -1,0 +1,24 @@
+========================================================================
+COORDINATED VULNERABILITY DISCLOSURE & SECURITY CONTACT POLICY
+Author  : Fata Fatikhul Karim
+Role    : Application Security & Backend Automation Engineer
+Email   : fatafatikhul@gmail.com
+LinkedIn: https://www.linkedin.com/in/fata-fatikhul-karim
+HackerOne: https://hackerone.com/zeonmaltius
+========================================================================
+
+1. AUTHORIZED TESTING & DISCLOSURE PRINCIPLES
+All security research, reconnaissance tooling, and vulnerability root-cause
+analyses published on https://fatakarim.github.io strictly adhere to:
+- Owner-authorized testing scopes and program Rules of Engagement (RoE).
+- Non-destructive verification (zero production denial-of-service or
+  unauthorized data modification).
+- Coordinated disclosure with system maintainers prior to any redacted
+  technical writeup publication.
+
+2. REPORTING A SECURITY ISSUE ON THIS DOMAIN
+If you identify a security or configuration issue on fatakarim.github.io
+or any associated open-source repository, please send a report to:
+  mailto:fatafatikhul@gmail.com
+with the subject line "[SECURITY DISCLOSURE] <Repository/Domain>".
+Acknowledgment is provided within 48 hours.

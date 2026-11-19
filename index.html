@@ -5,406 +5,343 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Fata Fatikhul Karim — Application Security &amp; Backend Automation Engineer</title>
-  <meta name="description" content="Fata Fatikhul Karim — Security-Focused Software Engineer specializing in Application Security (OWASP Top 10), Backend Development (Node.js/Python), and Model Context Protocol (MCP) Automation." />
+  <meta name="description" content="Engineering portfolio and security root-cause analysis writeups of Fata Fatikhul Karim — Application Security (OWASP Top 10) and Backend/Protocol Automation (Python 3, Node.js, MCP)." />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 
-  <!-- Open Graph / LinkedIn Preview -->
+  <!-- Open Graph / LinkedIn & WhatsApp Preview Card (1200x630) -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://fatakarim.github.io/" />
-  <meta property="og:title" content="Fata Fatikhul Karim — Security-Focused Software Engineer" />
-  <meta property="og:description" content="Application Security & Backend Automation Engineer (Node.js, TypeScript, Python). Bridging software engineering with offensive security testing." />
+  <meta property="og:title" content="Fata Fatikhul Karim — Application Security &amp; Backend Automation" />
+  <meta property="og:description" content="Engineering case studies, vulnerability Root-Cause Analysis (RCA), and Python/Node.js security automation tooling." />
   <meta property="og:image" content="https://fatakarim.github.io/og-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://fatakarim.github.io/og-preview.png" />
 
-  <!-- Google Fonts: Plus Jakarta Sans & Fira Code -->
+  <!-- Typography: Plus Jakarta Sans & Fira Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-
-  <!-- Navbar -->
+  <!-- Clean Editorial Header -->
   <header class="navbar" id="navbar">
     <div class="container nav-content">
       <a href="#home" class="logo">
-        <span class="logo-bracket">&lt;</span>Fata<span class="logo-accent">Karim</span><span class="logo-bracket">/&gt;</span>
+        Fata Fatikhul Karim
       </a>
 
       <nav class="nav-links" id="navLinks" aria-label="Primary Navigation">
         <a href="#projects" data-i18n="nav_projects">Case Studies</a>
-        <a href="#writeups" data-i18n="nav_writeups">Writeups</a>
-        <a href="#experience" data-i18n="nav_exp">Experience &amp; Education</a>
+        <a href="#writeups" data-i18n="nav_writeups">Security Writeups</a>
+        <a href="#experience" data-i18n="nav_exp">Experience &amp; Background</a>
         <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
 
       <div class="nav-actions">
         <button class="lang-btn" id="langToggle" aria-label="Switch Language" title="Switch EN / ID">
-          <i data-lucide="globe" class="icon-sm"></i>
           <span id="langLabel">EN</span>
         </button>
         <a href="Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-primary btn-sm">
-          <i data-lucide="download" class="icon-sm"></i>
           <span data-i18n="nav_resume">Resume (PDF)</span>
         </a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-          <i data-lucide="menu"></i>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">
+          ☰
         </button>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- Hero Section -->
+    <!-- Editorial Hero Section (Calm, High-Signal, Zero AI-Template Gimmicks) -->
     <section class="hero" id="home">
       <div class="container hero-grid">
         <div class="hero-text">
-          <div class="status-badge">
-            <span class="status-dot"></span>
-            <span data-i18n="hero_status">Open to Software Engineering &amp; Application Security Roles</span>
-          </div>
+          <p class="eyebrow" data-i18n="hero_eyebrow">APPLICATION SECURITY &amp; BACKEND AUTOMATION ENGINEER</p>
 
-          <h1 class="hero-title">
-            Fata Fatikhul Karim
+          <h1 class="hero-title" data-i18n="hero_headline">
+            Engineering resilient backend systems, protocol guardrails, and actionable security audits.
           </h1>
 
-          <div class="typing-wrapper">
-            <span class="prompt-symbol">&gt;</span>
-            <span class="typing-text" id="typingText">Security-Focused Software Engineer (Python / TypeScript)</span>
-            <span class="cursor">|</span>
-          </div>
-
           <p class="hero-description" data-i18n="hero_desc">
-            Software Engineer focused on <strong>Backend &amp; Automation Systems (Node.js, TypeScript, Python)</strong> and <strong>Application Security (OWASP Top 10)</strong>. I design deterministic automation tools and audit web applications for business-logic and access-control vulnerabilities to build resilient, secure-by-design software.
+            I build deterministic developer and security tooling in <strong>Python 3</strong> and <strong>Node.js</strong>—spanning Model Context Protocol (MCP) bridges, passive OSINT &amp; API boundary scanners, and event-driven automation—while conducting authorized web application security assessments focused on <strong>Broken Access Control (IDOR)</strong>, <strong>Business-Logic Flaws</strong>, and <strong>Server-Side Schema Hardening</strong>.
           </p>
 
           <div class="hero-cta">
             <a href="#projects" class="btn btn-primary">
-              <i data-lucide="layers" class="icon-sm"></i>
-              <span data-i18n="btn_projects">View Engineering Case Studies</span>
+              <span data-i18n="btn_projects">Read Engineering Case Studies</span>
             </a>
-            <a href="Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-ghost">
-              <i data-lucide="file-down" class="icon-sm"></i>
+            <a href="Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-outline">
               <span data-i18n="btn_cv">Download ATS Resume (PDF)</span>
             </a>
           </div>
 
-          <div class="arch-note" style="margin-bottom: 1.5rem;">
-            <i data-lucide="calendar-check" class="icon-xs"></i>
-            <span data-i18n="hero_logistics"><strong>Availability &amp; Logistics:</strong> Expected Graduation: 2027 (UNSOED) &bull; Flexible Schedule for Full-Time / Paid Internship &bull; Open to Remote, Hybrid, or Relocation (Jakarta / Bandung / Java).</span>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-num">8</span>
-              <span class="stat-label" data-i18n="stat_disclosed">Vulnerabilities Disclosed (Authorized Audit)</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-              <span class="stat-num">Node.js &amp; Python</span>
-              <span class="stat-label" data-i18n="stat_core">Primary Backend &amp; AppSec Stack</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-              <span class="stat-num">MCP &amp; CDP</span>
-              <span class="stat-label" data-i18n="stat_proto">System &amp; Browser Protocol Tooling</span>
-            </div>
+          <div class="logistics-bar" data-i18n="hero_logistics">
+            <strong>Availability &amp; Work Logistics:</strong> Expected Graduation: 2027 (UNSOED) &bull; Flexible schedule for Full-Time or Paid Internship roles &bull; Open to Remote, Hybrid, or Relocation (Jakarta / Bandung / Java).
           </div>
         </div>
 
-        <!-- Hero Right: Engineering Profile & Architecture Terminal -->
-        <div class="hero-visual">
+        <!-- Hero Right: Clean Engineering Profile & Verification Summary -->
+        <aside class="hero-visual" aria-label="Engineer Profile Summary">
           <div class="profile-card">
             <div class="profile-header">
-              <img src="avatar.jpg" alt="Fata Fatikhul Karim" class="profile-avatar" width="78" height="78" />
+              <img src="avatar.jpg" alt="Portrait of Fata Fatikhul Karim" class="profile-avatar" width="68" height="68" />
               <div class="profile-meta">
                 <h2>Fata Fatikhul Karim</h2>
-                <p><i data-lucide="map-pin" class="icon-xs"></i> Central Java, Indonesia (Open to Remote / Relocation)</p>
-                <div class="profile-badges">
-                  <span class="badge badge-purple">AppSec &amp; Backend</span>
-                  <span class="badge badge-green">HackerOne: @zeonmaltius</span>
-                </div>
+                <p>Central Java, Indonesia &bull; Open to Remote / Relocation</p>
               </div>
             </div>
 
-            <!-- Technical Verification Terminal -->
-            <div class="terminal-box">
-              <div class="terminal-bar">
-                <div class="terminal-dots">
-                  <span class="dot dot-red"></span>
-                  <span class="dot dot-yellow"></span>
-                  <span class="dot dot-green"></span>
-                </div>
-                <span class="terminal-title">fata@appsec-lab:~ (inspect)</span>
+            <dl class="spec-list">
+              <div class="spec-row">
+                <dt>Core Languages</dt>
+                <dd>Python 3, JavaScript (Node.js), Bash</dd>
               </div>
-              <div class="terminal-body" id="terminalOutput">
-                <div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">cat profile.json</span></div>
-                <div class="term-resp">{
-  "role": "Security-Focused Software Engineer",
-  "core_stack": ["TypeScript", "Node.js", "Python", "Next.js", "PostgreSQL"],
-  "security_focus": ["Broken Access Control (IDOR)", "Input Validation", "API Hardening"],
-  "disclosure_policy": "Authorized Testing &amp; Coordinated Disclosure Only"
-}</div>
-                <div class="term-line"><span class="term-prompt">$</span> <span class="term-hint" data-i18n="term_hint">Inspect engineering modules below:</span></div>
+              <div class="spec-row">
+                <dt>AppSec Focus</dt>
+                <dd>OWASP Top 10, Access Control, Input Bounds, API Hardening</dd>
               </div>
-              <div class="terminal-actions">
-                <button class="term-btn" data-cmd="skills">cat core-stack.txt</button>
-                <button class="term-btn" data-cmd="bounty">cat disclosure-log.txt</button>
-                <button class="term-btn" data-cmd="contact">cat contact.txt</button>
-                <button class="term-btn term-btn-clear" data-cmd="clear">clear</button>
+              <div class="spec-row">
+                <dt>Protocols &amp; Infra</dt>
+                <dd>JSON-RPC 2.0 (MCP), Android ADB, Chrome CDP, Linux, Git</dd>
               </div>
-            </div>
+              <div class="spec-row">
+                <dt>Track Record</dt>
+                <dd>8 Vulnerabilities Disclosed (Authorized Express.js Solver Audit)</dd>
+              </div>
+              <div class="spec-row">
+                <dt>Verification</dt>
+                <dd>
+                  <a href="https://github.com/fatakarim" target="_blank" rel="noopener">GitHub</a> &bull;
+                  <a href="https://hackerone.com/zeonmaltius" target="_blank" rel="noopener">HackerOne</a> &bull;
+                  <a href="https://www.linkedin.com/in/fata-fatikhul-karim" target="_blank" rel="noopener">LinkedIn</a> &bull;
+                  <a href=".well-known/security.txt">security.txt</a>
+                </dd>
+              </div>
+            </dl>
           </div>
-        </div>
+        </aside>
       </div>
     </section>
 
-    <!-- Engineering Case Studies (#projects) -->
+    <!-- Deep-Dive Engineering Case Studies (#projects) -->
     <section class="section section-alt" id="projects">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag" data-i18n="proj_tag">// ENGINEERING CASE STUDIES</span>
-          <h2 class="section-title" data-i18n="proj_title">Selected Systems &amp; Security Tooling</h2>
+          <p class="eyebrow" data-i18n="proj_tag">ENGINEERING CASE STUDIES</p>
+          <h2 class="section-title" data-i18n="proj_title">Systems Architecture &amp; Security Tooling</h2>
           <p class="section-subtitle" data-i18n="proj_subtitle">
-            Architectural breakdowns covering problem statements, security guardrails, technical trade-offs, and source code.
+            Detailed problem statements, architectural diagrams, security guardrails, and verified execution proofs.
           </p>
         </div>
 
-        <div class="projects-grid">
-          <!-- Case Study 1: Recon & AppSec Audit Suite v3.0 -->
-          <article class="project-card">
-            <div class="project-top">
-              <div class="project-icon">
-                <i data-lucide="shield-check"></i>
-              </div>
-              <div class="project-links">
+        <div class="case-studies-stack">
+          <!-- Case Study 1: Recon & AppSec Audit Suite v3.0 (With Visual 15s CLI Execution Proof!) -->
+          <article class="case-study-card">
+            <div class="case-study-content">
+              <div class="case-study-header">
+                <span class="case-domain">Application Security CLI &bull; Python 3 (Standard Library)</span>
                 <a href="https://github.com/fatakarim/fata-termux-toolkit" target="_blank" rel="noopener" class="repo-link">
-                  <i data-lucide="github" class="icon-xs"></i> <span>Source Code</span>
+                  View Source &amp; Unit Tests ↗
                 </a>
               </div>
+              <h3 class="case-title">Fata Recon &amp; AppSec Audit Suite v3.0</h3>
+              <p class="case-desc" data-i18n="proj1_desc">
+                <strong>Problem:</strong> Pre-release web security hygiene checks often miss permissive CORS reflections, missing cookie flags, or unvalidated numeric query parameters, while third-party Python scanners frequently fail in constrained CI environments due to dependency conflicts or single-source <code>crt.sh</code> timeouts.<br/><br/>
+                <strong>Engineering Decision &amp; Trade-offs:</strong> Built strictly on Python 3's standard library (<code>urllib.request</code>, <code>ssl</code>, <code>concurrent.futures</code>) for zero-dependency portability. Aggregates passive subdomain OSINT across three independent providers (AlienVault OTX, HackerTarget, and <code>crt.sh</code>), performs non-destructive numeric boundary probing (<code>0</code>, <code>-500</code>, <code>1e308</code>), and generates Markdown remediation reports with code blueprints.
+              </p>
+              <div class="project-meta-box">
+                <strong>Verification &amp; Guardrails:</strong> Backed by automated <code>unittest</code> regression tests (<code>tests/test_recon.py</code>); strictly read-only GET probes with configurable socket timeouts.
+              </div>
+              <div class="project-tags">
+                <span>Python 3</span>
+                <span>OWASP Auditing</span>
+                <span>Passive OSINT Failover</span>
+                <span>Boundary Probing</span>
+                <span>unittest</span>
+              </div>
             </div>
-            <span class="project-type">Application Security CLI • Python 3</span>
-            <h3 class="project-title">Fata Recon &amp; AppSec Audit Suite v3.0</h3>
-            <p class="project-desc" data-i18n="proj1_desc">
-              <strong>Problem:</strong> Manual pre-release security checks often miss subtle CORS misconfigurations, weak cookie flags, or unvalidated numeric boundary parameters.<br/><br/>
-              <strong>Architecture &amp; Trade-offs:</strong> Built with Python's standard library (<code>urllib</code>, <code>ssl</code>, <code>concurrent.futures</code>) to maintain zero external dependencies across Linux environments. Aggregates passive OSINT from AlienVault OTX, HackerTarget, and <code>crt.sh</code>, performs non-destructive boundary fuzzing (<code>0</code>, <code>-500</code>, <code>1e308</code>), and outputs Markdown remediation blueprints.
-            </p>
-            <div class="project-meta-box">
-              <div><strong>Guardrails:</strong> Non-destructive GET probes, configurable timeouts, passive DNS enumeration.</div>
-            </div>
-            <div class="project-tags">
-              <span>Python 3</span>
-              <span>OWASP Auditing</span>
-              <span>Boundary Fuzzing</span>
-              <span>Passive OSINT</span>
+            <div class="case-study-visual">
+              <img src="demo-recon.svg" alt="Animated terminal output of Fata Recon Suite v3.0 auditing headers, passive subdomains, and boundary parameters" loading="lazy" />
             </div>
           </article>
 
-          <!-- Case Study 2: Android & Headless Browser MCP Bridge -->
-          <article class="project-card">
-            <div class="project-top">
-              <div class="project-icon">
-                <i data-lucide="cpu"></i>
-              </div>
-              <div class="project-links">
+          <!-- Case Study 2: Model Context Protocol (MCP) Bridge (With SVG Architecture & Threat Boundary Diagram!) -->
+          <article class="case-study-card">
+            <div class="case-study-content">
+              <div class="case-study-header">
+                <span class="case-domain">Protocol &amp; E2E Automation &bull; Node.js &amp; JSON-RPC 2.0</span>
                 <a href="https://github.com/fatakarim/android-browser-mcp" target="_blank" rel="noopener" class="repo-link">
-                  <i data-lucide="github" class="icon-xs"></i> <span>Source Code</span>
+                  View Source Code ↗
                 </a>
               </div>
+              <h3 class="case-title">Sandboxed Model Context Protocol (MCP) Device &amp; Browser Bridge</h3>
+              <p class="case-desc" data-i18n="proj2_desc">
+                <strong>Problem:</strong> AI coding assistants cannot deterministically inspect or verify UI states on physical Android hardware and headless Chromium instances during end-to-end (E2E) testing, and naive ADB wrappers are vulnerable to host command injection via untrusted DOM/UI strings.<br/><br/>
+                <strong>Engineering Decision &amp; Trade-offs:</strong> Engineered a Node.js JSON-RPC 2.0 <code>stdio</code> server exposing 40 structured tools for Android Debug Bridge (ADB) and Chrome DevTools Protocol (CDP). Chose XML Accessibility Tree parsing (<code>uiautomator dump</code>) over static X/Y pixel coordinates to ensure layout resilience across screen densities.
+              </p>
+              <div class="project-meta-box">
+                <strong>Security Guardrails:</strong> All subprocess calls use parameterized <code>child_process.execFile('adb', args)</code> without invoking a shell interpreter, combined with regex allowlists for package identifiers to neutralize indirect prompt injection.
+              </div>
+              <div class="project-tags">
+                <span>Node.js</span>
+                <span>Model Context Protocol</span>
+                <span>Android ADB</span>
+                <span>Chrome CDP</span>
+                <span>Command-Injection Mitigation</span>
+              </div>
             </div>
-            <span class="project-type">System Automation • Node.js &amp; MCP</span>
-            <h3 class="project-title">Model Context Protocol (MCP) Device &amp; Browser Bridge</h3>
-            <p class="project-desc" data-i18n="proj2_desc">
-              <strong>Problem:</strong> AI coding assistants lack deterministic ways to verify UI states on physical Android hardware and headless Chromium instances during end-to-end (E2E) testing.<br/><br/>
-              <strong>Architecture &amp; Trade-offs:</strong> Implemented a JSON-RPC stdio MCP server in Node.js bridging LLM tool calls to Android Debug Bridge (ADB) and Chrome DevTools Protocol (CDP). Uses XML Accessibility Tree parsing (<code>uiautomator dump</code>) rather than brittle screen coordinates for layout-resilient UI testing.
-            </p>
-            <div class="project-meta-box">
-              <div><strong>Security Guardrails:</strong> Strict tool schema validation; isolated local ADB target binding; no arbitrary shell eval.</div>
-            </div>
-            <div class="project-tags">
-              <span>Node.js</span>
-              <span>Model Context Protocol</span>
-              <span>Android ADB</span>
-              <span>Chrome CDP</span>
+            <div class="case-study-visual">
+              <img src="arch-mcp.svg" alt="System architecture diagram showing JSON-RPC stdio transport, Node.js MCP Security Boundary, Android ADB XML Tree Parser, and Chromium CDP Bridge" loading="lazy" />
             </div>
           </article>
 
-          <!-- Case Study 3: Event-Driven Messaging & AI Triage Assistant -->
-          <article class="project-card">
-            <div class="project-top">
-              <div class="project-icon">
-                <i data-lucide="message-square-code"></i>
-              </div>
-              <div class="project-links">
+          <!-- Case Study 3: Event-Driven AI Messaging & Triage Assistant -->
+          <article class="case-study-card case-study-single">
+            <div class="case-study-content">
+              <div class="case-study-header">
+                <span class="case-domain">Event-Driven Backend Worker &bull; Node.js &amp; Google GenAI SDK</span>
                 <a href="https://github.com/fatakarim/jarvis-whatsapp-ai" target="_blank" rel="noopener" class="repo-link">
-                  <i data-lucide="github" class="icon-xs"></i> <span>Source Code</span>
+                  View Source Code ↗
                 </a>
               </div>
-            </div>
-            <span class="project-type">Backend Integration • Node.js &amp; Gemini SDK</span>
-            <h3 class="project-title">Event-Driven AI Messaging &amp; Triage Assistant</h3>
-            <p class="project-desc" data-i18n="proj3_desc">
-              <strong>Problem:</strong> High-latency manual message triage during deep development or research sprints.<br/><br/>
-              <strong>Architecture &amp; Trade-offs:</strong> Event-driven Node.js worker integrating WebSocket multi-file session persistence with Google GenAI SDK (<code>gemini-2.5-flash</code>). Enforces environment-variable secret isolation (<code>.env</code>), group-broadcast filtering to prevent quota exhaustion, and structured error fallbacks.
-            </p>
-            <div class="project-meta-box">
-              <div><strong>Security Guardrails:</strong> Secret scrubbing, JID sender filtering, rate-controlled response delays.</div>
-            </div>
-            <div class="project-tags">
-              <span>Node.js</span>
-              <span>Google GenAI SDK</span>
-              <span>WebSockets</span>
-              <span>Event-Driven Architecture</span>
+              <h3 class="case-title">Event-Driven AI Messaging &amp; Triage Worker</h3>
+              <p class="case-desc" data-i18n="proj3_desc">
+                <strong>Problem:</strong> Managing incoming communication triage during focused development sprints without exposing session credentials or exhausting LLM API quotas on group broadcasts.<br/><br/>
+                <strong>Architecture &amp; Guardrails:</strong> Built an asynchronous Node.js event worker with multi-file session state persistence and Google GenAI SDK (<code>gemini-2.5-flash</code>). Enforces environment-variable secret isolation (<code>process.env.GEMINI_API_KEY</code>), automated group-JID broadcast filtering, and graceful exception fallbacks.
+              </p>
+              <div class="project-tags">
+                <span>Node.js</span>
+                <span>Google GenAI SDK</span>
+                <span>WebSockets</span>
+                <span>Secret Hygiene</span>
+              </div>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Security Research & Root Cause Analysis Writeups (#writeups) -->
+    <!-- Standalone Security Writeups & Root-Cause Analysis (#writeups) -->
     <section class="section" id="writeups">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag" data-i18n="wrt_tag">// SECURITY RESEARCH &amp; RCA</span>
-          <h2 class="section-title" data-i18n="wrt_title">Vulnerability Root-Cause Analysis &amp; Engineering Notes</h2>
+          <p class="eyebrow" data-i18n="wrt_tag">SECURITY RESEARCH &amp; ROOT-CAUSE ANALYSIS</p>
+          <h2 class="section-title" data-i18n="wrt_title">Standalone Technical Writeups &amp; Remediation Guides</h2>
           <p class="section-subtitle" data-i18n="wrt_subtitle">
-            Technical deep-dives into authorized security assessments, vulnerable code patterns, and defensive remediation.
+            Each article is published as a standalone URL covering Threat Model, Vulnerable Code Pattern, Business Impact, and Patched Code with Regression Unit Tests.
           </p>
         </div>
 
         <div class="writeups-grid">
           <article class="writeup-card">
             <div class="writeup-meta">
-              <span class="badge badge-green">Authorized Audit • 8 Findings</span>
-              <span class="writeup-time">Coordinated Disclosure</span>
+              <span class="badge badge-green">Authorized Audit &bull; 8 Findings</span>
+              <span class="writeup-time">Express.js / Zod / Jest</span>
             </div>
             <h3 class="writeup-title">
-              <a href="writeups/agricultural-solver-api-audit.html" style="color:inherit;text-decoration:none;" data-i18n="wrt1_title">Root-Cause Analysis: Unauthenticated Data Exposure &amp; Input Boundary Flaws in an Agricultural Ration Solver API</a>
+              <a href="writeups/agricultural-solver-api-audit.html" data-i18n="wrt1_title">Root-Cause Analysis: Unauthenticated Data Exposure &amp; Input Boundary Flaws in an Agricultural Ration Solver API</a>
             </h3>
             <p class="writeup-excerpt" data-i18n="wrt1_desc">
-              Threat model, vulnerable Express.js endpoint patterns, business impact of unauthenticated GET /api/history exposure, and defense-in-depth remediation using Zod schemas + Jest regression unit tests.
+              How domain knowledge in livestock nutrition modeling combined with backend API auditing uncovered 8 vulnerabilities (including unauthenticated GET /api/history exposure and missing numeric bounds), complete with Zod schema patches and Jest regression tests.
             </p>
-            <a href="writeups/agricultural-solver-api-audit.html" class="writeup-btn" style="text-decoration:none;">
-              <span data-i18n="wrt_read">Read Full RCA &amp; Unit Tests</span> <i data-lucide="arrow-up-right" class="icon-xs"></i>
+            <a href="writeups/agricultural-solver-api-audit.html" class="writeup-btn">
+              <span data-i18n="wrt_read">Read Full Article (/writeups/agricultural-solver-api-audit)</span> →
             </a>
           </article>
 
           <article class="writeup-card">
             <div class="writeup-meta">
-              <span class="badge badge-purple">System Architecture</span>
-              <span class="writeup-time">MCP &amp; Sandboxing</span>
+              <span class="badge badge-purple">Threat Modeling &amp; Sandboxing</span>
+              <span class="writeup-time">Node.js / MCP / ADB</span>
             </div>
             <h3 class="writeup-title">
-              <a href="writeups/mcp-device-browser-architecture.html" style="color:inherit;text-decoration:none;" data-i18n="wrt2_title">Designing Sandboxed Model Context Protocol (MCP) Bridges for Android ADB &amp; Headless Browser E2E Verification</a>
+              <a href="writeups/mcp-device-browser-architecture.html" data-i18n="wrt2_title">Designing Sandboxed Model Context Protocol (MCP) Bridges for Android ADB &amp; Headless Browser E2E Verification</a>
             </h3>
             <p class="writeup-excerpt" data-i18n="wrt2_desc">
-              Mitigating indirect prompt-injection to shell-execution risks by replacing string-interpolated ADB calls with parameterized execFile subprocesses and XML Accessibility Tree centroid resolution.
+              Preventing indirect prompt injection from escalating to host shell execution by replacing string-interpolated ADB commands with parameterized execFile calls and strict package regex allowlists.
             </p>
-            <a href="writeups/mcp-device-browser-architecture.html" class="writeup-btn" style="text-decoration:none;">
-              <span data-i18n="wrt_read">Read Architecture &amp; Guardrails</span> <i data-lucide="arrow-up-right" class="icon-xs"></i>
+            <a href="writeups/mcp-device-browser-architecture.html" class="writeup-btn">
+              <span data-i18n="wrt_read">Read Full Article (/writeups/mcp-device-browser-architecture)</span> →
             </a>
           </article>
 
           <article class="writeup-card">
             <div class="writeup-meta">
-              <span class="badge badge-green">AppSec Automation &amp; CI</span>
-              <span class="writeup-time">Python 3 &amp; Unittest</span>
+              <span class="badge badge-green">AppSec Tooling &amp; Unittest</span>
+              <span class="writeup-time">Python 3 / OSINT</span>
             </div>
             <h3 class="writeup-title">
-              <a href="writeups/passive-osint-boundary-auditing.html" style="color:inherit;text-decoration:none;" data-i18n="wrt3_title">Multi-Source Passive Subdomain Enumeration &amp; Non-Destructive API Boundary Auditing in Python</a>
+              <a href="writeups/passive-osint-boundary-auditing.html" data-i18n="wrt3_title">Multi-Source Passive Subdomain Enumeration &amp; Non-Destructive API Boundary Auditing in Python</a>
             </h3>
             <p class="writeup-excerpt" data-i18n="wrt3_desc">
-              Combining AlienVault OTX, HackerTarget, and crt.sh telemetry with deterministic HTTP header, CORS, and numeric boundary probing backed by GitHub Actions CI unit tests.
+              Engineering a zero-dependency Python 3 CLI that aggregates AlienVault OTX, HackerTarget, and crt.sh telemetry while testing API parameters against numeric edge cases.
             </p>
-            <a href="writeups/passive-osint-boundary-auditing.html" class="writeup-btn" style="text-decoration:none;">
-              <span data-i18n="wrt_read">Read Engineering Note</span> <i data-lucide="arrow-up-right" class="icon-xs"></i>
+            <a href="writeups/passive-osint-boundary-auditing.html" class="writeup-btn">
+              <span data-i18n="wrt_read">Read Full Article (/writeups/passive-osint-boundary-auditing)</span> →
             </a>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Core Technical Competencies (#skills - Trimmed & Honest) -->
+    <!-- Core Technical Competencies (#skills - Strictly Interrogation-Proof 4 Pillars!) -->
     <section class="section section-alt" id="skills">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag" data-i18n="skills_tag">// CORE COMPETENCIES</span>
-          <h2 class="section-title" data-i18n="skills_title">Focused Technical Stack</h2>
+          <p class="eyebrow" data-i18n="skills_tag">VERIFIED TECHNICAL DEPTH</p>
+          <h2 class="section-title" data-i18n="skills_title">Core Engineering &amp; Security Stack</h2>
           <p class="section-subtitle" data-i18n="skills_subtitle">
-            Core technologies actively used in my production repositories and security assessments.
+            Focused strictly on the four technical domains I build with daily and can debug under live code review.
           </p>
         </div>
 
         <div class="skills-grid">
-          <div class="skill-card">
-            <div class="skill-top">
-              <span class="skill-name">TypeScript &amp; Node.js</span>
-              <span class="skill-badge">Backend &amp; Tooling</span>
-            </div>
-            <p class="skill-detail">REST APIs, Express.js, Model Context Protocol (MCP) JSON-RPC servers, Event-Driven Workers</p>
-          </div>
-
-          <div class="skill-card">
-            <div class="skill-top">
-              <span class="skill-name">Python 3</span>
-              <span class="skill-badge">AppSec &amp; CLI</span>
-            </div>
-            <p class="skill-detail">Concurrent HTTP/SSL Probing, Passive OSINT Aggregation, Automated Audit Reporting</p>
-          </div>
-
-          <div class="skill-card">
-            <div class="skill-top">
-              <span class="skill-name">GitHub Actions CI &amp; Unit Testing</span>
-              <span class="skill-badge">Quality &amp; Verification</span>
-            </div>
-            <p class="skill-detail">Automated Regression Tests (Python unittest / Jest), Secret Hygiene, Semantic HTML5 &amp; CSS3</p>
-          </div>
-
-          <div class="skill-card">
-            <div class="skill-top">
-              <span class="skill-name">PostgreSQL &amp; SQL</span>
-              <span class="skill-badge">Data Layer</span>
-            </div>
-            <p class="skill-detail">Relational Schema Design, Parameterized Queries, Ownership-Scoped Data Access</p>
-          </div>
-
           <div class="skill-card skill-card-sec">
             <div class="skill-top">
-              <span class="skill-name">Web App Pentesting (OWASP Top 10)</span>
+              <span class="skill-name">1. Web Application Security (OWASP Top 10)</span>
               <span class="skill-badge badge-sec">AppSec</span>
             </div>
-            <p class="skill-detail">Broken Access Control (IDOR), Business Logic Flaws, CORS/Cookie &amp; Header Auditing, Burp Suite</p>
+            <p class="skill-detail">Broken Access Control (IDOR), Business-Logic &amp; Numeric Domain Validation, HTTP Security Headers (CSP, HSTS, XFO), CORS &amp; Cookie Attribute Auditing, Burp Suite, Nuclei, Subfinder.</p>
           </div>
 
-          <div class="skill-card skill-card-sec">
+          <div class="skill-card">
             <div class="skill-top">
-              <span class="skill-name">Reconnaissance &amp; API Hardening</span>
-              <span class="skill-badge badge-sec">Defensive &amp; Offensive</span>
+              <span class="skill-name">2. Python 3 (Security &amp; CLI Engineering)</span>
+              <span class="skill-badge">Python 3</span>
             </div>
-            <p class="skill-detail">Nuclei, Subfinder, Schema Validation (Zod), HTTP Security Headers (CSP, HSTS, Helmet)</p>
+            <p class="skill-detail">Standard-library HTTP/SSL probing (<code>urllib</code>, <code>ssl</code>, <code>socket</code>), multi-threaded concurrency (<code>concurrent.futures</code>), Passive OSINT API integration, and automated unit testing (<code>unittest</code>).</p>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-top">
+              <span class="skill-name">3. Node.js &amp; JavaScript (Backend &amp; Tooling)</span>
+              <span class="skill-badge">Node.js</span>
+            </div>
+            <p class="skill-detail">JSON-RPC 2.0 <code>stdio</code> servers, Express.js REST APIs, parameterized subprocess execution (<code>child_process.execFile</code>), schema validation (<code>Zod</code>), and event-driven workers.</p>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-top">
+              <span class="skill-name">4. Automation Protocols &amp; Linux Environment</span>
+              <span class="skill-badge">Protocols</span>
+            </div>
+            <p class="skill-detail">Model Context Protocol (MCP), Android Debug Bridge (ADB &amp; <code>uiautomator</code> XML Accessibility Tree), Chrome DevTools Protocol (CDP), Linux CLI, Git, and Semantic HTML5/CSS3.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Experience Section (#experience - Strictly Engineering & Research) -->
+    <!-- Experience, Collaboration & Academic Background (#experience & #education) -->
     <section class="section" id="experience">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag" data-i18n="exp_tag">// EXPERIENCE &amp; RESEARCH</span>
-          <h2 class="section-title" data-i18n="exp_title">Security Research &amp; Engineering Track</h2>
+          <p class="eyebrow" data-i18n="exp_tag">EXPERIENCE, COLLABORATION &amp; EDUCATION</p>
+          <h2 class="section-title" data-i18n="exp_title">Security Research &amp; Academic Foundation</h2>
           <p class="section-subtitle" data-i18n="exp_subtitle">
-            Practical application security assessments and open-source software development.
+            Translating security findings into constructive, maintainer-ready patches, regression tests, and clear documentation.
           </p>
         </div>
 
@@ -414,22 +351,14 @@
             <div class="timeline-card">
               <div class="timeline-header">
                 <div>
-                  <span class="timeline-role" data-i18n="exp1_role">Independent Application Security Researcher</span>
-                  <h3 class="timeline-org">
-                    <i data-lucide="shield" class="icon-xs"></i> Coordinated Vulnerability Disclosure &amp; HackerOne (@zeonmaltius)
-                  </h3>
+                  <span class="timeline-role" data-i18n="exp1_role">Application Security Researcher (Coordinated Disclosure)</span>
+                  <h3 class="timeline-org">Independent Assessments &amp; HackerOne (@zeonmaltius)</h3>
                 </div>
                 <span class="timeline-date">2025 – Present</span>
               </div>
               <p class="timeline-desc" data-i18n="exp1_desc">
-                Conducting authorized web application security assessments focused on <strong>OWASP Top 10</strong> and domain-specific business logic flaws. Performed an authorized full-stack audit on an Express.js livestock ration formulation platform, identifying and responsibly disclosing <strong>8 vulnerabilities</strong> (unauthenticated <code>GET /api/history</code> exposure, missing numeric schema validation on <code>POST /api/feeds</code>, permissive CORS, and missing CSP/HSTS headers) complete with reproducible PoCs and remediation patches.
+                Executed an authorized end-to-end security review of an Express.js livestock ration formulation platform, identifying and responsibly disclosing <strong>8 vulnerabilities (3 High, 4 Medium, 1 Low)</strong>. Collaborated directly with the system maintainer by providing clear reproduction steps, logging verification record UUIDs for database cleanup, and delivering drop-in <code>Zod</code> validation schemas and authorization middleware so the engineering team could patch the issues without disrupting production users.
               </p>
-              <div class="project-tags">
-                <span>Coordinated Disclosure</span>
-                <span>OWASP Top 10</span>
-                <span>API Security</span>
-                <span>Root-Cause Analysis</span>
-              </div>
             </div>
           </div>
 
@@ -438,106 +367,63 @@
             <div class="timeline-card">
               <div class="timeline-header">
                 <div>
-                  <span class="timeline-role" data-i18n="exp2_role">Open-Source Software &amp; Automation Developer</span>
-                  <h3 class="timeline-org">
-                    <i data-lucide="code-2" class="icon-xs"></i> GitHub (@fatakarim)
-                  </h3>
+                  <span class="timeline-role" data-i18n="exp2_role">Open-Source Security &amp; Automation Developer</span>
+                  <h3 class="timeline-org">GitHub (@fatakarim)</h3>
                 </div>
                 <span class="timeline-date">2025 – Present</span>
               </div>
               <p class="timeline-desc" data-i18n="exp2_desc">
-                Designing and maintaining open-source developer and security tooling in <strong>Node.js, TypeScript, and Python</strong>. Built a 40-tool Model Context Protocol (MCP) server for Android ADB &amp; Chrome DevTools Protocol (CDP) E2E testing, an event-driven AI messaging assistant using Google Gemini SDK, and the zero-dependency Python CLI <em>Fata Recon &amp; AppSec Audit Suite v3.0</em>.
+                Developing and documenting open-source security and developer tools in Python 3 and Node.js. Focused on readable architecture, conventional commit history (<code>feat:</code>, <code>fix:</code>, <code>test:</code>), strict secret hygiene (<code>.env</code> isolation), and automated unit test verification.
               </p>
-              <div class="project-tags">
-                <span>Node.js &amp; TypeScript</span>
-                <span>Python CLI</span>
-                <span>Model Context Protocol</span>
-                <span>Linux Environment</span>
+            </div>
+          </div>
+
+          <div class="timeline-item" id="education">
+            <div class="timeline-dot dot-blue-glow"></div>
+            <div class="timeline-card">
+              <div class="timeline-header">
+                <div>
+                  <span class="timeline-role">Universitas Jenderal Soedirman (UNSOED)</span>
+                  <h3 class="timeline-org">Diploma (D3) in Animal Husbandry (Budidaya Ternak)</h3>
+                </div>
+                <span class="timeline-date">Expected Graduation: 2027</span>
               </div>
+              <p class="timeline-desc" data-i18n="edu1_desc">
+                Rapid, self-directed mastery of software engineering and application security built alongside quantitative studies at UNSOED. This cross-disciplinary background provides a sharp instinct for uncovering domain-specific mathematical and business-logic vulnerabilities—such as nutritional Dry Matter bounds and linear solver edge cases—that generic security scanners overlook.
+              </p>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dedicated Education & Credentials Section (#education - Separated!) -->
-    <section class="section section-alt" id="education">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag" data-i18n="edu_tag">// EDUCATION &amp; CREDENTIALS</span>
-          <h2 class="section-title" data-i18n="edu_title">Academic Background &amp; Security Training</h2>
-          <p class="section-subtitle" data-i18n="edu_subtitle">
-            Combining formal quantitative domain studies with rigorous, project-driven computer science and application security training.
-          </p>
-        </div>
-
-        <div class="pillars-grid">
-          <div class="pillar-card">
-            <div class="pillar-icon icon-blue">
-              <i data-lucide="graduation-cap"></i>
-            </div>
-            <h3>Universitas Jenderal Soedirman (UNSOED)</h3>
-            <p class="edu-sub">Diploma (D3) in Animal Husbandry (Budidaya Ternak) • Active Student</p>
-            <p data-i18n="edu1_desc">
-              Pursuing formal studies at UNSOED while independently engineering software and security tools. This cross-disciplinary foundation directly enabled the discovery of complex mathematical solver and input-validation vulnerabilities in agricultural formulation software.
-            </p>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-icon icon-green">
-              <i data-lucide="award"></i>
-            </div>
-            <h3 data-i18n="edu2_title">Application Security &amp; OWASP Training</h3>
-            <p class="edu-sub">Hands-On Labs, CTF &amp; Coordinated Disclosure</p>
-            <p data-i18n="edu2_desc">
-              Practical specialization in Web Application Security: Access Control (IDOR), Server-Side Input Validation, API Security Auditing, DNS/Email Spoofing Hardening (SPF/DMARC), and automated reconnaissance pipelines.
-            </p>
-          </div>
-
-          <div class="pillar-card">
-            <div class="pillar-icon icon-purple">
-              <i data-lucide="terminal"></i>
-            </div>
-            <h3 data-i18n="edu3_title">Software Engineering &amp; Systems Practice</h3>
-            <p class="edu-sub">Open-Source Portfolio &amp; Verification</p>
-            <p data-i18n="edu3_desc">
-              Verified through public repositories on GitHub (<code>@fatakarim</code>) covering JSON-RPC Model Context Protocol servers, concurrent Python security scanners, and modern full-stack web architectures.
-            </p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Client-Side Passive DNS & Anti-Spoofing Audit Tool (#scanner) -->
-    <section class="section" id="scanner">
+    <section class="section section-alt" id="scanner">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag" data-i18n="scan_tag">// PASSIVE DNS &amp; ANTI-SPOOFING AUDITOR</span>
+          <p class="eyebrow" data-i18n="scan_tag">INTERACTIVE PASSIVE DNS AUDITOR</p>
           <h2 class="section-title" data-i18n="scan_title">Client-Side Domain Security Posture Analyzer</h2>
           <p class="section-subtitle" data-i18n="scan_subtitle">
-            Queries public Cloudflare DNS-over-HTTPS (DoH) telemetry directly from your browser to evaluate SPF, DMARC (_dmarc), CAA SSL restrictions, and IPv4/IPv6 redundancy.
+            Evaluates SPF, DMARC (_dmarc), CAA SSL restrictions, and IPv4/IPv6 records via read-only Cloudflare DNS-over-HTTPS (DoH) telemetry.
           </p>
         </div>
 
         <div class="scanner-box">
           <div class="arch-note">
-            <i data-lucide="info" class="icon-xs"></i>
-            <span data-i18n="scan_arch_note"><strong>Architecture &amp; Safety Note:</strong> Executes 100% client-side read-only DNS-over-HTTPS queries via <code>cloudflare-dns.com/dns-query</code>. Zero backend proxy SSRF attack surface; sends no active packets to the target host.</span>
+            <span data-i18n="scan_arch_note"><strong>Architecture &amp; Safety Note:</strong> Executes 100% client-side read-only DNS-over-HTTPS queries via <code>cloudflare-dns.com/dns-query</code>. Zero backend proxy SSRF surface; sends no active packets to the target host.</span>
           </div>
 
           <form class="scanner-form" id="liveScanForm">
             <div class="scanner-input-wrap">
-              <i data-lucide="globe" class="icon-sm scanner-icon"></i>
-              <input type="text" id="scanDomainInput" placeholder="Enter domain (e.g. hackerone.com or unsoed.ac.id)" value="hackerone.com" required />
+              <input type="text" id="scanDomainInput" aria-label="Target domain to analyze" placeholder="Enter domain (e.g. hackerone.com or unsoed.ac.id)" value="hackerone.com" required />
             </div>
             <button type="submit" class="btn btn-primary" id="runScanBtn">
-              <i data-lucide="radar" class="icon-sm"></i>
               <span data-i18n="scan_btn">Analyze DNS Posture</span>
             </button>
           </form>
 
           <div class="scanner-presets">
-            <span data-i18n="scan_try">Quick presets:</span>
+            <span data-i18n="scan_try">Presets:</span>
             <button type="button" class="preset-chip" data-domain="hackerone.com">hackerone.com</button>
             <button type="button" class="preset-chip" data-domain="unsoed.ac.id">unsoed.ac.id</button>
             <button type="button" class="preset-chip" data-domain="github.com">github.com</button>
@@ -552,7 +438,6 @@
                 <p id="scanSummaryText">Querying Cloudflare DoH telemetry...</p>
               </div>
               <button type="button" class="btn btn-outline btn-sm" id="downloadScanReportBtn">
-                <i data-lucide="download" class="icon-xs"></i>
                 <span>Export Markdown (.md)</span>
               </button>
             </div>
@@ -560,7 +445,7 @@
             <div class="scan-Findings-grid" id="scanFindingsGrid"></div>
 
             <div class="scan-records-panel">
-              <h4><i data-lucide="terminal" class="icon-xs"></i> Passive DNS Telemetry (Cloudflare DoH JSON)</h4>
+              <h4>Passive DNS Telemetry (Cloudflare DoH JSON)</h4>
               <pre id="scanRawOutput"></pre>
             </div>
           </div>
@@ -568,41 +453,27 @@
       </div>
     </section>
 
-    <!-- Article Reader Modal -->
-    <div class="modal-backdrop" id="articleModal" aria-hidden="true">
-      <div class="modal-box">
-        <div class="modal-header">
-          <span class="modal-tag" id="modalTag">TECHNICAL WRITEUP</span>
-          <button class="modal-close" id="closeModalBtn" aria-label="Close">✕</button>
-        </div>
-        <h2 class="modal-title" id="modalTitle">Article Title</h2>
-        <div class="modal-body" id="modalBody"></div>
-      </div>
-    </div>
-
     <!-- Contact Section -->
-    <section class="section section-alt" id="contact">
+    <section class="section" id="contact">
       <div class="container">
         <div class="section-header">
-          <span class="section-tag" data-i18n="contact_tag">// GET IN TOUCH</span>
+          <p class="eyebrow" data-i18n="contact_tag">CONTACT &amp; VERIFICATION</p>
           <h2 class="section-title" data-i18n="contact_title">Connect for Engineering &amp; Security Roles</h2>
           <p class="section-subtitle" data-i18n="contact_desc">
-            Available for Software Engineering, Backend Automation, and Application Security opportunities. Reach out directly via email or LinkedIn.
+            Available for Full-Time or Paid Internship roles in Application Security, Backend Development, and Systems Automation (Remote / Hybrid / Relocation).
           </p>
         </div>
 
         <div class="contact-layout">
           <div class="contact-channels">
             <a href="https://www.linkedin.com/in/fata-fatikhul-karim" target="_blank" rel="noopener" class="contact-item">
-              <i data-lucide="linkedin"></i>
               <div>
                 <strong>LinkedIn</strong>
                 <span>linkedin.com/in/fata-fatikhul-karim</span>
               </div>
             </a>
 
-            <div class="contact-item copy-email-card" id="copyEmailBtn" title="Click to copy email">
-              <i data-lucide="mail"></i>
+            <div class="contact-item copy-email-card" id="copyEmailBtn" role="button" tabindex="0" aria-label="Copy email address">
               <div>
                 <strong>Email <span class="copy-hint" id="copyStatus">(Click to copy)</span></strong>
                 <span>fatafatikhul@gmail.com</span>
@@ -610,7 +481,6 @@
             </div>
 
             <a href="https://github.com/fatakarim" target="_blank" rel="noopener" class="contact-item">
-              <i data-lucide="github"></i>
               <div>
                 <strong>GitHub</strong>
                 <span>github.com/fatakarim</span>
@@ -618,7 +488,6 @@
             </a>
 
             <a href="https://hackerone.com/zeonmaltius" target="_blank" rel="noopener" class="contact-item">
-              <i data-lucide="shield"></i>
               <div>
                 <strong>HackerOne</strong>
                 <span>hackerone.com/zeonmaltius</span>
@@ -626,10 +495,16 @@
             </a>
 
             <a href="Fata-Fatikhul-Karim-Resume.pdf" download class="contact-item">
-              <i data-lucide="file-text"></i>
               <div>
-                <strong>ATS Resume (Direct PDF)</strong>
+                <strong>ATS Resume (1-Page Direct PDF)</strong>
                 <span>Fata-Fatikhul-Karim-Resume.pdf</span>
+              </div>
+            </a>
+
+            <a href="pgp.txt" class="contact-item">
+              <div>
+                <strong>Disclosure Policy &amp; Security Contact</strong>
+                <span>/pgp.txt &amp; /.well-known/security.txt (RFC 9116)</span>
               </div>
             </a>
           </div>
@@ -651,10 +526,9 @@
             </div>
             <div class="form-group">
               <label for="senderMsg" data-i18n="form_msg">Message</label>
-              <textarea id="senderMsg" rows="3" placeholder="Hi Fata, we reviewed your engineering case studies and would like to connect..." required></textarea>
+              <textarea id="senderMsg" rows="4" placeholder="Hi Fata, we reviewed your engineering case studies and would like to connect..." required></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-full">
-              <i data-lucide="send" class="icon-sm"></i>
               <span data-i18n="form_submit">Compose Email</span>
             </button>
           </form>
@@ -665,7 +539,7 @@
 
   <footer class="footer">
     <div class="container footer-content">
-      <p>© 2026 <strong>Fata Fatikhul Karim</strong>. Security-Focused Software Engineer &bull; <a href=".well-known/security.txt" style="color:var(--accent-green);text-decoration:none;font-family:var(--font-mono);font-size:0.8rem;">/.well-known/security.txt (RFC 9116)</a></p>
+      <p>© 2026 <strong>Fata Fatikhul Karim</strong> &bull; <a href=".well-known/security.txt" style="color:var(--accent-green);text-decoration:none;font-family:var(--font-mono);font-size:0.8rem;">/.well-known/security.txt</a> &bull; <a href="pgp.txt" style="color:var(--text-muted);text-decoration:none;font-family:var(--font-mono);font-size:0.8rem;">Disclosure Policy</a></p>
       <p class="footer-quote">All security research and tooling documented on this site adhere to authorized testing and coordinated vulnerability disclosure standards.</p>
     </div>
   </footer>
