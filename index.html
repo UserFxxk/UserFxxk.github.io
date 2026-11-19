@@ -12,7 +12,7 @@
   <!-- Open Graph / LinkedIn & WhatsApp Preview Card (1200x630) -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://fatakarim.github.io/" />
-  <meta property="og:title" content="Fata Fatikhul Karim — Application Security &amp; Backend Automation" />
+  <meta property="og:title" content="Fata Fatikhul Karim — Application Security &amp; Backend Automation Engineer" />
   <meta property="og:description" content="Engineering case studies, vulnerability Root-Cause Analysis (RCA), and Python/Node.js security automation tooling." />
   <meta property="og:image" content="https://fatakarim.github.io/og-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -109,7 +109,7 @@
               </div>
               <div class="spec-row">
                 <dt>Track Record</dt>
-                <dd>8 Vulnerabilities Disclosed (Authorized Express.js Solver Audit)</dd>
+                <dd>8 Findings (7 Vulnerabilities, 1 Info — Authorized Express.js Audit)</dd>
               </div>
               <div class="spec-row">
                 <dt>Verification</dt>
@@ -210,7 +210,7 @@
               <h3 class="case-title">JARVIS — Personal WhatsApp AI Triage Prototype</h3>
               <p class="case-desc" data-i18n="proj3_desc">
                 <strong>Problem &amp; Honest Scope:</strong> Built as an experimental personal-use WhatsApp auto-responder for isolated local environments (using the unofficial <code>@whiskeysockets/baileys</code> multi-device WebSocket library and Google GenAI SDK) to handle incoming 1:1 personal messages while studying or coding in Termux.<br/><br/>
-                <strong>Verifiable Code Mechanics &amp; Guardrails:</strong> Implements a deterministic <strong>2,000ms typing-presence delay</strong> (<code>sendPresenceUpdate('composing')</code>) before dispatching <code>gemini-2.5-flash</code> responses; enforces a strict <strong>group-JID filter (<code>if (senderJid.endsWith('@g.us')) return;</code>)</strong> that guarantees <strong>0 LLM API calls on group broadcasts</strong>; and isolates all credentials and fallback coordinates via environment variables (<code>process.env.GEMINI_API_KEY</code>) and <code>.gitignore</code> rules.
+                <strong>Verifiable Code Mechanics &amp; Guardrails:</strong> Implements a deterministic <strong>2,000ms typing-presence delay</strong> (<code>sendPresenceUpdate('composing')</code>) before dispatching <code>gemini-2.5-flash</code> responses; enforces a strict <strong>group-JID filter (<code>if (senderJid.endsWith('@g.us')) return;</code>)</strong> verified by automated unit tests (<code>test/filter.test.js</code>) to guarantee <strong>0 LLM API calls on group broadcasts</strong>; and isolates all credentials via environment variables (<code>process.env.GEMINI_API_KEY</code>) and <code>.gitignore</code> rules.
               </p>
               <div class="project-tags">
                 <span>Node.js</span>
@@ -357,10 +357,10 @@
                 <span class="timeline-date">Oct 2026 – Present</span>
               </div>
               <p class="timeline-desc" data-i18n="exp1_desc" style="margin-bottom: 0.75rem;">
-                Executed an authorized end-to-end security review of an Express.js livestock ration formulation platform, identifying and responsibly disclosing <strong>8 findings (2 High, 4 Medium, 1 Low, 1 Informational)</strong>. Collaborated directly with the system maintainer by providing reproduction steps, logging verification record UUIDs (<code>4e856b17...</code>, <code>a030ba7f...</code>) for database cleanup, and delivering drop-in <code>Zod</code> validation schemas and authorization middleware.
+                Executed an authorized end-to-end security review of an Express.js livestock ration formulation platform, identifying and responsibly disclosing <strong>8 findings (7 vulnerabilities: 2 High, 4 Medium, 1 Low; plus 1 Informational)</strong>. Collaborated directly with the system maintainer by providing reproduction steps, logging verification record UUIDs (<code>4e856b17...</code>, <code>a030ba7f...</code>) for database cleanup, and delivering drop-in <code>Zod</code> validation schemas, client solver guards, and authorization middleware.
               </p>
               <div class="project-meta-box" style="margin-bottom: 1rem;">
-                <strong>Publication Approval:</strong> Published with explicit maintainer permission granted on <strong>October 15, 2026</strong> following full production remediation and re-test verification on October 14, 2026; proprietary hostname and tenant identifiers are redacted.
+                <strong>Pre-Engagement Authorization &amp; Publication Approval:</strong> Written testing permission and scope definition (frontend + <code>/api/*</code>) were granted by the system owner on <strong>October 8, 2026</strong> prior to testing. Assessment executed October 9, 2026; all 7 vulnerabilities deployed and re-tested by October 14, 2026 (<a href="writeups/agricultural-solver-api-audit.html" style="color:var(--accent-green);">view post-patch curl verification logs</a>). Published with explicit maintainer approval granted on <strong>October 15, 2026</strong>.
               </div>
 
               <!-- Coordinated Disclosure Timeline Table (All 8 Individual Findings + CVSS v3.1 Vectors) -->
@@ -431,18 +431,18 @@
                     <tr>
                       <td><code>SOLVER-08</code></td>
                       <td>Backend Stack Fingerprinting via <code>x-powered-by: Express</code></td>
-                      <td><code>CWE-200</code> &bull; <span class="pill-pass scan-status-pill">3.1 LOW</span><br/><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N</code></td>
+                      <td><code>CWE-200</code> &bull; <span class="pill-pass scan-status-pill">3.7 LOW</span><br/><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:N/A:N</code></td>
                       <td>2026-10-09</td>
                       <td>2026-10-10</td>
-                      <td>Deployed &amp; Verified (2026-10-14)</td>
+                      <td>Deployed &amp; Re-tested (2026-10-14)</td>
                     </tr>
                     <tr>
                       <td><code>SOLVER-06</code></td>
-                      <td>Cloudflare <code>__cf_bm</code> Cookie <code>SameSite=None</code> Observation <em>(Triaged as Informational: expected Cloudflare Bot Management CDN behavior)</em></td>
-                      <td><code>CWE-1275</code> &bull; <span class="badge-purple scan-status-pill">0.0 INFO</span><br/><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N</code></td>
+                      <td>Cloudflare <code>__cf_bm</code> Cookie <code>SameSite=None</code> Observation <em>(Triaged as None / Informational: expected Cloudflare Bot Management CDN behavior)</em></td>
+                      <td><code>CWE-1275</code> &bull; <span class="badge-purple scan-status-pill">0.0 NONE</span><br/><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N</code></td>
                       <td>2026-10-09</td>
                       <td>2026-10-10</td>
-                      <td>Triaged as Informational / CDN-Managed (2026-10-10)</td>
+                      <td>Triaged as None / Informational (2026-10-10)</td>
                     </tr>
                   </tbody>
                 </table>
@@ -561,7 +561,7 @@
                   <span>SSL CAA Restriction</span>
                   <span class="scan-status-pill pill-pass">ENFORCED</span>
                 </div>
-                <div class="scan-check-desc">Restricts SSL issuance: 0 issue "letsencrypt.org", 0 issue "digicert.com"</div>
+                <div class="scan-check-desc">Restricts issuance to listed CAs: 0 issue "letsencrypt.org", 0 issue "digicert.com"</div>
               </div>
             </div>
 

@@ -298,7 +298,7 @@ async function runLiveDomainScan(rawDomain) {
       title: "SSL CAA Restriction",
       status: "ENFORCED",
       pill: "pill-pass",
-      desc: `Restricts SSL issuance: ${caaList.slice(0, 2).join(", ")}`
+      desc: `Restricts issuance to listed CAs: ${caaList.slice(0, 2).join(", ")}`
     });
   } else {
     checks.push({
