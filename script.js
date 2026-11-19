@@ -350,6 +350,7 @@ const i18n = {
       "I build deterministic developer and security tooling in <strong>Python 3</strong> and <strong>Node.js</strong>—spanning Model Context Protocol (MCP) bridges, passive OSINT &amp; API boundary scanners, and event-driven automation—while conducting authorized web application security assessments focused on <strong>Broken Access Control (IDOR)</strong>, <strong>Business-Logic Flaws</strong>, and <strong>Server-Side Schema Hardening</strong>.",
     btn_projects: "Read Engineering Case Studies",
     btn_cv: "Download ATS Resume (PDF)",
+    btn_web_cv: "View Web Resume",
     hero_logistics:
       "<strong>Availability &amp; Work Logistics:</strong> Expected Graduation: 2027 (UNSOED) &bull; Flexible schedule for Full-Time or Paid Internship roles &bull; Open to Remote, Hybrid, or Relocation (Jakarta / Bandung / Java).",
     proj_tag: "ENGINEERING CASE STUDIES",
@@ -413,6 +414,7 @@ const i18n = {
       "Saya mengembangkan perkakas otomasi developer dan keamanan deterministik menggunakan <strong>Python 3</strong> dan <strong>Node.js</strong>—meliputi bridge Model Context Protocol (MCP), pemindai OSINT pasif &amp; batas parameter API, serta worker berbasis event—sekaligus melaksanakan asesmen keamanan aplikasi web berizin dengan fokus pada <strong>Broken Access Control (IDOR)</strong>, <strong>Business-Logic Flaws</strong>, dan <strong>Server-Side Schema Hardening</strong>.",
     btn_projects: "Baca Studi Kasus Engineering",
     btn_cv: "Unduh CV ATS (PDF)",
+    btn_web_cv: "Lihat CV Web",
     hero_logistics:
       "<strong>Ketersediaan &amp; Logistik Kerja:</strong> Estimasi Lulus: 2027 (UNSOED) &bull; Jadwal fleksibel untuk peran Full-Time atau Paid Internship &bull; Terbuka untuk Remote, Hybrid, atau Relokasi (Jakarta / Bandung / Jawa).",
     proj_tag: "STUDI KASUS ENGINEERING",
