@@ -1,0 +1,115 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 5037 >>
+stream
+BT
+/F2 18 Tf
+1 0 0 1 48 755 Tm (FATA FATIKHUL KARIM) Tj
+/F2 11 Tf
+1 0 0 1 48 733 Tm (Security-Focused Software Engineer \(Application Security & Backend Automation\)) Tj
+/F1 9 Tf
+1 0 0 1 48 718 Tm (Central Java, Indonesia | fatafatikhul@gmail.com | https://fatakarim.github.io) Tj
+/F1 9 Tf
+1 0 0 1 48 704 Tm (LinkedIn: linkedin.com/in/fata-fatikhul-karim | GitHub: github.com/fatakarim | HackerOne: @zeonmaltius) Tj
+/F2 10.5 Tf
+1 0 0 1 48 686 Tm (PROFESSIONAL SUMMARY) Tj
+/F1 9.2 Tf
+1 0 0 1 48 671 Tm (Security-Focused Software Engineer specializing in Backend & Protocol Automation \(Node.js, TypeScript, Python\)) Tj
+/F1 9.2 Tf
+1 0 0 1 48 658 Tm (and Application Security \(OWASP Top 10\). Experienced in building deterministic Model Context Protocol \(MCP\)) Tj
+/F1 9.2 Tf
+1 0 0 1 48 645 Tm (bridges, zero-dependency Python security auditing CLIs, and executing authorized web application security) Tj
+/F1 9.2 Tf
+1 0 0 1 48 632 Tm (assessments with actionable Root-Cause Analysis \(RCA\) and schema-level remediation patches.) Tj
+/F2 10.5 Tf
+1 0 0 1 48 614 Tm (TECHNICAL COMPETENCIES) Tj
+/F1 9.2 Tf
+1 0 0 1 48 599 Tm (- Languages & Backend: TypeScript, JavaScript \(Node.js, Express.js\), Python 3 \(CLI & Probing\), SQL \(PostgreSQL\), Bash) Tj
+/F1 9.2 Tf
+1 0 0 1 48 586 Tm (- Frontend & Web: Next.js, React, HTML5, CSS3, Tailwind CSS, RESTful API Architecture) Tj
+/F1 9.2 Tf
+1 0 0 1 48 573 Tm (- Application Security: OWASP Top 10 Auditing, Broken Access Control \(IDOR\), Input Boundary Validation \(Zod\),) Tj
+/F1 9.2 Tf
+1 0 0 1 48 560 Tm (  CORS/Cookie & Header Hardening \(CSP, HSTS, Helmet\), Burp Suite, Nuclei, Subfinder) Tj
+/F1 9.2 Tf
+1 0 0 1 48 547 Tm (- Automation & Protocols: Model Context Protocol \(MCP / JSON-RPC\), Android ADB, Chrome DevTools Protocol \(CDP\), Git) Tj
+/F2 10.5 Tf
+1 0 0 1 48 529 Tm (SECURITY RESEARCH & ENGINEERING EXPERIENCE) Tj
+/F2 9.5 Tf
+1 0 0 1 48 514 Tm (Independent Application Security Researcher | Coordinated Disclosure & HackerOne \(@zeonmaltius\) [2025 - Present]) Tj
+/F1 9.2 Tf
+1 0 0 1 48 501 Tm (- Authorized Agricultural Ration Solver API Assessment: Executed a coordinated security review of an Express.js) Tj
+/F1 9.2 Tf
+1 0 0 1 48 488 Tm (  livestock ration formulation platform. Identified and responsibly disclosed 8 vulnerabilities \(3 High, 4 Medium, 1 Low\),) Tj
+/F1 9.2 Tf
+1 0 0 1 48 475 Tm (  including unauthenticated data exposure on GET /api/history \(38 user records\), missing server-side numeric domain) Tj
+/F1 9.2 Tf
+1 0 0 1 48 462 Tm (  bounds on POST /api/feeds, client solver freeze on non-positive inputs, and permissive CORS wildcard \(*\) policies.) Tj
+/F1 9.2 Tf
+1 0 0 1 48 449 Tm (- Authored reproducible Proof-of-Concept documentation and delivered Zod schema & auth middleware remediation blueprints.) Tj
+/F2 9.5 Tf
+1 0 0 1 48 433 Tm (Open-Source Software & Automation Developer | GitHub \(@fatakarim\) [2025 - Present]) Tj
+/F1 9.2 Tf
+1 0 0 1 48 420 Tm (- Engineered deterministic developer and security automation systems in Node.js and Python focusing on JSON-RPC MCP) Tj
+/F1 9.2 Tf
+1 0 0 1 48 407 Tm (  protocol tooling, headless browser E2E testing, and non-destructive security hygiene verification.) Tj
+/F2 10.5 Tf
+1 0 0 1 48 389 Tm (ENGINEERING CASE STUDIES & PROJECTS) Tj
+/F2 9.5 Tf
+1 0 0 1 48 374 Tm (Fata Recon & AppSec Audit Suite v3.0 \(Python 3\) | github.com/fatakarim/fata-termux-toolkit) Tj
+/F1 9.2 Tf
+1 0 0 1 48 361 Tm (- Zero-dependency Python 3 CLI for pre-release security reviews: audits HTTP Security Headers \(CSP, HSTS, XFO\), inspects) Tj
+/F1 9.2 Tf
+1 0 0 1 48 348 Tm (  CORS reflection & cookie flags, aggregates passive subdomain OSINT across AlienVault OTX, HackerTarget, and crt.sh,) Tj
+/F1 9.2 Tf
+1 0 0 1 48 335 Tm (  performs non-destructive boundary fuzzing \(0, -500, 1e308\), and exports Markdown remediation reports.) Tj
+/F2 9.5 Tf
+1 0 0 1 48 319 Tm (Model Context Protocol \(MCP\) Device & Browser Bridge \(Node.js\) | github.com/fatakarim/android-browser-mcp) Tj
+/F1 9.2 Tf
+1 0 0 1 48 306 Tm (- Node.js JSON-RPC stdio MCP server exposing 40 structured automation tools for physical Android hardware \(via ADB XML) Tj
+/F1 9.2 Tf
+1 0 0 1 48 293 Tm (  Accessibility Tree parsing\) and headless Chromium \(via Chrome DevTools Protocol\) with strict schema validation.) Tj
+/F2 9.5 Tf
+1 0 0 1 48 277 Tm (Event-Driven AI Messaging & Triage Assistant \(Node.js\) | github.com/fatakarim/jarvis-whatsapp-ai) Tj
+/F1 9.2 Tf
+1 0 0 1 48 264 Tm (- Event-driven Node.js worker integrating multi-file session persistence with Google GenAI SDK \(gemini-2.5-flash\).) Tj
+/F2 10.5 Tf
+1 0 0 1 48 246 Tm (EDUCATION) Tj
+/F2 9.5 Tf
+1 0 0 1 48 231 Tm (Universitas Jenderal Soedirman \(UNSOED\) - Diploma \(D3\) in Animal Husbandry \(Budidaya Ternak\) [Active Student]) Tj
+/F1 9.2 Tf
+1 0 0 1 48 218 Tm (- Combined quantitative agricultural nutrition modeling with independent software engineering and application security) Tj
+/F1 9.2 Tf
+1 0 0 1 48 205 Tm (  specialization to audit domain-specific mathematical solvers and backend web APIs.) Tj
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+5485
+%%EOF

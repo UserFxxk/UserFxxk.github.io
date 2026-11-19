@@ -1,30 +1,32 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CV / Resume — Fata Fatikhul Karim</title>
+  <title>Resume — Fata Fatikhul Karim</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #4f46e5;
+      --primary: #1e293b;
+      --accent: #4f46e5;
       --text-dark: #0f172a;
-      --text-body: #334155;
-      --text-muted: #64748b;
-      --border: #e2e8f0;
+      --text-body: #1e293b;
+      --text-muted: #475569;
+      --border: #cbd5e1;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', Arial, sans-serif;
       background: #090d16;
       color: var(--text-dark);
-      line-height: 1.55;
+      line-height: 1.5;
       padding: 2rem 1rem;
     }
     .toolbar {
-      max-width: 850px;
+      max-width: 840px;
       margin: 0 auto 1.25rem;
       display: flex;
       justify-content: space-between;
@@ -44,91 +46,77 @@
       padding: 0.55rem 1rem;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       cursor: pointer;
       text-decoration: none;
       border: none;
     }
     .btn-back { background: rgba(255,255,255,0.08); color: #e2e8f0; }
-    .btn-print { background: #6c63ff; color: #fff; }
+    .btn-dl { background: #10b981; color: #052e16; }
     .resume-sheet {
-      max-width: 850px;
+      max-width: 840px;
       margin: 0 auto;
       background: #ffffff;
-      padding: 2.75rem 3rem;
-      border-radius: 12px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      padding: 2.5rem 2.75rem;
+      border-radius: 8px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
     }
     .header {
       border-bottom: 2px solid var(--text-dark);
-      padding-bottom: 1.15rem;
-      margin-bottom: 1.35rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1rem;
-      flex-wrap: wrap;
+      padding-bottom: 0.9rem;
+      margin-bottom: 1.15rem;
     }
     .header h1 {
-      font-size: 1.85rem;
+      font-size: 1.75rem;
       font-weight: 800;
       letter-spacing: -0.5px;
       color: var(--text-dark);
     }
     .header .role {
       font-size: 1rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-top: 0.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0.15rem 0 0.45rem;
     }
-    .contact-info {
+    .contact-line {
       font-size: 0.83rem;
       color: var(--text-body);
-      text-align: right;
     }
-    .contact-info a { color: var(--text-dark); text-decoration: none; font-weight: 500; }
-    .section { margin-bottom: 1.35rem; }
+    .contact-line a { color: var(--text-dark); text-decoration: none; font-weight: 600; }
+    .section { margin-bottom: 1.15rem; }
     .section-title {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--primary);
+      letter-spacing: 0.8px;
+      color: var(--text-dark);
       border-bottom: 1px solid var(--border);
-      padding-bottom: 0.3rem;
-      margin-bottom: 0.75rem;
+      padding-bottom: 0.25rem;
+      margin-bottom: 0.65rem;
     }
-    .summary { font-size: 0.9rem; color: var(--text-body); }
-    .exp-item { margin-bottom: 1rem; }
+    .summary { font-size: 0.88rem; color: var(--text-body); }
+    .exp-item { margin-bottom: 0.85rem; }
     .exp-head {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       flex-wrap: wrap;
     }
-    .exp-title { font-weight: 700; font-size: 0.96rem; color: var(--text-dark); }
-    .exp-org { font-weight: 600; color: var(--primary); font-size: 0.9rem; }
-    .exp-date { font-size: 0.8rem; color: var(--text-muted); font-family: 'Fira Code', monospace; }
+    .exp-title { font-weight: 700; font-size: 0.93rem; color: var(--text-dark); }
+    .exp-org { font-weight: 600; color: var(--accent); font-size: 0.88rem; }
+    .exp-date { font-size: 0.8rem; color: var(--text-muted); }
     ul.bullets {
-      margin-top: 0.35rem;
-      padding-left: 1.2rem;
-      font-size: 0.88rem;
+      margin-top: 0.3rem;
+      padding-left: 1.15rem;
+      font-size: 0.86rem;
       color: var(--text-body);
     }
-    ul.bullets li { margin-bottom: 0.25rem; }
-    .skills-table {
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 0.45rem 1rem;
-      font-size: 0.88rem;
+    ul.bullets li { margin-bottom: 0.22rem; }
+    .skills-list {
+      font-size: 0.86rem;
+      color: var(--text-body);
     }
-    .skill-cat { font-weight: 700; color: var(--text-dark); }
-    .skill-val { color: var(--text-body); }
-    @media (max-width: 640px) {
-      .resume-sheet { padding: 1.5rem; }
-      .contact-info { text-align: left; }
-      .skills-table { grid-template-columns: 1fr; gap: 0.2rem; }
-    }
+    .skills-list div { margin-bottom: 0.28rem; }
     @media print {
       body { background: #fff; padding: 0; }
       .toolbar { display: none !important; }
@@ -138,117 +126,108 @@
 </head>
 <body>
   <div class="toolbar">
-    <a href="index.html" class="btn-back">← Kembali ke Portofolio</a>
-    <span style="font-size: 0.85rem; color: #94a3b8;">Format ATS-Friendly & Siap Cetak A4</span>
-    <button class="btn-print" onclick="window.print()">🖨️ Simpan PDF / Cetak CV</button>
+    <a href="index.html" class="btn-back">← Back to Portfolio</a>
+    <span style="font-size: 0.84rem; color: #94a3b8;">Single-Column ATS-Standard Resume</span>
+    <a href="Fata-Fatikhul-Karim-Resume.pdf" download class="btn-dl">⬇️ Direct Download PDF</a>
   </div>
 
   <div class="resume-sheet">
     <header class="header">
-      <div>
-        <h1>FATA FATIKHUL KARIM</h1>
-        <div class="role">Full-Stack Developer & Application Security Researcher</div>
-      </div>
-      <div class="contact-info">
-        <div>📍 Purbalingga, Jawa Tengah, Indonesia | 🌐 <a href="https://userfxxk.github.io">userfxxk.github.io</a></div>
-        <div>✉️ <a href="mailto:fatafatikhul@gmail.com">fatafatikhul@gmail.com</a></div>
-        <div>🔗 <a href="https://www.linkedin.com/in/fata-fatikhul-karim">linkedin.com/in/fata-fatikhul-karim</a></div>
-        <div>💻 <a href="https://github.com/UserFxxk">github.com/UserFxxk</a> | 🛡️ <a href="https://hackerone.com/zeonmaltius">hackerone.com/zeonmaltius</a></div>
+      <h1>FATA FATIKHUL KARIM</h1>
+      <div class="role">Security-Focused Software Engineer (Application Security &amp; Backend Automation)</div>
+      <div class="contact-line">
+        Central Java, Indonesia &bull;
+        <a href="mailto:fatafatikhul@gmail.com">fatafatikhul@gmail.com</a> &bull;
+        <a href="https://fatakarim.github.io">fatakarim.github.io</a> &bull;
+        <a href="https://www.linkedin.com/in/fata-fatikhul-karim">linkedin.com/in/fata-fatikhul-karim</a> &bull;
+        <a href="https://github.com/fatakarim">github.com/fatakarim</a> &bull;
+        HackerOne: <a href="https://hackerone.com/zeonmaltius">@zeonmaltius</a>
       </div>
     </header>
 
     <section class="section">
-      <h2 class="section-title">Ringkasan Profesional (Executive Summary)</h2>
+      <h2 class="section-title">Professional Summary</h2>
       <p class="summary">
-        <strong>Self-Taught Software Developer</strong> dan <strong>Bug Bounty Hunter</strong> (mahasiswa aktif di <strong>Universitas Jenderal Soedirman / UNSOED</strong>) yang mempelajari rekayasa perangkat lunak, otomasi AI/MCP, dan <em>Application Security</em> secara otodidak dari nol. Menggabungkan ketajaman analisis domain dengan penguasaan teknis <strong>Next.js, TypeScript, Node.js, Python</strong>, serta pengujian kerentanan <strong>OWASP Top 10</strong> untuk membangun dan mengaudit sistem secara menyeluruh (<em>Secure by Design</em>).
+        Security-Focused Software Engineer specializing in <strong>Backend &amp; Protocol Automation (Node.js, TypeScript, Python)</strong> and <strong>Application Security (OWASP Top 10)</strong>. Experienced in building deterministic Model Context Protocol (MCP) bridges, zero-dependency Python security auditing CLIs, and executing authorized web application security assessments with actionable Root-Cause Analysis (RCA) and schema-level remediation patches.
       </p>
     </section>
 
     <section class="section">
-      <h2 class="section-title">Pengalaman & Riset Keamanan (Experience)</h2>
+      <h2 class="section-title">Technical Competencies</h2>
+      <div class="skills-list">
+        <div><strong>Languages &amp; Backend:</strong> TypeScript, JavaScript (Node.js, Express.js), Python 3 (Concurrent Probing &amp; CLI), SQL (PostgreSQL), Bash</div>
+        <div><strong>Frontend &amp; Web:</strong> Next.js, React, HTML5, CSS3, Tailwind CSS, RESTful API Design</div>
+        <div><strong>Application Security:</strong> OWASP Top 10 Auditing, Broken Access Control (IDOR), Input Boundary Validation (Zod), CORS/Cookie &amp; Header Hardening (CSP, HSTS, Helmet), Burp Suite, Nuclei, Subfinder</div>
+        <div><strong>Automation &amp; Systems:</strong> Model Context Protocol (MCP / JSON-RPC), Android Debug Bridge (ADB), Chrome DevTools Protocol (CDP), Linux, Git</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Security Research &amp; Engineering Experience</h2>
 
       <div class="exp-item">
         <div class="exp-head">
-          <div><span class="exp-title">Independent Security Researcher (Bug Bounty Hunter)</span> — <span class="exp-org">HackerOne (@zeonmaltius) & Independent Audits</span></div>
-          <span class="exp-date">2025 – Sekarang</span>
+          <div><span class="exp-title">Independent Application Security Researcher</span> — <span class="exp-org">Coordinated Disclosure &amp; HackerOne (@zeonmaltius)</span></div>
+          <span class="exp-date">2025 – Present</span>
         </div>
         <ul class="bullets">
-          <li><strong>Studi Kasus Audit Nyata (Web App Kalkulator/Solver Ransum Ternak):</strong> Menemukan dan melaporkan secara bertanggung jawab (<em>Responsible Disclosure</em>) <strong>8 celah keamanan & logika bisnis (3 High, 4 Medium, 1 Low)</strong>, meliputi kebocoran 38 <em>record</em> riwayat pengguna tanpa autentikasi (<code>GET /api/history</code>), mutasi database tanpa validasi (<code>POST /api/feeds</code> hingga memicu korupsi data <code>2.3e+289 kg</code>), <em>Solver DoS</em> pada input negatif, serta misconfiguration CORS wildcard (<code>*</code>) dan Security Headers.</li>
-          <li>Membangun pipeline <em>reconnaissance</em> otomatis menggunakan <strong>Subfinder, Nuclei, Nmap, dan Shodan</strong> untuk pemetaan permukaan serangan (<em>attack surface mapping</em>) secara cepat dan akurat.</li>
+          <li><strong>Authorized Agricultural Ration Solver API Assessment:</strong> Executed a coordinated security review of an Express.js livestock ration formulation platform. Identified and responsibly disclosed <strong>8 vulnerabilities (3 High, 4 Medium, 1 Low)</strong>, including unauthenticated sensitive data exposure on <code>GET /api/history</code> (38 user records), missing server-side numeric domain bounds on <code>POST /api/feeds</code>, client solver freeze on non-positive inputs, and permissive CORS wildcard (<code>*</code>) policies.</li>
+          <li><strong>Remediation &amp; Verification:</strong> Authored reproducible Proof-of-Concept documentation, logged controlled test record UUIDs for maintainer cleanup, and delivered schema validation blueprints (Zod) and ownership-scoped authorization middleware.</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-head">
-          <div><span class="exp-title">Full-Stack & AI Automation Developer</span> — <span class="exp-org">Freelance / Independent Builder</span></div>
-          <span class="exp-date">2025 – Sekarang</span>
+          <div><span class="exp-title">Open-Source Software &amp; Automation Developer</span> — <span class="exp-org">GitHub (@fatakarim)</span></div>
+          <span class="exp-date">2025 – Present</span>
         </div>
         <ul class="bullets">
-          <li>Merancang dan mengembangkan aplikasi web responsif serta RESTful API menggunakan <strong>Next.js, TypeScript, Tailwind CSS, Node.js, dan NestJS</strong>.</li>
-          <li>Mengembangkan perkakas otomatisasi sistem berbasis <strong>Model Context Protocol (MCP)</strong> yang menghubungkan AI Agent (Claude/Cursor) dengan perangkat Android fisik via ADB dan browser Chromium headless.</li>
-          <li>Membangun bot produktivitas dan asisten otomatis menggunakan integrasi <strong>Google Gemini AI SDK</strong> dan WhatsApp Web API (Baileys).</li>
+          <li>Engineered deterministic developer and security automation systems in Node.js and Python focusing on JSON-RPC protocol tooling, headless browser E2E testing, and non-destructive security hygiene verification.</li>
         </ul>
       </div>
     </section>
 
     <section class="section">
-      <h2 class="section-title">Proyek Unggulan (Key Technical Projects)</h2>
+      <h2 class="section-title">Engineering Case Studies &amp; Projects</h2>
 
       <div class="exp-item">
         <div class="exp-head">
-          <div><span class="exp-title">Android & Stealth Browser MCP Automation Bridge</span> <span class="exp-org">(Node.js, ADB, Chrome CDP, MCP)</span></div>
+          <div><span class="exp-title">Fata Recon &amp; AppSec Audit Suite v3.0</span> — <span class="exp-org">github.com/fatakarim/fata-termux-toolkit</span></div>
         </div>
         <ul class="bullets">
-          <li>Membangun 40+ <em>automation tools</em> pada server MCP lokal/VPS untuk mengontrol perangkat Android secara penuh (UI dump, tap, swipe, form fill, screenshot) dan navigasi browser anti-bot.</li>
+          <li>Built a zero-dependency Python 3 CLI for pre-release security reviews: audits HTTP Security Headers (CSP, HSTS, XFO), inspects CORS reflection &amp; cookie flags, aggregates passive subdomain OSINT across AlienVault OTX, HackerTarget, and <code>crt.sh</code>, performs non-destructive boundary fuzzing (<code>0</code>, <code>-500</code>, <code>1e308</code>), and exports Markdown remediation reports.</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-head">
-          <div><span class="exp-title">AI-Powered WhatsApp Assistant Bot</span> <span class="exp-org">(Node.js, Baileys, Google GenAI)</span></div>
+          <div><span class="exp-title">Model Context Protocol (MCP) Device &amp; Browser Bridge</span> — <span class="exp-org">github.com/fatakarim/android-browser-mcp</span></div>
         </div>
         <ul class="bullets">
-          <li>Mengintegrasikan LLM Gemini ke dalam ekosistem WhatsApp menggunakan <em>multi-file auth state</em> untuk otomasi respons percakapan cerdas secara <em>real-time</em>.</li>
+          <li>Developed a Node.js JSON-RPC stdio MCP server exposing 40 structured automation tools for physical Android hardware (via ADB XML Accessibility Tree parsing) and headless Chromium (via Chrome DevTools Protocol) with strict parameter schema validation.</li>
         </ul>
       </div>
 
       <div class="exp-item">
         <div class="exp-head">
-          <div><span class="exp-title">Fata Recon & AppSec Audit Suite v2.0</span> <span class="exp-org">(Python 3, crt.sh CT Logs, Concurrent Probing, OWASP)</span></div>
+          <div><span class="exp-title">Event-Driven AI Messaging &amp; Triage Assistant</span> — <span class="exp-org">github.com/fatakarim/jarvis-whatsapp-ai</span></div>
         </div>
         <ul class="bullets">
-          <li>Membangun CLI audit keamanan (<code>github.com/UserFxxk/fata-termux-toolkit</code>) dengan 5 modul otomatis: audit <em>Security Headers & Stack Fingerprinting</em>, inspeksi <em>CORS Wildcard & Cookie Flags</em>, enumerasi subdomain pasif via <code>crt.sh</code>, pemindaian endpoint API konkuren, dan generator laporan Markdown otomatis.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2 class="section-title">Pendidikan & Pembelajaran Mandiri (Education)</h2>
-      <div class="exp-item">
-        <div class="exp-head">
-          <div><span class="exp-title">Universitas Jenderal Soedirman (UNSOED)</span> — <span class="exp-org">Fakultas Peternakan (D3 Budidaya Ternak)</span></div>
-          <span class="exp-date">Mahasiswa Aktif</span>
-        </div>
-        <ul class="bullets">
-          <li>Memadukan pemahaman domain sains/agrikultur dengan keahlian <strong>Software Engineering & Cybersecurity yang dipelajari 100% secara otodidak dari nol</strong> (terbukti efektif saat mengaudit logika matematis solver & celah keamanan backend pada aplikasi web formulasi pakan ternak).</li>
+          <li>Designed an event-driven Node.js worker integrating multi-file session persistence with Google GenAI SDK (<code>gemini-2.5-flash</code>), environment-isolated credential management, and automated broadcast filtering.</li>
         </ul>
       </div>
     </section>
 
     <section class="section">
-      <h2 class="section-title">Keahlian Teknis (Technical Arsenal)</h2>
-      <div class="skills-table">
-        <div class="skill-cat">Frontend Development</div>
-        <div class="skill-val">HTML5, CSS3, JavaScript (ES6+), TypeScript, Next.js, React, Tailwind CSS</div>
-
-        <div class="skill-cat">Backend & Database</div>
-        <div class="skill-val">Node.js, NestJS, Python (Asyncio), Go, PostgreSQL, MongoDB, Redis, REST API</div>
-
-        <div class="skill-cat">Application Security</div>
-        <div class="skill-val">OWASP Top 10, Burp Suite, Nuclei, Subfinder, Nmap, SQLMap, Wireshark, Hashcat, Shodan, OSINT</div>
-
-        <div class="skill-cat">DevOps, AI & OS</div>
-        <div class="skill-val">Docker, Git, GitHub Actions, Vercel, Model Context Protocol (MCP), Kali Linux, Arch Linux</div>
+      <h2 class="section-title">Education</h2>
+      <div class="exp-item">
+        <div class="exp-head">
+          <div><span class="exp-title">Universitas Jenderal Soedirman (UNSOED)</span> — <span class="exp-org">Diploma (D3) in Animal Husbandry (Budidaya Ternak)</span></div>
+          <span class="exp-date">Active Student</span>
+        </div>
+        <ul class="bullets">
+          <li>Combined quantitative agricultural nutrition modeling with independent software engineering and application security specialization to audit domain-specific mathematical solvers and backend web APIs.</li>
+        </ul>
       </div>
     </section>
   </div>

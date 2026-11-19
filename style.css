@@ -757,6 +757,45 @@ body {
 }
 .project-links a { color: var(--text-muted); transition: color 0.2s; }
 .project-links a:hover { color: var(--text-main); }
+.repo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+}
+.project-meta-box {
+  background: rgba(16, 185, 129, 0.08);
+  border-left: 3px solid var(--accent-green);
+  padding: 0.6rem 0.85rem;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  margin-bottom: 1.1rem;
+}
+.edu-sub {
+  font-family: var(--font-mono);
+  font-size: 0.78rem !important;
+  color: var(--accent-green) !important;
+  margin-bottom: 0.6rem;
+}
+.arch-note {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(108, 99, 255, 0.1);
+  border: 1px solid rgba(108, 99, 255, 0.3);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  margin-bottom: 1.15rem;
+}
 .project-type { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-green); margin-bottom: 0.35rem; }
 .project-title { font-size: 1.22rem; margin-bottom: 0.65rem; }
 .project-desc { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.4rem; flex-grow: 1; }

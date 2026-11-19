@@ -1,17 +1,17 @@
-# 🌐 Fata Fatikhul Karim — Interactive Developer & Security Portfolio
+# Fata Fatikhul Karim — Security-Focused Software Engineer Portfolio
 
-Live Website: **[https://userfxxk.github.io](https://userfxxk.github.io)**
+Live Portfolio: **[https://fatakarim.github.io](https://fatakarim.github.io)**  
+Direct ATS Resume (PDF): **[Fata-Fatikhul-Karim-Resume.pdf](https://fatakarim.github.io/Fata-Fatikhul-Karim-Resume.pdf)**
 
-Repository ini berisi kode sumber portofolio profesional **Fata Fatikhul Karim** (*Full-Stack Developer, AI Automation Builder & Bug Bounty Hunter*).
+This repository hosts the engineering case studies, security root-cause analysis (RCA) writeups, client-side DNS-over-HTTPS (DoH) posture analyzer, and ATS resume of **Fata Fatikhul Karim** (*Security-Focused Software Engineer — Application Security & Backend Automation*).
 
-## ✨ Fitur Utama
-- **Bilingual Support (ID / EN):** Mendukung pergantian bahasa Indonesia dan Inggris secara instan.
-- **Interactive Security Terminal:** Mini terminal interaktif yang menampilkan tech stack, profil bug bounty, dan kontak.
-- **ATS-Friendly Printable Resume (`/cv.html`):** Halaman CV/Resume khusus yang siap disimpan sebagai PDF ukuran A4 (`https://userfxxk.github.io/cv.html`).
-- **LinkedIn Cover Banner Studio (`/banner.html`):** Generator sampul LinkedIn ukuran resmi `1584 × 396 px` dengan 3 pilihan tema (`https://userfxxk.github.io/banner.html`).
+## Key Sections
+- **Engineering Case Studies (`#projects`):** Architectural breakdowns, security guardrails, and trade-offs for *Fata Recon & AppSec Audit Suite v3.0*, *Model Context Protocol (MCP) Device & Browser Bridge*, and *Event-Driven AI Messaging Assistant*.
+- **Security Research & RCA (`#writeups`):** Technical root-cause analysis and remediation blueprints (Zod schema validation & ownership-scoped authorization) from authorized security assessments.
+- **Client-Side Passive DNS Analyzer (`#scanner`):** Read-only browser tool querying Cloudflare DoH JSON telemetry to evaluate SPF, DMARC, and CAA configurations without server-side SSRF exposure.
 
-## 🔗 Tautan Profil
+## Profile Links
 - **LinkedIn:** [linkedin.com/in/fata-fatikhul-karim](https://www.linkedin.com/in/fata-fatikhul-karim)
-- **GitHub:** [github.com/UserFxxk](https://github.com/UserFxxk)
+- **GitHub:** [github.com/fatakarim](https://github.com/fatakarim)
 - **HackerOne:** [hackerone.com/zeonmaltius](https://hackerone.com/zeonmaltius)
 - **Email:** [fatafatikhul@gmail.com](mailto:fatafatikhul@gmail.com)
