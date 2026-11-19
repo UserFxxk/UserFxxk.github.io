@@ -140,27 +140,45 @@
         </table>
       </div>
 
-      <h2 style="font-size: 1.2rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Root-Cause Analysis &amp; Proof-of-Concept (PoC)</h2>
-      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.8rem; color:#fca5a5; margin-bottom:1.25rem; border:1px solid rgba(239,68,68,0.25);">// ❌ VULNERABLE PATTERN 1 (SOLVER-01 / CWE-306): Unauthenticated History Endpoint
-// PoC: curl -i https://&lt;redacted-target&gt;/api/history
-// Pre-Patch Result: HTTP/1.1 200 OK (Returned 38 calculation records without session token)
+      <h2 style="font-size: 1.2rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Root-Cause Analysis &amp; Proof-of-Concept (PoC for SOLVER-01 through SOLVER-08)</h2>
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.79rem; color:#fca5a5; margin-bottom:1.25rem; border:1px solid rgba(239,68,68,0.25);">// [SOLVER-01 / CWE-306] Unauthenticated Calculation History Exposure (7.5 HIGH)
+// PoC:
+//   curl -i https://&lt;redacted-target&gt;/api/history
+// Pre-Patch Output:
+//   HTTP/1.1 200 OK -> Returned JSON array containing 38 historical ration records of other users.
 app.get('/api/history', async (req, res) => {
-  const history = await db.history.findAll();
+  const history = await db.history.findAll(); // Missing requireAuth &amp; userId filter
   return res.status(200).json(history);
 });
 
-// ❌ VULNERABLE PATTERN 2 (SOLVER-02 &amp; SOLVER-04 / CWE-20 &amp; CWE-306): Unvalidated Feed Creation
-// PoC: curl -X POST https://&lt;redacted-target&gt;/api/feeds -H "Content-Type: application/json" \
-//      -d '{"name":"VerificationFeed","category":"Mineral","dryMatterPct":-500}'
-// Pre-Patch Result: HTTP/1.1 200 OK (Persisted negative DM%, causing 2.3e+289 kg solver overflow)
+// [SOLVER-02 (CWE-20, 7.5 HIGH) &amp; SOLVER-04 (CWE-306, 5.3 MED)] Unvalidated &amp; Unauthenticated Feed Mutation
+// PoC (SOLVER-02 negative DM% float divergence &amp; SOLVER-04 unauthenticated write):
+//   curl -i -X POST https://&lt;redacted-target&gt;/api/feeds \
+//     -H "Content-Type: application/json" \
+//     -d '{"name":"VerificationFeed","category":"Mineral","dryMatterPct":-500}'
+// Pre-Patch Output:
+//   HTTP/1.1 200 OK -> Persisted without auth; negative DM% caused 2.3e+289 kg solver float divergence.
 app.post('/api/feeds', async (req, res) => {
-  const feed = await db.feeds.create(req.body);
+  const feed = await db.feeds.create(req.body); // Missing requireAuth &amp; numeric schema bounds
   return res.status(200).json(feed);
 });
 
-// ❌ VULNERABLE PATTERN 3 (SOLVER-03 / CWE-400): Unbounded Client/Solver Iteration on BB &lt;= 0
-// PoC: Entering Body Weight (BB) = 0 or -50 in Step 1 form (where &lt;input type="number"&gt; had empty min/max)
-// triggered an unguarded division/simplex loop in the client solver thread, hanging the UI tab.</pre>
+// [SOLVER-03 / CWE-400] Client/Solver Thread Freeze on Non-Positive Body Weight (6.5 MEDIUM)
+// PoC (Requires user interaction in Step 1 Ration Form; UI:R -> CVSS 6.5 Medium):
+//   1. Open Step 1 Solver UI where &lt;input id="bodyWeight" type="number"&gt; has empty min/max attributes.
+//   2. Input Body Weight (BB) = 0 or -50 kg and click "Calculate Ration".
+//   3. The simplex solver loop divides by zero / fails termination condition (targetDryMatter &lt;= 0),
+//      freezing the browser main thread until forced tab reload.
+
+// [SOLVER-05 (CWE-942), SOLVER-07 (CWE-693), SOLVER-08 (CWE-200) &amp; SOLVER-06 (CWE-1275 INFO)] Header Inspection
+// PoC:
+//   curl -i -H "Origin: https://evil.example" https://&lt;redacted-target&gt;/api/feeds
+// Pre-Patch Response Headers:
+//   HTTP/1.1 200 OK
+//   X-Powered-By: Express                        &lt;-- [SOLVER-08: Stack fingerprinting (3.1 LOW)]
+//   Access-Control-Allow-Origin: *               &lt;-- [SOLVER-05: Global wildcard CORS (5.3 MED)]
+//   Set-Cookie: __cf_bm=...; Domain=.&lt;target&gt;; SameSite=None; Secure; HttpOnly &lt;-- [SOLVER-06: Cloudflare Bot Mgmt (0.0 INFO)]
+//   (Missing Content-Security-Policy, Strict-Transport-Security, X-Frame-Options) &lt;-- [SOLVER-07: Missing headers (4.3 MED)]</pre>
 
       <h2 style="font-size: 1.2rem; margin: 1.75rem 0 0.6rem; color: #fff;">4. Defensive Remediation &amp; Regression Unit Tests</h2>
       <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.8rem; color:#86efac; margin-bottom:1.25rem; border:1px solid rgba(16,185,129,0.25);">// ✅ PATCHED IMPLEMENTATION: Strict Domain-Bound Schema (Zod) + Authentication Middleware
@@ -193,8 +211,19 @@ app.get('/api/history', requireAuth, async (req, res) => {
   return res.status(200).json(records);
 });</pre>
 
-      <h3 style="font-size: 1.05rem; margin: 1.25rem 0 0.6rem; color: #a5b4fc;">Automated Regression Test Suite (Jest + Supertest)</h3>
-      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.8rem; color:#c7d2fe; margin-bottom:1.5rem;">describe('Ration Solver API Security Regression Suite', () => {
+      <h3 style="font-size: 1.05rem; margin: 1.25rem 0 0.6rem; color: #a5b4fc;">Automated Regression Test Suite (Jest + Supertest • Covers SOLVER-01..05, 07, 08)</h3>
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.79rem; color:#c7d2fe; margin-bottom:1.5rem;">import request from 'supertest';
+import { app } from '../src/app';
+
+const validUserToken = process.env.TEST_JWT_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.test';
+const validFeed = {
+  name: 'Napier Grass Forage',
+  category: 'Forage',
+  dryMatterPct: 22.5,
+  bodyWeightKg: 450
+};
+
+describe('Ration Solver API Security Regression Suite (SOLVER-01 through SOLVER-08)', () => {
   it('SOLVER-01: rejects unauthenticated access to GET /api/history with 401', async () => {
     const res = await request(app).get('/api/history');
     expect(res.status).toBe(401);
@@ -204,7 +233,7 @@ app.get('/api/history', requireAuth, async (req, res) => {
     const res = await request(app)
       .post('/api/feeds')
       .set('Authorization', `Bearer ${validUserToken}`)
-      .send({ name: 'Test Concentrate', category: 'Concentrate', dryMatterPct: -500, bodyWeightKg: 400 });
+      .send({ ...validFeed, dryMatterPct: -500 });
     expect(res.status).toBe(400);
   });
 
@@ -212,15 +241,28 @@ app.get('/api/history', requireAuth, async (req, res) => {
     const res = await request(app)
       .post('/api/feeds')
       .set('Authorization', `Bearer ${validUserToken}`)
-      .send({ name: 'Test Forage', category: 'Forage', dryMatterPct: 85, bodyWeightKg: 0 });
+      .send({ ...validFeed, bodyWeightKg: 0 });
     expect(res.status).toBe(400);
   });
 
-  it('SOLVER-04: rejects unauthenticated catalog mutation on POST /api/feeds with 401', async () => {
-    const res = await request(app)
-      .post('/api/feeds')
-      .send({ name: 'Unauth Feed', category: 'Mineral', dryMatterPct: 90, bodyWeightKg: 350 });
-    expect(res.status).toBe(401);
+  it('SOLVER-04: rejects unauthenticated POST /api/feeds with 401', async () => {
+    await request(app).post('/api/feeds').send(validFeed).expect(401);
+  });
+
+  it('SOLVER-05: does not return wildcard CORS for untrusted origin', async () => {
+    const res = await request(app).get('/api/feeds').set('Origin', 'https://evil.example');
+    expect(res.headers['access-control-allow-origin']).not.toBe('*');
+  });
+
+  it('SOLVER-07: sends core HTTP security headers (CSP, HSTS, X-Frame-Options)', async () => {
+    const res = await request(app).get('/');
+    ['content-security-policy', 'strict-transport-security', 'x-frame-options']
+      .forEach((h) => expect(res.headers[h]).toBeDefined());
+  });
+
+  it('SOLVER-08: hides x-powered-by stack fingerprinting header', async () => {
+    const res = await request(app).get('/');
+    expect(res.headers['x-powered-by']).toBeUndefined();
   });
 });</pre>
 
