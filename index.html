@@ -180,7 +180,7 @@
               <h3 class="case-title">Sandboxed Model Context Protocol (MCP) Device &amp; Browser Bridge</h3>
               <p class="case-desc" data-i18n="proj2_desc">
                 <strong>Problem:</strong> AI coding assistants cannot deterministically inspect or verify UI states on physical Android hardware and headless Chromium instances during end-to-end (E2E) testing, and naive ADB wrappers are vulnerable to host command injection via untrusted DOM/UI strings.<br/><br/>
-                <strong>Engineering Decision &amp; Trade-offs:</strong> Engineered a Node.js JSON-RPC 2.0 <code>stdio</code> server exposing 40 structured tools for Android Debug Bridge (ADB) and Chrome DevTools Protocol (CDP). Chose XML Accessibility Tree parsing (<code>uiautomator dump</code>) over static X/Y pixel coordinates to ensure layout resilience across screen densities.
+                <strong>Engineering Decision &amp; Trade-offs:</strong> Engineered a Node.js JSON-RPC 2.0 <code>stdio</code> server exposing 44 structured tools for Android Debug Bridge (ADB) and Chrome DevTools Protocol (CDP). Chose XML Accessibility Tree parsing (<code>uiautomator dump</code>) over static X/Y pixel coordinates to ensure layout resilience across screen densities.
               </p>
               <div class="project-meta-box">
                 <strong>Security Guardrails:</strong> All subprocess calls use parameterized <code>child_process.execFile('adb', args)</code> without invoking a shell interpreter, combined with regex allowlists for package identifiers to neutralize indirect prompt injection.
@@ -463,7 +463,7 @@
               <p class="timeline-desc" data-i18n="exp2_desc">
                 Maintaining <strong>4 public repositories</strong> across Python 3 and Node.js:
                 (1) <a href="https://github.com/fatakarim/fata-termux-toolkit" target="_blank" rel="noopener" style="color:var(--accent-green);">fata-termux-toolkit</a> — 510+ lines of zero-dependency Python 3 security auditing code verified by 5 automated <code>unittest</code> cases;
-                (2) <a href="https://github.com/fatakarim/android-browser-mcp" target="_blank" rel="noopener" style="color:var(--accent-green);">android-browser-mcp</a> — 40 JSON-RPC 2.0 <code>stdio</code> MCP automation tools with parameterized <code>execFile</code> guardrails;
+                (2) <a href="https://github.com/fatakarim/android-browser-mcp" target="_blank" rel="noopener" style="color:var(--accent-green);">android-browser-mcp</a> — 44 JSON-RPC 2.0 <code>stdio</code> MCP automation tools with parameterized <code>execFile</code> and <code>PACKAGE_REGEX</code> guardrails;
                 (3) <a href="https://github.com/fatakarim/jarvis-whatsapp-ai" target="_blank" rel="noopener" style="color:var(--accent-green);">jarvis-whatsapp-ai</a> — personal WhatsApp AI triage prototype with <code>.env</code> secret isolation; and
                 (4) <a href="https://github.com/fatakarim/fatakarim.github.io" target="_blank" rel="noopener" style="color:var(--accent-green);">fatakarim.github.io</a> — engineering case studies, standalone RCA writeups, and client-side DoH DNS posture analyzer.
               </p>

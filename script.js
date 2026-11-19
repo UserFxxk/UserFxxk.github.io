@@ -1,109 +1,27 @@
-// Initialize Lucide Icons
-if (window.lucide) {
-  lucide.createIcons();
-}
-
-// Typing Effect in Hero (100% Consistent per Language)
-const roles = {
-  en: [
-    "Security-Focused Software Engineer (Python / TypeScript)",
-    "Application Security & Backend Automation Engineer",
-    "Model Context Protocol (MCP) & CLI Tooling Developer",
-    "Coordinated Vulnerability Disclosure (HackerOne @zeonmaltius)"
-  ],
-  id: [
-    "Security-Focused Software Engineer (Python / TypeScript)",
-    "Insinyur Keamanan Aplikasi & Otomasi Backend",
-    "Pengembang Perkakas Model Context Protocol (MCP) & CLI",
-    "Periset Keamanan Aplikasi (HackerOne @zeonmaltius)"
-  ]
-};
-
+// Portfolio Interactivity, Client-Side Passive DNS Auditor (Cloudflare DoH) & Bilingual (EN/ID) Engine
 let currentLang = "en";
-let roleIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-const typingEl = document.getElementById("typingText");
-
-function typeLoop() {
-  const list = roles[currentLang];
-  const currentText = list[roleIndex % list.length];
-
-  if (!isDeleting) {
-    typingEl.textContent = currentText.substring(0, charIndex + 1);
-    charIndex++;
-    if (charIndex === currentText.length) {
-      isDeleting = true;
-      setTimeout(typeLoop, 2400);
-      return;
-    }
-  } else {
-    typingEl.textContent = currentText.substring(0, charIndex - 1);
-    charIndex--;
-    if (charIndex === 0) {
-      isDeleting = false;
-      roleIndex = (roleIndex + 1) % list.length;
-    }
-  }
-  setTimeout(typeLoop, isDeleting ? 30 : 55);
-}
-
-typeLoop();
-
-// Technical Verification Terminal
-const terminalOutput = document.getElementById("terminalOutput");
-const termCommands = {
-  skills: {
-    cmd: "cat core-stack.txt",
-    resp: "[Backend & CLI] TypeScript, Node.js, Python 3, SQL/PostgreSQL\n[Web Frontend ] Next.js, React, HTML5, Tailwind CSS\n[AppSec & QA  ] OWASP Top 10, Burp Suite, Nuclei, Zod Schema Hardening\n[Protocols    ] Model Context Protocol (MCP), Android ADB, Chrome CDP"
-  },
-  bounty: {
-    cmd: "cat disclosure-log.txt",
-    resp: "[Policy ] Strictly Authorized Testing & Coordinated Disclosure\n[Profile] HackerOne (@zeonmaltius)\n[Recent ] 8 vulnerabilities disclosed in an authorized agricultural solver audit\n          (Unauthenticated history endpoint, missing schema bounds, CORS/CSP)"
-  },
-  contact: {
-    cmd: "cat contact.txt",
-    resp: "Portfolio : https://fatakarim.github.io\nLinkedIn  : https://www.linkedin.com/in/fata-fatikhul-karim\nGitHub    : https://github.com/fatakarim\nEmail     : fatafatikhul@gmail.com"
-  }
-};
-
-document.querySelectorAll(".term-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const key = btn.getAttribute("data-cmd");
-    if (key === "clear") {
-      terminalOutput.innerHTML = `<div class="term-line"><span class="term-prompt">$</span> <span class="term-cmd">clear</span></div>`;
-      return;
-    }
-    const item = termCommands[key];
-    if (!item) return;
-
-    const line = document.createElement("div");
-    line.className = "term-line";
-    line.innerHTML = `<span class="term-prompt">$</span> <span class="term-cmd">${item.cmd}</span>`;
-
-    const resp = document.createElement("div");
-    resp.className = "term-resp";
-    resp.style.whiteSpace = "pre-line";
-    resp.textContent = item.resp;
-
-    terminalOutput.appendChild(line);
-    terminalOutput.appendChild(resp);
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-  });
-});
 
 // Copy Email to Clipboard
 const copyEmailBtn = document.getElementById("copyEmailBtn");
 const copyStatus = document.getElementById("copyStatus");
 
 if (copyEmailBtn) {
-  copyEmailBtn.addEventListener("click", () => {
+  const handleCopyEmail = () => {
     navigator.clipboard.writeText("fatafatikhul@gmail.com").then(() => {
-      copyStatus.textContent = currentLang === "en" ? "✓ Copied!" : "✓ Tersalin!";
-      setTimeout(() => {
-        copyStatus.textContent = currentLang === "en" ? "(Click to copy)" : "(Klik untuk salin)";
-      }, 2500);
+      if (copyStatus) {
+        copyStatus.textContent = currentLang === "en" ? "✓ Copied!" : "✓ Tersalin!";
+        setTimeout(() => {
+          copyStatus.textContent = currentLang === "en" ? "(Click to copy)" : "(Klik untuk salin)";
+        }, 2500);
+      }
     });
+  };
+  copyEmailBtn.addEventListener("click", handleCopyEmail);
+  copyEmailBtn.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleCopyEmail();
+    }
   });
 }
 
@@ -133,8 +51,18 @@ const scanFindingsGrid = document.getElementById("scanFindingsGrid");
 const scanRawOutput = document.getElementById("scanRawOutput");
 const downloadScanReportBtn = document.getElementById("downloadScanReportBtn");
 
-let lastScanReportMd = "";
-let lastScannedDomain = "";
+let lastScanReportMd = [
+  "# Passive DNS & Anti-Spoofing Report: `hackerone.com`",
+  "- **Generated via:** Fata Fatikhul Karim Portfolio (https://fatakarim.github.io)",
+  "- **Posture Score:** 90/100 (**Grade A**)",
+  "",
+  "## 1. Posture Checks",
+  "- **Host & IP Resolution [PASS]:** Resolved: 104.18.36.214, 172.64.151.42 + 2 IPv6",
+  "- **SPF Anti-Spoofing Policy [STRICT (-all)]:** Hardfail active: v=spf1 include:_spf.google.com include:mail.zendesk.com -all",
+  "- **DMARC Policy (_dmarc) [REJECT]:** Strict enforcement (p=reject): v=DMARC1; p=reject; pct=100;",
+  "- **SSL CAA Restriction [ENFORCED]:** Restricts issuance to listed CAs: 0 issue \"letsencrypt.org\", 0 issue \"digicert.com\""
+].join("\n");
+let lastScannedDomain = "hackerone.com";
 
 async function queryDoH(name, type) {
   const url = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(name)}&type=${encodeURIComponent(type)}`;
@@ -170,13 +98,13 @@ async function runLiveDomainScan(rawDomain) {
   if (!domain || !domain.includes(".")) return;
 
   lastScannedDomain = domain;
-  scanDomainInput.value = domain;
-  scanResultsBox.style.display = "block";
-  scanTargetTitle.textContent = domain;
-  scanSummaryText.textContent = "Querying passive DNS-over-HTTPS telemetry...";
-  scanGradeBadge.textContent = "⏳";
-  scanFindingsGrid.innerHTML = "";
-  scanRawOutput.textContent = "[*] Querying Cloudflare DoH (A, AAAA, MX, NS, TXT, DMARC, CAA)...";
+  if (scanDomainInput) scanDomainInput.value = domain;
+  if (scanResultsBox) scanResultsBox.style.display = "block";
+  if (scanTargetTitle) scanTargetTitle.textContent = domain;
+  if (scanSummaryText) scanSummaryText.textContent = "Querying passive DNS-over-HTTPS telemetry...";
+  if (scanGradeBadge) scanGradeBadge.textContent = "⏳";
+  if (scanFindingsGrid) scanFindingsGrid.innerHTML = "";
+  if (scanRawOutput) scanRawOutput.textContent = "[*] Querying Cloudflare DoH (A, AAAA, MX, NS, TXT, DMARC, CAA)...";
 
   const [aRecs, aaaaRecs, mxRecs, nsRecs, txtRecs, dmarcRecs, caaRecs] = await Promise.all([
     queryDoH(domain, "A"),
@@ -317,24 +245,30 @@ async function runLiveDomainScan(rawDomain) {
   else if (score < 40) { grade = "D"; badgeColor = "#ef4444"; }
 
   const todayUtc = new Date().toISOString().slice(0, 10) + " UTC";
-  scanGradeBadge.textContent = grade;
-  scanGradeBadge.style.borderColor = badgeColor;
-  scanGradeBadge.style.color = badgeColor;
-  scanTargetTitle.textContent = `${domain} (Snapshot: ${todayUtc})`;
-  scanSummaryText.textContent = `Passive DNS Posture Score: ${score}/100 (Grade ${grade}) • Nameservers: ${nsList.slice(0, 2).join(", ") || "N/A"}`;
+  if (scanGradeBadge) {
+    scanGradeBadge.textContent = grade;
+    scanGradeBadge.style.borderColor = badgeColor;
+    scanGradeBadge.style.color = badgeColor;
+  }
+  if (scanTargetTitle) scanTargetTitle.textContent = `${domain} (Snapshot: ${todayUtc})`;
+  if (scanSummaryText) {
+    scanSummaryText.textContent = `Passive DNS Posture Score: ${score}/100 (Grade ${grade}) • Nameservers: ${nsList.slice(0, 2).join(", ") || "N/A"}`;
+  }
 
-  scanFindingsGrid.innerHTML = checks
-    .map(
-      (c) => `
-      <div class="scan-check-card">
-        <div class="scan-check-top">
-          <span>${c.title}</span>
-          <span class="scan-status-pill ${c.pill}">${c.status}</span>
-        </div>
-        <div class="scan-check-desc">${c.desc}</div>
-      </div>`
-    )
-    .join("");
+  if (scanFindingsGrid) {
+    scanFindingsGrid.innerHTML = checks
+      .map(
+        (c) => `
+        <div class="scan-check-card">
+          <div class="scan-check-top">
+            <span>${c.title}</span>
+            <span class="scan-status-pill ${c.pill}">${c.status}</span>
+          </div>
+          <div class="scan-check-desc">${c.desc}</div>
+        </div>`
+      )
+      .join("");
+  }
 
   const rawLines = [
     `[+] Target Domain : ${domain}`,
@@ -348,7 +282,7 @@ async function runLiveDomainScan(rawDomain) {
     `[+] DMARC Record  : ${dmarcRecord || "MISSING"}`,
     `[+] CAA Records   : ${caaList.join(" | ") || "None"}`
   ];
-  scanRawOutput.textContent = rawLines.join("\n");
+  if (scanRawOutput) scanRawOutput.textContent = rawLines.join("\n");
 
   lastScanReportMd = [
     `# Passive DNS & Anti-Spoofing Report: \`${domain}\``,
@@ -396,55 +330,71 @@ if (downloadScanReportBtn) {
 const mobileMenuBtn = document.getElementById("mobileMenuBtn");
 const navLinks = document.getElementById("navLinks");
 
-if (mobileMenuBtn) {
+if (mobileMenuBtn && navLinks) {
   mobileMenuBtn.addEventListener("click", () => {
     navLinks.classList.toggle("open");
   });
 }
 
-// 100% Consistent Bilingual Dictionary (EN default / ID toggle)
+// 100% Complete Bilingual Dictionary (EN default / ID toggle) matching all 52 data-i18n keys
 const i18n = {
   en: {
     nav_projects: "Case Studies",
-    nav_writeups: "Security Research",
-    nav_exp: "Experience",
-    nav_edu: "Education",
-    nav_scanner: "DNS Audit Tool",
+    nav_writeups: "Security Writeups",
+    nav_exp: "Experience & Background",
     nav_contact: "Contact",
     nav_resume: "Resume (PDF)",
-    hero_status: "Open to Software Engineering & Application Security Roles",
+    hero_eyebrow: "APPLICATION SECURITY & BACKEND AUTOMATION ENGINEER",
+    hero_headline: "Engineering resilient backend systems, protocol guardrails, and actionable security audits.",
     hero_desc:
-      "Software Engineer focused on <strong>Backend &amp; Automation Systems (Node.js, TypeScript, Python)</strong> and <strong>Application Security (OWASP Top 10)</strong>. I design deterministic automation tools and audit web applications for business-logic and access-control vulnerabilities to build resilient, secure-by-design software.",
-    btn_projects: "Engineering Case Studies",
+      "I build deterministic developer and security tooling in <strong>Python 3</strong> and <strong>Node.js</strong>—spanning Model Context Protocol (MCP) bridges, passive OSINT &amp; API boundary scanners, and event-driven automation—while conducting authorized web application security assessments focused on <strong>Broken Access Control (IDOR)</strong>, <strong>Business-Logic Flaws</strong>, and <strong>Server-Side Schema Hardening</strong>.",
+    btn_projects: "Read Engineering Case Studies",
     btn_cv: "Download ATS Resume (PDF)",
-    stat_disclosed: "Vulnerabilities Disclosed (Authorized Audit)",
-    stat_core: "Primary Backend & AppSec Stack",
-    stat_proto: "System & Browser Protocol Tooling",
-    term_hint: "Inspect engineering modules below:",
-    proj_tag: "// ENGINEERING CASE STUDIES",
-    proj_title: "Selected Systems & Security Tooling",
-    proj_subtitle: "Architectural breakdowns covering problem statements, security guardrails, technical trade-offs, and source code.",
-    wrt_tag: "// SECURITY RESEARCH & RCA",
-    wrt_title: "Vulnerability Root-Cause Analysis & Engineering Notes",
-    wrt_subtitle: "Technical deep-dives into authorized security assessments, vulnerable code patterns, and defensive remediation.",
-    wrt_read: "Read Technical RCA & Patch",
-    skills_tag: "// CORE COMPETENCIES",
-    skills_title: "Focused Technical Stack",
-    skills_subtitle: "Core technologies actively used in my production repositories and security assessments.",
-    exp_tag: "// EXPERIENCE & RESEARCH",
-    exp_title: "Security Research & Engineering Track",
-    exp_subtitle: "Practical application security assessments and open-source software development.",
-    edu_tag: "// EDUCATION & CREDENTIALS",
-    edu_title: "Academic Background & Security Training",
-    edu_subtitle: "Combining formal quantitative domain studies with rigorous, project-driven computer science and application security training.",
-    scan_tag: "// PASSIVE DNS & ANTI-SPOOFING AUDITOR",
+    hero_logistics:
+      "<strong>Availability &amp; Work Logistics:</strong> Expected Graduation: 2027 (UNSOED) &bull; Flexible schedule for Full-Time or Paid Internship roles &bull; Open to Remote, Hybrid, or Relocation (Jakarta / Bandung / Java).",
+    proj_tag: "ENGINEERING CASE STUDIES",
+    proj_title: "Systems Architecture & Security Tooling",
+    proj_subtitle: "Detailed problem statements, architectural diagrams, security guardrails, and verified execution proofs.",
+    proj1_desc:
+      "<strong>Problem:</strong> Pre-release web security hygiene checks often miss permissive CORS reflections, missing cookie flags, or unvalidated numeric query parameters, while third-party Python scanners frequently fail in constrained CI environments due to dependency conflicts or single-source <code>crt.sh</code> timeouts.<br/><br/><strong>Engineering Decision &amp; Trade-offs:</strong> Built strictly on Python 3's standard library (<code>urllib.request</code>, <code>ssl</code>, <code>concurrent.futures</code>) for zero-dependency portability. Aggregates passive subdomain OSINT across three independent providers (AlienVault OTX, HackerTarget, and <code>crt.sh</code>), performs non-destructive numeric boundary probing (<code>0</code>, <code>-500</code>, <code>1e308</code>), and generates Markdown remediation reports with code blueprints.",
+    proj2_desc:
+      "<strong>Problem:</strong> AI coding assistants cannot deterministically inspect or verify UI states on physical Android hardware and headless Chromium instances during end-to-end (E2E) testing, and naive ADB wrappers are vulnerable to host command injection via untrusted DOM/UI strings.<br/><br/><strong>Engineering Decision &amp; Trade-offs:</strong> Engineered a Node.js JSON-RPC 2.0 <code>stdio</code> server exposing 44 structured tools for Android Debug Bridge (ADB) and Chrome DevTools Protocol (CDP). Chose XML Accessibility Tree parsing (<code>uiautomator dump</code>) over static X/Y pixel coordinates to ensure layout resilience across screen densities.",
+    proj3_desc:
+      "<strong>Problem &amp; Honest Scope:</strong> Built as an experimental personal-use WhatsApp auto-responder for isolated local environments (using the unofficial <code>@whiskeysockets/baileys</code> multi-device WebSocket library and Google GenAI SDK) to handle incoming 1:1 personal messages while studying or coding in Termux.<br/><br/><strong>Verifiable Code Mechanics &amp; Guardrails:</strong> Implements a deterministic <strong>2,000ms typing-presence delay</strong> (<code>sendPresenceUpdate('composing')</code>) before dispatching <code>gemini-2.5-flash</code> responses; enforces a strict <strong>group-JID filter (<code>if (senderJid.endsWith('@g.us')) return;</code>)</strong> verified by automated unit tests (<code>test/filter.test.js</code>) to guarantee <strong>0 LLM API calls on group broadcasts</strong>; and isolates all credentials via environment variables (<code>process.env.GEMINI_API_KEY</code>) and <code>.gitignore</code> rules.",
+    wrt_tag: "SECURITY RESEARCH & ROOT-CAUSE ANALYSIS",
+    wrt_title: "Standalone Technical Writeups & Remediation Guides",
+    wrt_subtitle: "Each article is published as a standalone URL covering Threat Model, Vulnerable Code Pattern, Business Impact, and Patched Code with Regression Unit Tests.",
+    wrt1_title: "Root-Cause Analysis: Unauthenticated Data Exposure & Input Boundary Flaws in an Agricultural Ration Solver API",
+    wrt1_desc: "How domain knowledge in livestock nutrition modeling combined with backend API auditing uncovered 8 vulnerabilities (including unauthenticated GET /api/history exposure and missing numeric bounds), complete with Zod schema patches and Jest regression tests.",
+    wrt2_title: "Designing Sandboxed Model Context Protocol (MCP) Bridges for Android ADB & Headless Browser E2E Verification",
+    wrt2_desc: "Preventing indirect prompt injection from escalating to host shell execution by replacing string-interpolated ADB commands with parameterized execFile calls and strict package regex allowlists.",
+    wrt3_title: "Multi-Source Passive Subdomain Enumeration & Non-Destructive API Boundary Auditing in Python",
+    wrt3_desc: "Engineering a zero-dependency Python 3 CLI that aggregates AlienVault OTX, HackerTarget, and crt.sh telemetry while testing API parameters against numeric edge cases.",
+    wrt_read: "Read Full Article",
+    skills_tag: "VERIFIED TECHNICAL DEPTH",
+    skills_title: "Core Engineering & Security Stack",
+    skills_subtitle: "Focused strictly on the four technical domains I build with daily and can debug under live code review.",
+    exp_tag: "EXPERIENCE, COLLABORATION & EDUCATION",
+    exp_title: "Security Research & Academic Foundation",
+    exp_subtitle: "Translating security findings into constructive, maintainer-ready patches, regression tests, and clear documentation.",
+    exp1_role: "Application Security Researcher (Coordinated Disclosure)",
+    exp1_desc:
+      "Executed an authorized end-to-end security review of an Express.js livestock ration formulation platform, identifying and responsibly disclosing <strong>8 findings (7 vulnerabilities: 2 High, 4 Medium, 1 Low; plus 1 Informational)</strong>. Collaborated directly with the system maintainer by providing reproduction steps, logging verification record UUIDs (<code>4e856b17...</code>, <code>a030ba7f...</code>) for database cleanup, and delivering drop-in <code>Zod</code> validation schemas, client solver guards, and authorization middleware.",
+    exp2_role: "Open-Source Security & Automation Developer",
+    exp2_desc:
+      'Maintaining <strong>4 public repositories</strong> across Python 3 and Node.js: (1) <a href="https://github.com/fatakarim/fata-termux-toolkit" target="_blank" rel="noopener" style="color:var(--accent-green);">fata-termux-toolkit</a> — 510+ lines of zero-dependency Python 3 security auditing code verified by 5 automated <code>unittest</code> cases; (2) <a href="https://github.com/fatakarim/android-browser-mcp" target="_blank" rel="noopener" style="color:var(--accent-green);">android-browser-mcp</a> — 44 JSON-RPC 2.0 <code>stdio</code> MCP automation tools with parameterized <code>execFile</code> and <code>PACKAGE_REGEX</code> guardrails; (3) <a href="https://github.com/fatakarim/jarvis-whatsapp-ai" target="_blank" rel="noopener" style="color:var(--accent-green);">jarvis-whatsapp-ai</a> — personal WhatsApp AI triage prototype with <code>.env</code> secret isolation; and (4) <a href="https://github.com/fatakarim/fatakarim.github.io" target="_blank" rel="noopener" style="color:var(--accent-green);">fatakarim.github.io</a> — engineering case studies, standalone RCA writeups, and client-side DoH DNS posture analyzer.',
+    edu1_desc:
+      "Rapid, self-directed mastery of software engineering and application security built alongside quantitative studies at UNSOED. This cross-disciplinary background provides a sharp instinct for uncovering domain-specific mathematical and business-logic vulnerabilities—such as nutritional Dry Matter bounds and linear solver edge cases—that generic security scanners overlook.",
+    scan_tag: "INTERACTIVE PASSIVE DNS AUDITOR",
     scan_title: "Client-Side Domain Security Posture Analyzer",
-    scan_subtitle: "Queries public Cloudflare DNS-over-HTTPS (DoH) telemetry directly from your browser to evaluate SPF, DMARC (_dmarc), CAA SSL restrictions, and IPv4/IPv6 redundancy.",
+    scan_subtitle: "Evaluates SPF, DMARC (_dmarc), CAA SSL restrictions, and IPv4/IPv6 records via read-only Cloudflare DNS-over-HTTPS (DoH) telemetry.",
+    scan_arch_note:
+      "<strong>Architecture &amp; Safety Note:</strong> Executes 100% client-side read-only DNS-over-HTTPS queries via <code>cloudflare-dns.com/dns-query</code>. Zero backend proxy SSRF surface; sends no active packets to the target host.",
     scan_btn: "Analyze DNS Posture",
-    scan_try: "Quick presets:",
-    contact_tag: "// GET IN TOUCH",
+    scan_try: "Presets:",
+    contact_tag: "CONTACT & VERIFICATION",
     contact_title: "Connect for Engineering & Security Roles",
-    contact_desc: "Available for Software Engineering, Backend Automation, and Application Security opportunities. Reach out directly via email or LinkedIn.",
+    contact_desc: "Available for Full-Time or Paid Internship roles in Application Security, Backend Development, and Systems Automation (Remote / Hybrid / Relocation).",
     form_title: "Direct Email Composer",
     form_name: "Your Name / Organization",
     form_topic: "Subject",
@@ -453,48 +403,64 @@ const i18n = {
   },
   id: {
     nav_projects: "Studi Kasus",
-    nav_writeups: "Riset Keamanan",
-    nav_exp: "Pengalaman",
-    nav_edu: "Pendidikan",
-    nav_scanner: "Audit DNS",
+    nav_writeups: "Writeup Keamanan",
+    nav_exp: "Pengalaman & Pendidikan",
     nav_contact: "Kontak",
-    nav_resume: "CV (PDF)",
-    hero_status: "Terbuka untuk Peran Software Engineering & Application Security",
+    nav_resume: "CV ATS (PDF)",
+    hero_eyebrow: "APPLICATION SECURITY & BACKEND AUTOMATION ENGINEER",
+    hero_headline: "Membangun sistem backend tangguh, guardrail protokol, dan audit keamanan aplikasi yang terukur.",
     hero_desc:
-      "Software Engineer yang berfokus pada <strong>Sistem Backend &amp; Otomasi (Node.js, TypeScript, Python)</strong> serta <strong>Application Security (OWASP Top 10)</strong>. Merancang perkakas otomasi deterministik dan mengaudit celah logika bisnis serta kontrol akses untuk membangun perangkat lunak yang aman sejak perancangan.",
-    btn_projects: "Studi Kasus Engineering",
+      "Saya mengembangkan perkakas otomasi developer dan keamanan deterministik menggunakan <strong>Python 3</strong> dan <strong>Node.js</strong>—meliputi bridge Model Context Protocol (MCP), pemindai OSINT pasif &amp; batas parameter API, serta worker berbasis event—sekaligus melaksanakan asesmen keamanan aplikasi web berizin dengan fokus pada <strong>Broken Access Control (IDOR)</strong>, <strong>Business-Logic Flaws</strong>, dan <strong>Server-Side Schema Hardening</strong>.",
+    btn_projects: "Baca Studi Kasus Engineering",
     btn_cv: "Unduh CV ATS (PDF)",
-    stat_disclosed: "Celah Dilaporkan (Audit Berizin)",
-    stat_core: "Stack Utama Backend & AppSec",
-    stat_proto: "Perkakas Protokol Sistem & Browser",
-    term_hint: "Periksa modul teknis di bawah ini:",
-    proj_tag: "// STUDI KASUS ENGINEERING",
+    hero_logistics:
+      "<strong>Ketersediaan &amp; Logistik Kerja:</strong> Estimasi Lulus: 2027 (UNSOED) &bull; Jadwal fleksibel untuk peran Full-Time atau Paid Internship &bull; Terbuka untuk Remote, Hybrid, atau Relokasi (Jakarta / Bandung / Jawa).",
+    proj_tag: "STUDI KASUS ENGINEERING",
     proj_title: "Arsitektur Sistem & Perkakas Keamanan",
-    proj_subtitle: "Bedah arsitektur meliputi rumusan masalah, batasan keamanan (security guardrails), keputusan teknis, dan kode sumber.",
-    wrt_tag: "// RISET KEAMANAN & RCA",
-    wrt_title: "Analisis Akar Masalah (Root-Cause Analysis) & Catatan Teknis",
-    wrt_subtitle: "Pembahasan teknis mendalam atas asesmen keamanan berizin, pola kode rentan, dan implementasi mitigasi.",
-    wrt_read: "Baca Analisis & Patch",
-    skills_tag: "// KOMPETENSI INTI",
-    skills_title: "Fokus Teknologi Utama",
-    skills_subtitle: "Teknologi inti yang aktif digunakan pada repositori produksi dan pengujian keamanan saya.",
-    exp_tag: "// PENGALAMAN & RISET",
-    exp_title: "Rekam Jejak Riset Keamanan & Rekayasa",
-    exp_subtitle: "Asesmen keamanan aplikasi praktis dan pengembangan perangkat lunak open-source.",
-    edu_tag: "// PENDIDIKAN & KREDENSIAL",
-    edu_title: "Latar Belakang Akademik & Pelatihan Keamanan",
-    edu_subtitle: "Memadukan studi kuantitatif formal dengan pelatihan ilmu komputer dan keamanan aplikasi berbasis proyek.",
-    scan_tag: "// AUDITOR DNS PASIF & ANTI-SPOOFING",
+    proj_subtitle: "Rumusan masalah, diagram arsitektur, guardrail keamanan, dan bukti eksekusi terverifikasi.",
+    proj1_desc:
+      "<strong>Masalah:</strong> Pemeriksaan keamanan web pra-rilis sering melewatkan refleksi CORS permisif, atribut cookie yang hilang, atau parameter numerik tanpa validasi, sementara pemindai pihak ketiga kerap gagal di lingkungan CI terbatas akibat konflik dependensi atau timeout sumber tunggal <code>crt.sh</code>.<br/><br/><strong>Keputusan Engineering &amp; Trade-off:</strong> Dibangun murni di atas standard library Python 3 (<code>urllib.request</code>, <code>ssl</code>, <code>concurrent.futures</code>) tanpa dependensi eksternal. Mengagregasi OSINT subdomain pasif dari tiga penyedia independen (AlienVault OTX, HackerTarget, dan <code>crt.sh</code>), menguji batas numerik secara non-destruktif (<code>0</code>, <code>-500</code>, <code>1e308</code>), serta menyusun laporan remediasi Markdown otomatis.",
+    proj2_desc:
+      "<strong>Masalah:</strong> Asisten coding AI tidak dapat memeriksa atau memverifikasi state UI secara deterministik pada perangkat fisik Android maupun instance Chromium headless saat pengujian end-to-end (E2E), dan wrapper ADB naif rentan terhadap command injection melalui string DOM/UI yang tidak tepercaya.<br/><br/><strong>Keputusan Engineering &amp; Trade-off:</strong> Merancang server Node.js JSON-RPC 2.0 <code>stdio</code> yang mengekspos 44 tool terstruktur untuk Android Debug Bridge (ADB) dan Chrome DevTools Protocol (CDP). Menggunakan parsing XML Accessibility Tree (<code>uiautomator dump</code>) dibanding koordinat piksel X/Y statis agar tahan terhadap perbedaan resolusi layar.",
+    proj3_desc:
+      "<strong>Masalah &amp; Cakupan Jujur:</strong> Dibangun sebagai prototipe asisten penjawab otomatis WhatsApp pribadi untuk lingkungan lokal terisolasi (menggunakan library WebSocket multi-device <code>@whiskeysockets/baileys</code> dan Google GenAI SDK) untuk menangani pesan masuk 1:1 saat sedang kuliah atau mengoding di Termux.<br/><br/><strong>Mekanisme Kode &amp; Guardrail:</strong> Mengimplementasikan jeda indikator mengetik deterministik <strong>2.000ms</strong> (<code>sendPresenceUpdate('composing')</code>) sebelum mengirim respons <code>gemini-2.5-flash</code>; menerapkan <strong>filter grup ketat (<code>if (senderJid.endsWith('@g.us')) return;</code>)</strong> yang diverifikasi oleh unit test otomatis (<code>test/filter.test.js</code>) untuk menjamin <strong>0 panggilan API LLM pada pesan grup</strong>; serta mengisolasi kredensial lewat environment variable (<code>process.env.GEMINI_API_KEY</code>).",
+    wrt_tag: "RISET KEAMANAN & ROOT-CAUSE ANALYSIS",
+    wrt_title: "Artikel Teknis Mandiri & Panduan Remediasi",
+    wrt_subtitle: "Setiap artikel diterbitkan sebagai halaman mandiri yang membahas Threat Model, Pola Kode Rentan, Dampak Bisnis, serta Kode Patch dan Unit Test Regresi.",
+    wrt1_title: "Root-Cause Analysis: Eksposur Data Tanpa Autentikasi & Celah Batas Input pada API Solver Ransum Pertanian",
+    wrt1_desc: "Bagaimana pemahaman domain pemodelan nutrisi ternak yang dipadukan dengan audit API backend mengungkap 8 temuan keamanan (termasuk eksposur GET /api/history dan ketiadaan batas numerik), lengkap dengan patch skema Zod dan unit test Jest.",
+    wrt2_title: "Merancang Bridge Model Context Protocol (MCP) Terisolasi untuk Verifikasi E2E Android ADB & Headless Browser",
+    wrt2_desc: "Mencegah eskalasi indirect prompt injection menjadi eksekusi shell host dengan mengganti interpolasi string ADB menjadi pemanggilan execFile berparameter dan allowlist regex package ketat.",
+    wrt3_title: "Enumerasi Subdomain Pasif Multi-Sumber & Audit Batas Parameter API Non-Destruktif dengan Python",
+    wrt3_desc: "Merancang CLI Python 3 tanpa dependensi eksternal yang mengagregasi telemetri AlienVault OTX, HackerTarget, dan crt.sh sekaligus menguji parameter API terhadap nilai batas numerik ekstrem.",
+    wrt_read: "Baca Artikel Lengkap",
+    skills_tag: "KEDALAMAN TEKNIS TERVERIFIKASI",
+    skills_title: "Kompetensi Inti Engineering & Keamanan",
+    skills_subtitle: "Berfokus ketat pada empat domain teknis yang saya bangun setiap hari dan siap diuji melalui live code review.",
+    exp_tag: "PENGALAMAN, KOLABORASI & PENDIDIKAN",
+    exp_title: "Riset Keamanan & Fondasi Akademik",
+    exp_subtitle: "Menerjemahkan temuan keamanan menjadi patch siap pakai, unit test regresi, dan dokumentasi teknis yang jelas bagi maintainer.",
+    exp1_role: "Periset Keamanan Aplikasi (Coordinated Disclosure)",
+    exp1_desc:
+      "Melaksanakan asesmen keamanan end-to-end berizin pada platform formulasi ransum ternak berbasis Express.js, mengidentifikasi dan melaporkan secara bertanggung jawab <strong>8 temuan (7 kerentanan: 2 High, 4 Medium, 1 Low; serta 1 Informational)</strong>. Berkolaborasi langsung dengan maintainer sistem dengan menyertakan langkah reproduksi, mencatat UUID record pengujian (<code>4e856b17...</code>, <code>a030ba7f...</code>) untuk pembersihan database, serta menyerahkan skema validasi <code>Zod</code>, guard solver, dan middleware otorisasi.",
+    exp2_role: "Pengembang Open-Source Security & Otomasi",
+    exp2_desc:
+      'Memelihara <strong>4 repositori publik</strong> berbasis Python 3 dan Node.js: (1) <a href="https://github.com/fatakarim/fata-termux-toolkit" target="_blank" rel="noopener" style="color:var(--accent-green);">fata-termux-toolkit</a> — 510+ baris kode audit keamanan Python 3 tanpa dependensi yang diverifikasi oleh 5 <code>unittest</code> otomatis; (2) <a href="https://github.com/fatakarim/android-browser-mcp" target="_blank" rel="noopener" style="color:var(--accent-green);">android-browser-mcp</a> — 44 tool otomasi MCP JSON-RPC 2.0 <code>stdio</code> dengan guardrail <code>execFile</code> dan <code>PACKAGE_REGEX</code>; (3) <a href="https://github.com/fatakarim/jarvis-whatsapp-ai" target="_blank" rel="noopener" style="color:var(--accent-green);">jarvis-whatsapp-ai</a> — prototipe asisten triase WhatsApp AI pribadi dengan isolasi secret <code>.env</code>; serta (4) <a href="https://github.com/fatakarim/fatakarim.github.io" target="_blank" rel="noopener" style="color:var(--accent-green);">fatakarim.github.io</a> — studi kasus engineering, writeup RCA mandiri, dan penganalisis postur DNS DoH client-side.',
+    edu1_desc:
+      "Penguasaan mandiri rekayasa perangkat lunak dan keamanan aplikasi yang dibangun berdampingan dengan studi kuantitatif di UNSOED. Latar belakang lintas disiplin ini memberikan insting tajam dalam mengungkap celah logika bisnis dan perhitungan matematis spesifik domain—seperti batas Dry Matter nutrisi dan edge-case solver linear—yang sering terlewat oleh pemindai otomatis.",
+    scan_tag: "AUDITOR DNS PASIF INTERAKTIF",
     scan_title: "Penganalisis Postur Keamanan Domain (Client-Side)",
-    scan_subtitle: "Menjalankan kueri telemetri publik Cloudflare DNS-over-HTTPS (DoH) langsung dari browser untuk mengevaluasi SPF, DMARC, CAA SSL, dan redundansi IP.",
+    scan_subtitle: "Mengevaluasi kebijakan SPF, DMARC (_dmarc), pembatasan SSL CAA, dan resolusi IPv4/IPv6 melalui telemetri read-only Cloudflare DNS-over-HTTPS (DoH).",
+    scan_arch_note:
+      "<strong>Catatan Arsitektur &amp; Keamanan:</strong> Menjalankan kueri read-only DNS-over-HTTPS 100% dari sisi klien (browser) melalui <code>cloudflare-dns.com/dns-query</code>. Nol permukaan serangan SSRF di sisi server dan tidak mengirimkan paket aktif ke host target.",
     scan_btn: "Analisis Postur DNS",
     scan_try: "Contoh cepat:",
-    contact_tag: "// HUBUNGI SAYA",
+    contact_tag: "KONTAK & VERIFIKASI",
     contact_title: "Terhubung untuk Peran Engineering & Keamanan",
-    contact_desc: "Tersedia untuk peluang karier Software Engineering, Backend Automation, dan Application Security. Hubungi langsung melalui email atau LinkedIn.",
-    form_title: "Kirim Email Langsung",
-    form_name: "Nama / Perusahaan Anda",
-    form_topic: "Subjek Keperluan",
+    contact_desc: "Tersedia untuk peran Full-Time maupun Paid Internship di bidang Application Security, Backend Development, dan Systems Automation (Remote / Hybrid / Relokasi).",
+    form_title: "Penyusun Email Langsung",
+    form_name: "Nama / Organisasi Anda",
+    form_topic: "Subjek",
     form_msg: "Pesan",
     form_submit: "Susun Email"
   }
@@ -506,12 +472,14 @@ const langLabel = document.getElementById("langLabel");
 if (langToggle) {
   langToggle.addEventListener("click", () => {
     currentLang = currentLang === "en" ? "id" : "en";
-    langLabel.innerHTML = currentLang === "en" ? "<strong>EN</strong> | ID" : "EN | <strong>ID</strong>";
+    if (langLabel) {
+      langLabel.innerHTML = currentLang === "en" ? "<strong>EN</strong> | ID" : "EN | <strong>ID</strong>";
+    }
     document.documentElement.lang = currentLang;
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
-      if (i18n[currentLang][key]) {
+      if (i18n[currentLang] && i18n[currentLang][key]) {
         el.innerHTML = i18n[currentLang][key];
       }
     });

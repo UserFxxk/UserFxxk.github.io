@@ -13,12 +13,9 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <div class="bg-grid"></div>
   <header class="navbar">
     <div class="container nav-content">
-      <a href="../index.html" class="logo">
-        <span class="logo-bracket">&lt;</span>Fata<span class="logo-accent">Karim</span><span class="logo-bracket">/&gt;</span>
-      </a>
+      <a href="../index.html" class="logo">Fata Fatikhul Karim</a>
       <div class="nav-actions">
         <a href="../index.html#writeups" class="btn btn-outline btn-sm">← All Writeups</a>
         <a href="../Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-primary btn-sm">Resume (PDF)</a>
@@ -28,12 +25,12 @@
 
   <main class="container" style="padding-top: 7.5rem; padding-bottom: 5rem; max-width: 860px;">
     <article class="pillar-card" style="padding: 2.5rem;">
-      <span class="section-tag">APPSEC AUTOMATION &amp; CI/CD • PYTHON 3</span>
+      <p class="eyebrow">APPSEC AUTOMATION &amp; CI/CD &bull; PYTHON 3</p>
       <h1 style="font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.25; margin-bottom: 1rem;">
         Multi-Source Passive Subdomain Enumeration &amp; Non-Destructive API Boundary Auditing in Python
       </h1>
       <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem;">
-        <strong>Author:</strong> Fata Fatikhul Karim &bull; <strong>Repository:</strong> <a href="https://github.com/fatakarim/fata-termux-toolkit" style="color:#34d399;">fata-termux-toolkit (Fata Recon Suite v3.0)</a>
+        <strong>Author:</strong> Fata Fatikhul Karim &bull; <strong>Repository:</strong> <a href="https://github.com/fatakarim/fata-termux-toolkit" style="color:var(--accent-green);">fata-termux-toolkit (Fata Recon Suite v3.0)</a> &bull; <strong>Verification:</strong> 5 Automated Unit Tests (<code>tests/test_recon.py</code>)
       </p>
 
       <h2 style="font-size: 1.25rem; margin: 1.5rem 0 0.6rem; color: #fff;">1. Problem Statement &amp; Design Constraints</h2>
@@ -51,14 +48,14 @@
         <li><strong>Tertiary Fallback:</strong> Certificate Transparency logs via <code>crt.sh</code>.</li>
       </ul>
 
-      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Non-Destructive API Boundary Probing</h2>
+      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Non-Destructive API Boundary Probing &amp; Authorization Guardrail</h2>
       <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
-        Inspired by real-world business-logic findings where negative or zero numeric inputs caused unhandled exceptions or solver hangs, Module 5 (<code>--fuzz</code>) sends five non-destructive boundary probes (<code>0</code>, <code>-500</code>, <code>1e308</code>, <code>null</code>, <code>'"&lt;&gt;</code>) and compares HTTP status codes and response latency against a baseline request.
+        Inspired by real-world business-logic findings where negative or zero numeric inputs caused unhandled exceptions or solver hangs, Module 5 (<code>--fuzz</code>) sends five non-destructive boundary probes (<code>0</code>, <code>-500</code>, <code>1e308</code>, <code>null</code>, <code>'"&lt;&gt;</code>) and compares HTTP status codes and response latency against a baseline request. Active boundary probing is disabled by default unless the operator passes the explicit <code>--confirm-authorized</code> flag.
       </p>
 
       <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">4. Automated Unit Testing &amp; GitHub Actions CI</h2>
       <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
-        Every commit is verified via GitHub Actions running the automated <code>unittest</code> suite (<code>tests/test_recon.py</code>):
+        Every commit is verified via GitHub Actions (<code>.github/workflows/ci.yml</code>) running the automated <code>unittest</code> suite (<code>tests/test_recon.py</code>):
       </p>
       <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#86efac; border:1px solid rgba(16,185,129,0.25);">python3 -m unittest discover -s tests -v</pre>
     </article>

@@ -13,12 +13,9 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
-  <div class="bg-grid"></div>
   <header class="navbar">
     <div class="container nav-content">
-      <a href="../index.html" class="logo">
-        <span class="logo-bracket">&lt;</span>Fata<span class="logo-accent">Karim</span><span class="logo-bracket">/&gt;</span>
-      </a>
+      <a href="../index.html" class="logo">Fata Fatikhul Karim</a>
       <div class="nav-actions">
         <a href="../index.html#writeups" class="btn btn-outline btn-sm">← All Writeups</a>
         <a href="../Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-primary btn-sm">Resume (PDF)</a>
@@ -28,54 +25,55 @@
 
   <main class="container" style="padding-top: 7.5rem; padding-bottom: 5rem; max-width: 860px;">
     <article class="pillar-card" style="padding: 2.5rem;">
-      <span class="section-tag">SYSTEM ARCHITECTURE &amp; SECURITY GUARDRAILS • NODE.JS &amp; MCP</span>
+      <p class="eyebrow">SYSTEM ARCHITECTURE &amp; SECURITY GUARDRAILS &bull; NODE.JS &amp; MCP</p>
       <h1 style="font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.25; margin-bottom: 1rem;">
         Designing Sandboxed Model Context Protocol (MCP) Bridges for Android ADB &amp; Headless Browser E2E Verification
       </h1>
       <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem;">
-        <strong>Author:</strong> Fata Fatikhul Karim &bull; <strong>Repository:</strong> <a href="https://github.com/fatakarim/android-browser-mcp" style="color:#34d399;">android-browser-mcp</a>
+        <strong>Author:</strong> Fata Fatikhul Karim &bull; <strong>Repository:</strong> <a href="https://github.com/fatakarim/android-browser-mcp" style="color:var(--accent-green);">android-browser-mcp</a> &bull; <strong>Verification:</strong> Automated Guardrail Unit Tests (<code>test/guardrails.test.js</code>)
       </p>
 
       <h2 style="font-size: 1.25rem; margin: 1.5rem 0 0.6rem; color: #fff;">1. Context &amp; Threat Model</h2>
       <p style="color: #cbd5e1; margin-bottom: 1rem;">
         Connecting an LLM agent to physical Android hardware (via ADB) and headless Chromium (via Chrome DevTools Protocol) enables automated End-to-End (E2E) UI verification. However, bridging an LLM to OS-level tools introduces a critical threat vector: <strong>Indirect Prompt Injection leading to Command Injection</strong> when parsing untrusted DOM or UI accessibility text.
       </p>
-      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#a5b4fc; margin-bottom:1.25rem;">[LLM Client] ⇄ (JSON-RPC 2.0 stdio) ⇄ [Node.js MCP Server (Schema Guardrails)]
-                                             ├──► Android ADB Module (XML UI Tree Parser)
-                                             └──► Chromium CDP Module (Isolated Context)</pre>
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#a5b4fc; margin-bottom:1.25rem;">[LLM Client] ⇄ (JSON-RPC 2.0 stdio) ⇄ [Node.js MCP Server (android/guardrails.js)]
+                                             ├──► Android ADB Module (21 Tools • XML UI Tree Parser)
+                                             └──► Chromium CDP Module (23 Tools • Isolated Context)</pre>
 
       <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">2. Root Cause of Naive Bridge Vulnerabilities</h2>
       <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
-        Naive ADB wrappers concatenate LLM-supplied strings directly into shell commands (<code>child_process.exec</code>), allowing metacharacters (<code>;</code>, <code>$()</code>, backticks) in UI labels or form inputs to execute arbitrary shell commands on the host:
+        Naive ADB wrappers concatenate LLM-supplied strings directly into shell commands (<code>child_process.exec</code> or unvalidated <code>adb shell</code> strings), allowing metacharacters (<code>;</code>, <code>$()</code>, backticks) in UI labels, package names, or form inputs to execute arbitrary shell commands:
       </p>
-      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#fca5a5; margin-bottom:1.25rem; border:1px solid rgba(239,68,68,0.25);">// ❌ VULNERABLE: String interpolation in shell execution
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#fca5a5; margin-bottom:1.25rem; border:1px solid rgba(239,68,68,0.25);">// ❌ VULNERABLE: Unvalidated string interpolation in shell execution
 function unsafeAdbInput(userText) {
-  // If userText contains `"; rm -rf / #`, the host shell executes it!
+  // If userText contains `"; rm -rf /sdcard/* #`, the shell executes it!
   exec(`adb shell input text "${userText}"`);
 }</pre>
 
       <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Architectural Trade-Offs &amp; Security Guardrails</h2>
       <ul style="color: #cbd5e1; padding-left: 1.25rem; margin-bottom: 1.25rem;">
-        <li><strong>Accessibility Tree Resolution vs. Pixel Coordinates:</strong> Instead of hardcoded X/Y coordinates that break across screen densities, the bridge parses <code>uiautomator dump</code> XML nodes and computes bounding-box centroids dynamically.</li>
-        <li><strong>Parameterized Subprocess Execution:</strong> All ADB calls use <code>execFile('adb', argsArray)</code> without invoking a shell interpreter, neutralizing host-side command injection.</li>
-        <li><strong>Strict Input Allowlisting:</strong> Package names, coordinates, and keycodes are validated against strict regular expressions before dispatch.</li>
+        <li><strong>Accessibility Tree Resolution vs. Pixel Coordinates:</strong> Instead of hardcoded X/Y coordinates that break across screen densities, <code>tap_text</code> and <code>fill_field</code> parse <code>uiautomator dump</code> XML nodes and compute bounding-box centroids dynamically.</li>
+        <li><strong>Parameterized Subprocess Execution:</strong> All host ADB binary calls use <code>execFile('adb', argsArray)</code> without invoking a host shell interpreter.</li>
+        <li><strong>Strict Input Allowlisting (<code>android/guardrails.js</code>):</strong> Package names (<code>assertValidPackage</code>), URLs (<code>assertValidUrl</code>), and text inputs (<code>sanitizeAdbInputText</code>) are validated against strict regular expressions and POSIX quoting before dispatch, verified by automated unit tests in <code>test/guardrails.test.js</code>.</li>
       </ul>
 
-      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">4. Patched Implementation &amp; Verification</h2>
-      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#86efac; margin-bottom:1.25rem; border:1px solid rgba(16,185,129,0.25);">// ✅ SAFE: Parameterized execFile + strict coordinate &amp; package validation
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
-const execFileAsync = promisify(execFile);
+      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">4. Production Guardrail Implementation (<code>android/guardrails.js</code>)</h2>
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#86efac; margin-bottom:1.25rem; border:1px solid rgba(16,185,129,0.25);">// ✅ SAFE: Parameterized execFile + strict package, URL &amp; input sanitization (android/guardrails.js)
+export const PACKAGE_REGEX = /^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z0-9_]+)+$/;
 
-const PACKAGE_REGEX = /^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z0-9_]+)+$/;
-
-export async function safeOpenApp(targetSerial, packageName) {
-  if (!PACKAGE_REGEX.test(packageName)) {
-    throw new Error('Invalid Android package identifier rejected by guardrail');
+export function assertValidPackage(pkg) {
+  const clean = String(pkg || "").trim();
+  if (!PACKAGE_REGEX.test(clean)) {
+    throw new Error(`Invalid Android package identifier rejected by guardrail: "${clean}"`);
   }
-  const args = targetSerial ? ['-s', targetSerial, 'shell', 'monkey', '-p', packageName, '1']
-                            : ['shell', 'monkey', '-p', packageName, '1'];
-  return await execFileAsync('adb', args, { timeout: 8000 });
+  return clean;
+}
+
+export function sanitizeAdbInputText(rawText) {
+  const singleLine = String(rawText ?? "").replace(/[\r\n\0]/g, " ");
+  const escapedSpaces = singleLine.replace(/ /g, "%s");
+  return `'${escapedSpaces.replace(/'/g, "'\\''")}'`;
 }</pre>
     </article>
   </main>
