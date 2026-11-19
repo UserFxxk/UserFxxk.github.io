@@ -600,6 +600,40 @@ body {
   font-size: 0.91rem;
 }
 
+/* Coordinated Disclosure Table */
+.disclosure-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.81rem;
+  background: #09090b;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.disclosure-table th,
+.disclosure-table td {
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.disclosure-table th {
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: #121216;
+}
+
+.disclosure-table td {
+  color: var(--text-body);
+}
+
+.disclosure-table tr:last-child td {
+  border-bottom: none;
+}
+
 /* Passive DNS Auditor */
 .scanner-box {
   background: var(--bg-card);

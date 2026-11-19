@@ -15,7 +15,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 6 0 obj
-<< /Length 5483 >>
+<< /Length 5476 >>
 stream
 BT
 /F2 18 Tf
@@ -55,33 +55,33 @@ BT
 /F2 10.5 Tf
 1 0 0 1 48 503 Tm (SECURITY RESEARCH & ENGINEERING EXPERIENCE) Tj
 /F2 9.5 Tf
-1 0 0 1 48 488 Tm (Application Security Researcher \(Coordinated Disclosure\) | HackerOne \(@zeonmaltius\) [2025 - Present]) Tj
+1 0 0 1 48 488 Tm (Application Security Researcher \(Coordinated Disclosure\) | HackerOne \(@zeonmaltius\) [Oct 2026 - Present]) Tj
 /F1 9.2 Tf
-1 0 0 1 48 475 Tm (- Authorized Agricultural Ration Solver API Assessment: Executed a coordinated security review of an Express.js) Tj
+1 0 0 1 48 475 Tm (- Authorized Agricultural Ration Solver API Assessment \(Reported Oct 9, 2026; Maintainer Acknowledged < 24h\):) Tj
 /F1 9.2 Tf
-1 0 0 1 48 462 Tm (  livestock ration formulation platform. Identified and responsibly disclosed 8 vulnerabilities \(3 High, 4 Medium, 1 Low\),) Tj
+1 0 0 1 48 462 Tm (  Identified and responsibly disclosed 8 vulnerabilities \(3 High, 4 Medium, 1 Low\) in an Express.js livestock ration) Tj
 /F1 9.2 Tf
-1 0 0 1 48 449 Tm (  including unauthenticated data exposure on GET /api/history \(38 user records\), missing server-side numeric domain) Tj
+1 0 0 1 48 449 Tm (  solver, including unauthenticated GET /api/history exposure \(38 user records\), missing numeric bounds on POST /api/feeds,) Tj
 /F1 9.2 Tf
-1 0 0 1 48 436 Tm (  bounds on POST /api/feeds, client solver freeze on non-positive inputs, and permissive CORS wildcard \(*\) policies.) Tj
+1 0 0 1 48 436 Tm (  client solver freeze on non-positive inputs, and wildcard CORS \(*\). Logged verification UUIDs for cleanup and) Tj
 /F1 9.2 Tf
-1 0 0 1 48 423 Tm (- Authored Root-Cause Analysis, Zod schema validation patches, and Jest/Supertest regression unit test blueprints.) Tj
+1 0 0 1 48 423 Tm (  delivered drop-in Zod validation schemas, auth ownership middleware, and Jest regression unit tests.) Tj
 /F2 9.5 Tf
-1 0 0 1 48 407 Tm (Open-Source Security & Automation Developer | GitHub \(@fatakarim\) [2025 - Present]) Tj
+1 0 0 1 48 407 Tm (Open-Source Security & Automation Developer | GitHub \(@fatakarim\) [Jun 2026 - Present]) Tj
 /F1 9.2 Tf
-1 0 0 1 48 394 Tm (- Engineered deterministic developer and security automation systems in Python 3 and Node.js focusing on JSON-RPC MCP) Tj
+1 0 0 1 48 394 Tm (- Maintaining 4 public repositories across Python 3 and Node.js: authored 510+ lines of zero-dependency Python 3) Tj
 /F1 9.2 Tf
-1 0 0 1 48 381 Tm (  protocol tooling, parameterized subprocess execution guardrails, and unit-tested security hygiene verification.) Tj
+1 0 0 1 48 381 Tm (  security auditing code verified by 5 automated unittest cases and 40 JSON-RPC stdio MCP automation tools.) Tj
 /F2 10.5 Tf
 1 0 0 1 48 363 Tm (ENGINEERING CASE STUDIES & PROJECTS) Tj
 /F2 9.5 Tf
 1 0 0 1 48 348 Tm (Fata Recon & AppSec Audit Suite v3.0 \(Python 3\) | github.com/fatakarim/fata-termux-toolkit) Tj
 /F1 9.2 Tf
-1 0 0 1 48 335 Tm (- Zero-dependency Python 3 CLI backed by unittest regression tests: audits HTTP Security Headers \(CSP, HSTS, XFO\),) Tj
+1 0 0 1 48 335 Tm (- Zero-dependency Python 3 CLI backed by 5 unittest regression tests: audits HTTP Security Headers \(CSP, HSTS, XFO\),) Tj
 /F1 9.2 Tf
 1 0 0 1 48 322 Tm (  inspects CORS reflection & cookie flags, aggregates passive subdomain OSINT across AlienVault OTX, HackerTarget, and) Tj
 /F1 9.2 Tf
-1 0 0 1 48 309 Tm (  crt.sh, performs non-destructive boundary fuzzing \(0, -500, 1e308\), and exports Markdown remediation reports.) Tj
+1 0 0 1 48 309 Tm (  crt.sh, and performs authorized boundary fuzzing \(--confirm-authorized\) with Markdown remediation reports.) Tj
 /F2 9.5 Tf
 1 0 0 1 48 293 Tm (Sandboxed Model Context Protocol \(MCP\) Device & Browser Bridge \(Node.js\) | github.com/fatakarim/android-browser-mcp) Tj
 /F1 9.2 Tf
@@ -89,9 +89,9 @@ BT
 /F1 9.2 Tf
 1 0 0 1 48 267 Tm (  Accessibility Tree parsing\) and headless Chromium \(via Chrome DevTools Protocol\) with parameterized execFile guardrails.) Tj
 /F2 9.5 Tf
-1 0 0 1 48 251 Tm (Event-Driven AI Messaging & Triage Worker \(Node.js\) | github.com/fatakarim/jarvis-whatsapp-ai) Tj
+1 0 0 1 48 251 Tm (JARVIS - Personal WhatsApp AI Triage Prototype \(Node.js\) | github.com/fatakarim/jarvis-whatsapp-ai) Tj
 /F1 9.2 Tf
-1 0 0 1 48 238 Tm (- Event-driven Node.js worker integrating multi-file session persistence with Google GenAI SDK \(gemini-2.5-flash\).) Tj
+1 0 0 1 48 238 Tm (- Personal Baileys WebSocket + Gemini 2.5 Flash prototype \(< 1.8s latency, 100% group-chat filtering saving ~75% tokens\).) Tj
 /F2 10.5 Tf
 1 0 0 1 48 220 Tm (EDUCATION & AVAILABILITY) Tj
 /F2 9.5 Tf
@@ -115,5 +115,5 @@ xref
 trailer
 << /Size 7 /Root 1 0 R >>
 startxref
-5931
+5924
 %%EOF

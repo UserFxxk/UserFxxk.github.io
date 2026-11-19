@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Coordinated Vulnerability Disclosure Policy — Fata Fatikhul Karim</title>
+  <meta name="description" content="Scope, reporting procedure, response SLA targets, and ethical rules of engagement for Fata Fatikhul Karim's repositories and web assets." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">Fata Fatikhul Karim</a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-outline btn-sm">← Back to Portfolio</a>
+        <a href=".well-known/security.txt" class="btn btn-primary btn-sm">security.txt (RFC 9116)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 7.5rem; padding-bottom: 5rem; max-width: 820px;">
+    <article class="pillar-card" style="padding: 2.5rem;">
+      <p class="eyebrow">RFC 9116 SECURITY POLICY</p>
+      <h1 style="font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1rem;">
+        Coordinated Vulnerability Disclosure &amp; Ethical Testing Policy
+      </h1>
+      <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+        Effective Date: October 2026 &bull; Maintainer: Fata Fatikhul Karim (<a href="mailto:fatafatikhul@gmail.com" style="color:var(--accent-green);">fatafatikhul@gmail.com</a>)
+      </p>
+
+      <h2 style="font-size: 1.15rem; margin: 1.25rem 0 0.5rem;">1. Outbound Research Ethics (How I Conduct Security Assessments)</h2>
+      <p style="color: var(--text-body); font-size: 0.92rem; margin-bottom: 1rem;">
+        All security research, reconnaissance scripts, and vulnerability root-cause analyses published on this domain strictly adhere to the following rules of engagement:
+      </p>
+      <ul style="color: var(--text-body); font-size: 0.9rem; padding-left: 1.25rem; margin-bottom: 1.5rem;">
+        <li><strong>Written Authorization &amp; Scope Compliance:</strong> Testing is performed exclusively on systems with explicit owner permission or within official Bug Bounty program scopes (e.g., HackerOne).</li>
+        <li><strong>Non-Destructive Verification:</strong> Zero production denial-of-service (DoS), zero automated brute-forcing, and zero unauthorized alteration of other users' data. If a verification probe creates test records, all record UUIDs are documented and reported immediately to the maintainer for cleanup.</li>
+        <li><strong>Redaction &amp; Confidentiality:</strong> Public case studies redact proprietary client names, domains, and internal identifiers while preserving the technical Root-Cause Analysis (RCA) and remediation patterns.</li>
+      </ul>
+
+      <h2 style="font-size: 1.15rem; margin: 1.25rem 0 0.5rem;">2. Inbound Scope (Reporting Issues in My Repositories)</h2>
+      <p style="color: var(--text-body); font-size: 0.92rem; margin-bottom: 0.75rem;">
+        This policy covers the following properties and open-source repositories:
+      </p>
+      <ul style="color: var(--text-body); font-size: 0.9rem; padding-left: 1.25rem; margin-bottom: 1.5rem;">
+        <li><code>https://fatakarim.github.io</code> (Portfolio &amp; Client-Side DNS Analyzer)</li>
+        <li><code>https://github.com/fatakarim/fata-termux-toolkit</code> (Fata Recon &amp; AppSec Audit Suite v3.0)</li>
+        <li><code>https://github.com/fatakarim/android-browser-mcp</code> (Model Context Protocol Device &amp; Browser Bridge)</li>
+        <li><code>https://github.com/fatakarim/jarvis-whatsapp-ai</code> (Personal WhatsApp AI Assistant Prototype)</li>
+      </ul>
+
+      <h2 style="font-size: 1.15rem; margin: 1.25rem 0 0.5rem;">3. How to Report &amp; Response SLA Targets</h2>
+      <p style="color: var(--text-body); font-size: 0.92rem; margin-bottom: 0.75rem;">
+        To report a vulnerability or security configuration issue in any in-scope asset, email <a href="mailto:fatafatikhul@gmail.com" style="color:var(--accent-green);">fatafatikhul@gmail.com</a> with the subject line <code>[SECURITY DISCLOSURE] &lt;Repository/Asset&gt;</code> and include reproduction steps or a Proof-of-Concept.
+      </p>
+      <ul style="color: var(--text-body); font-size: 0.9rem; padding-left: 1.25rem;">
+        <li><strong>Initial Acknowledgment:</strong> Within <strong>48 hours</strong>.</li>
+        <li><strong>Triage &amp; Severity Assessment:</strong> Within <strong>5 business days</strong>.</li>
+        <li><strong>Patch &amp; Public Credit:</strong> Coordinated fix release within <strong>14 days</strong>, with credit in the repository release notes.</li>
+      </ul>
+    </article>
+  </main>
+</body>
+</html>

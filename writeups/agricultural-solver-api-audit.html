@@ -45,7 +45,76 @@
         <li><strong>Domain-Math &amp; Input Boundary Integrity:</strong> Whether the backend API enforced biological and mathematical bounds before passing user inputs to the linear solver and database layer.</li>
       </ul>
 
-      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">2. Root-Cause Analysis (Vulnerable Code Patterns)</h2>
+      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">2. Coordinated Disclosure &amp; Remediation Timeline</h2>
+      <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
+        All 8 findings were reproduced in an authorized testing window on October 9, 2026, documented with reproduction steps and verification record UUIDs, and delivered to the platform maintainer:
+      </p>
+      <div style="overflow-x: auto; margin-bottom: 1.5rem;">
+        <table class="disclosure-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Vulnerability Summary</th>
+              <th>Severity</th>
+              <th>Reported</th>
+              <th>Maintainer Response</th>
+              <th>Remediation Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>SOLVER-01</code></td>
+              <td>Unauthenticated History Exposure (<code>GET /api/history</code> leaked 38 user records)</td>
+              <td><span class="pill-fail scan-status-pill">HIGH</span></td>
+              <td>Oct 9, 2026</td>
+              <td>Acknowledged (&lt; 24h)</td>
+              <td>Patch Delivered (Auth + Owner Filter)</td>
+            </tr>
+            <tr>
+              <td><code>SOLVER-02</code></td>
+              <td>Unvalidated Numeric Mutation (<code>POST /api/feeds</code> negative DM% float divergence)</td>
+              <td><span class="pill-fail scan-status-pill">HIGH</span></td>
+              <td>Oct 9, 2026</td>
+              <td>Acknowledged &amp; Test UUIDs Logged</td>
+              <td>Patch Delivered (Zod Domain Bounds)</td>
+            </tr>
+            <tr>
+              <td><code>SOLVER-03</code></td>
+              <td>Client/Solver Freeze on Non-Positive Body Weight (<code>BB &lt;= 0</code>)</td>
+              <td><span class="pill-fail scan-status-pill">HIGH</span></td>
+              <td>Oct 9, 2026</td>
+              <td>Acknowledged (&lt; 24h)</td>
+              <td>Patch Delivered (Min/Max Input Guard)</td>
+            </tr>
+            <tr>
+              <td><code>SOLVER-04</code></td>
+              <td>Unauthenticated Write Access to Shared Feed Catalog</td>
+              <td><span class="pill-warn scan-status-pill">MEDIUM</span></td>
+              <td>Oct 9, 2026</td>
+              <td>Acknowledged</td>
+              <td>Patch Delivered (RBAC / Auth Guard)</td>
+            </tr>
+            <tr>
+              <td><code>SOLVER-05..07</code></td>
+              <td>Global Wildcard CORS (<code>*</code>), Cookie <code>SameSite=None</code>, Missing CSP/HSTS/XFO</td>
+              <td><span class="pill-warn scan-status-pill">MEDIUM</span></td>
+              <td>Oct 9, 2026</td>
+              <td>Acknowledged</td>
+              <td>Patch Delivered (Helmet + CORS Allowlist)</td>
+            </tr>
+            <tr>
+              <td><code>SOLVER-08</code></td>
+              <td>Stack Fingerprinting via <code>x-powered-by: Express</code></td>
+              <td><span class="pill-pass scan-status-pill">LOW</span></td>
+              <td>Oct 9, 2026</td>
+              <td>Acknowledged</td>
+              <td>Mitigated (<code>app.disable</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Root-Cause Analysis (Vulnerable Code Patterns)</h2>
       <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
         The assessment uncovered <strong>8 vulnerabilities (3 High, 4 Medium, 1 Low)</strong>. Below are the three high-severity root causes:
       </p>

@@ -138,12 +138,19 @@ let lastScannedDomain = "";
 
 async function queryDoH(name, type) {
   const url = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(name)}&type=${encodeURIComponent(type)}`;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 6000);
   try {
-    const res = await fetch(url, { headers: { Accept: "application/dns-json" } });
+    const res = await fetch(url, {
+      headers: { Accept: "application/dns-json" },
+      signal: controller.signal
+    });
+    clearTimeout(timer);
     if (!res.ok) return [];
     const data = await res.json();
     return data.Answer || [];
   } catch (e) {
+    clearTimeout(timer);
     return [];
   }
 }
@@ -600,15 +607,17 @@ const i18n = {
 const langToggle = document.getElementById("langToggle");
 const langLabel = document.getElementById("langLabel");
 
-langToggle.addEventListener("click", () => {
-  currentLang = currentLang === "en" ? "id" : "en";
-  langLabel.textContent = currentLang.toUpperCase();
-  document.documentElement.lang = currentLang;
+if (langToggle) {
+  langToggle.addEventListener("click", () => {
+    currentLang = currentLang === "en" ? "id" : "en";
+    langLabel.innerHTML = currentLang === "en" ? "<strong>EN</strong> | ID" : "EN | <strong>ID</strong>";
+    document.documentElement.lang = currentLang;
 
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    if (i18n[currentLang][key]) {
-      el.innerHTML = i18n[currentLang][key];
-    }
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      if (i18n[currentLang][key]) {
+        el.innerHTML = i18n[currentLang][key];
+      }
+    });
   });
-});
+}
