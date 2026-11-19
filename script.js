@@ -393,6 +393,10 @@ const i18n = {
       "<strong>Architecture &amp; Safety Note:</strong> Executes 100% client-side read-only DNS-over-HTTPS queries via <code>cloudflare-dns.com/dns-query</code>. Zero backend proxy SSRF surface; sends no active packets to the target host.",
     scan_btn: "Analyze DNS Posture",
     scan_try: "Presets:",
+    sandbox_note:
+      "<strong>Interactive AppSec Remediation Sandbox (SOLVER-01..08):</strong> Test the exact exploit payloads from the Agricultural Ration Solver API assessment against both the <strong>Pre-Patch Vulnerable Handler</strong> and the <strong>Post-Patch Hardened Express.js + Zod Middleware</strong> (100% deterministic browser simulation).",
+    sandbox_mode_label: "Backend Defense State:",
+    sandbox_select_label: "Select Test Vector:",
     contact_tag: "CONTACT & VERIFICATION",
     contact_title: "Connect for Engineering & Security Roles",
     contact_desc: "Available for Full-Time or Paid Internship roles in Application Security, Backend Development, and Systems Automation (Remote / Hybrid / Relocation).",
@@ -457,6 +461,10 @@ const i18n = {
       "<strong>Catatan Arsitektur &amp; Keamanan:</strong> Menjalankan kueri read-only DNS-over-HTTPS 100% dari sisi klien (browser) melalui <code>cloudflare-dns.com/dns-query</code>. Nol permukaan serangan SSRF di sisi server dan tidak mengirimkan paket aktif ke host target.",
     scan_btn: "Analisis Postur DNS",
     scan_try: "Contoh cepat:",
+    sandbox_note:
+      "<strong>Sandbox Remediasi AppSec Interaktif (SOLVER-01..08):</strong> Uji payload eksploitasi dari asesmen API Solver Ransum Pertanian terhadap <strong>Handler Rentan (Pre-Patch)</strong> maupun <strong>Middleware Express.js + Zod Terproteksi (Post-Patch)</strong> secara deterministik di browser.",
+    sandbox_mode_label: "Status Pertahanan Backend:",
+    sandbox_select_label: "Pilih Vektor Uji:",
     contact_tag: "KONTAK & VERIFIKASI",
     contact_title: "Terhubung untuk Peran Engineering & Keamanan",
     contact_desc: "Tersedia untuk peran Full-Time maupun Paid Internship di bidang Application Security, Backend Development, dan Systems Automation (Remote / Hybrid / Relokasi).",
@@ -487,3 +495,188 @@ if (langToggle) {
     });
   });
 }
+
+// Interactive AppSec Remediation Sandbox (SOLVER-01..08 Vulnerable vs. Patched Simulator)
+let sandboxMode = "patched"; // "patched" | "vulnerable"
+let currentVector = "SOLVER-02";
+
+const modePatchedBtn = document.getElementById("modePatchedBtn");
+const modeVulnBtn = document.getElementById("modeVulnBtn");
+const sandboxStatusTitle = document.getElementById("sandboxStatusTitle");
+const sandboxOutput = document.getElementById("sandboxOutput");
+
+const SANDBOX_VECTORS = {
+  "SOLVER-01": {
+    patched: [
+      "$ curl -i https://api.solver-sandbox.local/api/history",
+      "",
+      "HTTP/1.1 401 Unauthorized",
+      "Content-Security-Policy: default-src 'self'",
+      "Strict-Transport-Security: max-age=31536000; includeSubDomains",
+      "X-Frame-Options: DENY",
+      "Content-Type: application/json; charset=utf-8",
+      "",
+      "{",
+      '  "error": "Authentication required (Mitigated CWE-306: requireAuth & tenant ownership filter active)"',
+      "}"
+    ].join("\n"),
+    vulnerable: [
+      "$ curl -i https://api.solver-sandbox.local/api/history",
+      "",
+      "HTTP/1.1 200 OK",
+      "X-Powered-By: Express",
+      "Access-Control-Allow-Origin: *",
+      "Content-Type: application/json; charset=utf-8",
+      "",
+      "[",
+      '  {"id": "8f19c2a0...", "userId": "tenant-01", "animal": "Sapi Potong", "resultKg": 12.4},',
+      '  {"id": "4e856b17...", "userId": "tenant-02", "animal": "Sapi Perah", "resultKg": 2.3e+289},',
+      '  "... (38 unauthenticated user calculation records exposed - CVSS 7.5 HIGH)"',
+      "]"
+    ].join("\n")
+  },
+  "SOLVER-02": {
+    patched: [
+      "$ curl -i -X POST https://api.solver-sandbox.local/api/feeds \\",
+      '    -H "Authorization: Bearer <valid-session-jwt>" \\',
+      '    -H "Content-Type: application/json" \\',
+      '    -d \'{"name":"VerificationFeed","category":"Mineral","dryMatterPct":-500}\'',
+      "",
+      "HTTP/1.1 400 Bad Request",
+      "Content-Security-Policy: default-src 'self'",
+      "Strict-Transport-Security: max-age=31536000; includeSubDomains",
+      "X-Frame-Options: DENY",
+      "Content-Type: application/json; charset=utf-8",
+      "",
+      "{",
+      '  "error": "Invalid feed parameters (Blocked by Zod NRC Domain Schema)",',
+      '  "details": [',
+      "    {",
+      '      "path": ["dryMatterPct"],',
+      '      "code": "too_small",',
+      '      "minimum": 0.5,',
+      '      "message": "dryMatterPct: Number must be between 0.5 and 100 (NRC Dry Matter percentage)"',
+      "    }",
+      "  ]",
+      "}"
+    ].join("\n"),
+    vulnerable: [
+      "$ curl -i -X POST https://api.solver-sandbox.local/api/feeds \\",
+      '    -H "Content-Type: application/json" \\',
+      '    -d \'{"name":"VerificationFeed","category":"Mineral","dryMatterPct":-500}\'',
+      "",
+      "HTTP/1.1 200 OK",
+      "X-Powered-By: Express",
+      "Access-Control-Allow-Origin: *",
+      "Content-Type: application/json; charset=utf-8",
+      "",
+      "{",
+      '  "id": "4e856b17-9c11-4d3e-8a2b-001928374655",',
+      '  "name": "VerificationFeed",',
+      '  "dryMatterPct": -500,',
+      '  "warning": "VULNERABLE (CWE-20, CVSS 7.5 HIGH): Unauthenticated negative Dry Matter persisted, causing 2.3e+289 kg simplex float divergence!"',
+      "}"
+    ].join("\n")
+  },
+  "SOLVER-03": {
+    patched: [
+      "$ curl -i -X POST https://api.solver-sandbox.local/api/solve \\",
+      '    -H "Authorization: Bearer <valid-session-jwt>" \\',
+      '    -H "Content-Type: application/json" \\',
+      '    -d \'{"bodyWeightKg":0,"feedIds":["550e8400-e29b-41d4-a716-446655440000"]}\'',
+      "",
+      "HTTP/1.1 400 Bad Request",
+      "Content-Security-Policy: default-src 'self'",
+      "Content-Type: application/json; charset=utf-8",
+      "",
+      "{",
+      '  "error": "Invalid ration solver parameters (Blocked by Pre-Solver NRC Physiological Guard)",',
+      '  "details": [',
+      '    { "path": ["bodyWeightKg"], "message": "Livestock body weight (BB) must be between 1.0 kg and 2,500 kg" }',
+      "  ]",
+      "}"
+    ].join("\n"),
+    vulnerable: [
+      "$ curl -i -X POST https://api.solver-sandbox.local/api/solve \\",
+      '    -H "Content-Type: application/json" \\',
+      '    -d \'{"bodyWeightKg":0,"feedIds":["550e8400-e29b-41d4-a716-446655440000"]}\'',
+      "",
+      "[!] VULNERABLE (CWE-400, CVSS 6.5 MEDIUM): targetDryMatter = bodyWeightKg * 0.03 = 0",
+      "[!] Simplex pivot loop division by zero -> Non-terminating iteration freeze (UI Thread Hang / DoS)"
+    ].join("\n")
+  },
+  "SOLVER-05": {
+    patched: [
+      '$ curl -I -H "Origin: https://evil.example" https://api.solver-sandbox.local/api/feeds',
+      "",
+      "HTTP/1.1 200 OK",
+      "Content-Security-Policy: default-src 'self'",
+      "Strict-Transport-Security: max-age=31536000; includeSubDomains",
+      "X-Frame-Options: DENY",
+      "X-Content-Type-Options: nosniff",
+      "Vary: Origin",
+      "# [MITIGATED] Untrusted Origin omitted; X-Powered-By fingerprint stripped"
+    ].join("\n"),
+    vulnerable: [
+      '$ curl -I -H "Origin: https://evil.example" https://api.solver-sandbox.local/api/feeds',
+      "",
+      "HTTP/1.1 200 OK",
+      "X-Powered-By: Express",
+      "Access-Control-Allow-Origin: *",
+      "# [VULNERABLE - SOLVER-05/07/08] Global wildcard CORS (*), missing CSP/HSTS/XFO, Express header leaked"
+    ].join("\n")
+  }
+};
+
+function renderSandbox() {
+  if (!sandboxOutput || !sandboxStatusTitle) return;
+  const entry = SANDBOX_VECTORS[currentVector];
+  if (!entry) return;
+  const modeUpper = sandboxMode === "patched" ? "PATCHED (HARDENED)" : "PRE-PATCH (VULNERABLE)";
+  sandboxStatusTitle.textContent = `Simulated HTTP Request & Response Telemetry (Mode: ${modeUpper} • Vector: ${currentVector})`;
+  sandboxOutput.textContent = entry[sandboxMode];
+  sandboxOutput.style.color = sandboxMode === "patched" ? "#86efac" : "#fca5a5";
+
+  if (modePatchedBtn && modeVulnBtn) {
+    if (sandboxMode === "patched") {
+      modePatchedBtn.style.borderColor = "var(--accent-green)";
+      modePatchedBtn.style.color = "var(--accent-green)";
+      modePatchedBtn.style.fontWeight = "700";
+      modeVulnBtn.style.borderColor = "";
+      modeVulnBtn.style.color = "";
+      modeVulnBtn.style.fontWeight = "";
+    } else {
+      modeVulnBtn.style.borderColor = "#ef4444";
+      modeVulnBtn.style.color = "#fca5a5";
+      modeVulnBtn.style.fontWeight = "700";
+      modePatchedBtn.style.borderColor = "";
+      modePatchedBtn.style.color = "";
+      modePatchedBtn.style.fontWeight = "";
+    }
+  }
+}
+
+if (modePatchedBtn) {
+  modePatchedBtn.addEventListener("click", () => {
+    sandboxMode = "patched";
+    renderSandbox();
+  });
+}
+
+if (modeVulnBtn) {
+  modeVulnBtn.addEventListener("click", () => {
+    sandboxMode = "vulnerable";
+    renderSandbox();
+  });
+}
+
+document.querySelectorAll(".sandbox-vector-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const v = btn.getAttribute("data-vector");
+    if (v) {
+      currentVector = v;
+      renderSandbox();
+    }
+  });
+});
+

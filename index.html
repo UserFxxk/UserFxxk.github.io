@@ -582,6 +582,67 @@
             </div>
           </div>
         </div>
+
+        <!-- Interactive AppSec Remediation Sandbox (SOLVER-01..08 Vulnerable vs. Patched Simulator) -->
+        <div class="scanner-box" style="margin-top: 2rem;" id="remediationSandbox">
+          <div class="arch-note">
+            <span data-i18n="sandbox_note"><strong>Interactive AppSec Remediation Sandbox (SOLVER-01..08):</strong> Test the exact exploit payloads from the Agricultural Ration Solver API assessment against both the <strong>Pre-Patch Vulnerable Handler</strong> and the <strong>Post-Patch Hardened Express.js + Zod Middleware</strong> (100% deterministic browser simulation).</span>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
+            <div class="scanner-presets" style="margin-bottom: 0;">
+              <span data-i18n="sandbox_mode_label">Backend Defense State:</span>
+              <button type="button" class="preset-chip" id="modePatchedBtn" style="border-color: var(--accent-green); color: var(--accent-green); font-weight: 700;">
+                🛡️ Patched Mode (Zod + Auth + Helmet)
+              </button>
+              <button type="button" class="preset-chip" id="modeVulnBtn">
+                ⚠️ Pre-Patch Vulnerable Mode
+              </button>
+            </div>
+          </div>
+
+          <div class="scanner-presets" style="margin-bottom: 1.25rem;">
+            <span data-i18n="sandbox_select_label">Select Test Vector:</span>
+            <button type="button" class="preset-chip sandbox-vector-btn" data-vector="SOLVER-01">
+              1. SOLVER-01: Unauthenticated GET /api/history
+            </button>
+            <button type="button" class="preset-chip sandbox-vector-btn" data-vector="SOLVER-02">
+              2. SOLVER-02: Negative Dry Matter (-500% Float Divergence)
+            </button>
+            <button type="button" class="preset-chip sandbox-vector-btn" data-vector="SOLVER-03">
+              3. SOLVER-03: Non-Positive Body Weight (BB = 0 Freeze)
+            </button>
+            <button type="button" class="preset-chip sandbox-vector-btn" data-vector="SOLVER-05">
+              4. SOLVER-05: Untrusted Origin CORS Reflection
+            </button>
+          </div>
+
+          <div class="scan-records-panel">
+            <h4 id="sandboxStatusTitle">Simulated HTTP Request &amp; Response Telemetry (Mode: PATCHED &bull; Vector: SOLVER-02)</h4>
+            <pre id="sandboxOutput">$ curl -i -X POST https://api.solver-sandbox.local/api/feeds \
+    -H "Authorization: Bearer &lt;valid-session-jwt&gt;" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"VerificationFeed","category":"Mineral","dryMatterPct":-500}'
+
+HTTP/1.1 400 Bad Request
+Content-Security-Policy: default-src 'self'
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Frame-Options: DENY
+Content-Type: application/json; charset=utf-8
+
+{
+  "error": "Invalid feed parameters (Blocked by Zod NRC Domain Schema)",
+  "details": [
+    {
+      "path": ["dryMatterPct"],
+      "code": "too_small",
+      "minimum": 0.5,
+      "message": "dryMatterPct: Number must be between 0.5 and 100 (NRC Dry Matter percentage)"
+    }
+  ]
+}</pre>
+          </div>
+        </div>
       </div>
     </section>
 
