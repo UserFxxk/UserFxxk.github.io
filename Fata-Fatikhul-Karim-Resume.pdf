@@ -15,7 +15,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 6 0 obj
-<< /Length 5037 >>
+<< /Length 5179 >>
 stream
 BT
 /F2 18 Tf
@@ -23,9 +23,9 @@ BT
 /F2 11 Tf
 1 0 0 1 48 733 Tm (Security-Focused Software Engineer \(Application Security & Backend Automation\)) Tj
 /F1 9 Tf
-1 0 0 1 48 718 Tm (Central Java, Indonesia | fatafatikhul@gmail.com | https://fatakarim.github.io) Tj
+1 0 0 1 48 718 Tm (Central Java, Indonesia \(Open to Remote / Hybrid / Relocation\) | fatafatikhul@gmail.com) Tj
 /F1 9 Tf
-1 0 0 1 48 704 Tm (LinkedIn: linkedin.com/in/fata-fatikhul-karim | GitHub: github.com/fatakarim | HackerOne: @zeonmaltius) Tj
+1 0 0 1 48 704 Tm (Portfolio: fatakarim.github.io | LinkedIn: linkedin.com/in/fata-fatikhul-karim | GitHub: github.com/fatakarim) Tj
 /F2 10.5 Tf
 1 0 0 1 48 686 Tm (PROFESSIONAL SUMMARY) Tj
 /F1 9.2 Tf
@@ -33,21 +33,21 @@ BT
 /F1 9.2 Tf
 1 0 0 1 48 658 Tm (and Application Security \(OWASP Top 10\). Experienced in building deterministic Model Context Protocol \(MCP\)) Tj
 /F1 9.2 Tf
-1 0 0 1 48 645 Tm (bridges, zero-dependency Python security auditing CLIs, and executing authorized web application security) Tj
+1 0 0 1 48 645 Tm (bridges, zero-dependency Python security auditing CLIs with automated CI/CD unit tests, and executing authorized) Tj
 /F1 9.2 Tf
-1 0 0 1 48 632 Tm (assessments with actionable Root-Cause Analysis \(RCA\) and schema-level remediation patches.) Tj
+1 0 0 1 48 632 Tm (web application security assessments with Root-Cause Analysis \(RCA\), Zod patches, and regression test suites.) Tj
 /F2 10.5 Tf
 1 0 0 1 48 614 Tm (TECHNICAL COMPETENCIES) Tj
 /F1 9.2 Tf
 1 0 0 1 48 599 Tm (- Languages & Backend: TypeScript, JavaScript \(Node.js, Express.js\), Python 3 \(CLI & Probing\), SQL \(PostgreSQL\), Bash) Tj
 /F1 9.2 Tf
-1 0 0 1 48 586 Tm (- Frontend & Web: Next.js, React, HTML5, CSS3, Tailwind CSS, RESTful API Architecture) Tj
+1 0 0 1 48 586 Tm (- Application Security: OWASP Top 10 Auditing, Broken Access Control \(IDOR\), Input Boundary Validation \(Zod\),) Tj
 /F1 9.2 Tf
-1 0 0 1 48 573 Tm (- Application Security: OWASP Top 10 Auditing, Broken Access Control \(IDOR\), Input Boundary Validation \(Zod\),) Tj
+1 0 0 1 48 573 Tm (  CORS/Cookie & Header Hardening \(CSP, HSTS, Helmet\), Burp Suite, Nuclei, Subfinder) Tj
 /F1 9.2 Tf
-1 0 0 1 48 560 Tm (  CORS/Cookie & Header Hardening \(CSP, HSTS, Helmet\), Burp Suite, Nuclei, Subfinder) Tj
+1 0 0 1 48 560 Tm (- Automation & Protocols: Model Context Protocol \(MCP / JSON-RPC\), Android ADB, Chrome DevTools Protocol \(CDP\)) Tj
 /F1 9.2 Tf
-1 0 0 1 48 547 Tm (- Automation & Protocols: Model Context Protocol \(MCP / JSON-RPC\), Android ADB, Chrome DevTools Protocol \(CDP\), Git) Tj
+1 0 0 1 48 547 Tm (- Quality & Infrastructure: GitHub Actions CI/CD, Automated Unit Testing \(Python unittest / Jest\), Linux, Git) Tj
 /F2 10.5 Tf
 1 0 0 1 48 529 Tm (SECURITY RESEARCH & ENGINEERING EXPERIENCE) Tj
 /F2 9.5 Tf
@@ -61,41 +61,41 @@ BT
 /F1 9.2 Tf
 1 0 0 1 48 462 Tm (  bounds on POST /api/feeds, client solver freeze on non-positive inputs, and permissive CORS wildcard \(*\) policies.) Tj
 /F1 9.2 Tf
-1 0 0 1 48 449 Tm (- Authored reproducible Proof-of-Concept documentation and delivered Zod schema & auth middleware remediation blueprints.) Tj
+1 0 0 1 48 449 Tm (- Authored Root-Cause Analysis, Zod schema validation patches, and Jest/Supertest regression unit test blueprints.) Tj
 /F2 9.5 Tf
 1 0 0 1 48 433 Tm (Open-Source Software & Automation Developer | GitHub \(@fatakarim\) [2025 - Present]) Tj
 /F1 9.2 Tf
 1 0 0 1 48 420 Tm (- Engineered deterministic developer and security automation systems in Node.js and Python focusing on JSON-RPC MCP) Tj
 /F1 9.2 Tf
-1 0 0 1 48 407 Tm (  protocol tooling, headless browser E2E testing, and non-destructive security hygiene verification.) Tj
+1 0 0 1 48 407 Tm (  protocol tooling, parameterized subprocess execution guardrails, and CI-tested security hygiene verification.) Tj
 /F2 10.5 Tf
 1 0 0 1 48 389 Tm (ENGINEERING CASE STUDIES & PROJECTS) Tj
 /F2 9.5 Tf
 1 0 0 1 48 374 Tm (Fata Recon & AppSec Audit Suite v3.0 \(Python 3\) | github.com/fatakarim/fata-termux-toolkit) Tj
 /F1 9.2 Tf
-1 0 0 1 48 361 Tm (- Zero-dependency Python 3 CLI for pre-release security reviews: audits HTTP Security Headers \(CSP, HSTS, XFO\), inspects) Tj
+1 0 0 1 48 361 Tm (- Zero-dependency Python 3 CLI backed by GitHub Actions CI unit tests: audits HTTP Security Headers \(CSP, HSTS, XFO\),) Tj
 /F1 9.2 Tf
-1 0 0 1 48 348 Tm (  CORS reflection & cookie flags, aggregates passive subdomain OSINT across AlienVault OTX, HackerTarget, and crt.sh,) Tj
+1 0 0 1 48 348 Tm (  inspects CORS reflection & cookie flags, aggregates passive subdomain OSINT across AlienVault OTX, HackerTarget, and) Tj
 /F1 9.2 Tf
-1 0 0 1 48 335 Tm (  performs non-destructive boundary fuzzing \(0, -500, 1e308\), and exports Markdown remediation reports.) Tj
+1 0 0 1 48 335 Tm (  crt.sh, performs non-destructive boundary fuzzing \(0, -500, 1e308\), and exports Markdown remediation reports.) Tj
 /F2 9.5 Tf
 1 0 0 1 48 319 Tm (Model Context Protocol \(MCP\) Device & Browser Bridge \(Node.js\) | github.com/fatakarim/android-browser-mcp) Tj
 /F1 9.2 Tf
 1 0 0 1 48 306 Tm (- Node.js JSON-RPC stdio MCP server exposing 40 structured automation tools for physical Android hardware \(via ADB XML) Tj
 /F1 9.2 Tf
-1 0 0 1 48 293 Tm (  Accessibility Tree parsing\) and headless Chromium \(via Chrome DevTools Protocol\) with strict schema validation.) Tj
+1 0 0 1 48 293 Tm (  Accessibility Tree parsing\) and headless Chromium \(via Chrome DevTools Protocol\) with parameterized execFile guardrails.) Tj
 /F2 9.5 Tf
 1 0 0 1 48 277 Tm (Event-Driven AI Messaging & Triage Assistant \(Node.js\) | github.com/fatakarim/jarvis-whatsapp-ai) Tj
 /F1 9.2 Tf
 1 0 0 1 48 264 Tm (- Event-driven Node.js worker integrating multi-file session persistence with Google GenAI SDK \(gemini-2.5-flash\).) Tj
 /F2 10.5 Tf
-1 0 0 1 48 246 Tm (EDUCATION) Tj
+1 0 0 1 48 246 Tm (EDUCATION & AVAILABILITY) Tj
 /F2 9.5 Tf
-1 0 0 1 48 231 Tm (Universitas Jenderal Soedirman \(UNSOED\) - Diploma \(D3\) in Animal Husbandry \(Budidaya Ternak\) [Active Student]) Tj
+1 0 0 1 48 231 Tm (Universitas Jenderal Soedirman \(UNSOED\) - Diploma \(D3\) in Animal Husbandry \(Budidaya Ternak\) [Expected Graduation: 2027]) Tj
 /F1 9.2 Tf
-1 0 0 1 48 218 Tm (- Combined quantitative agricultural nutrition modeling with independent software engineering and application security) Tj
+1 0 0 1 48 218 Tm (- Availability: Flexible schedule for Full-Time or Paid Internship; open to Remote, Hybrid, or Relocation \(Java/Jakarta\).) Tj
 /F1 9.2 Tf
-1 0 0 1 48 205 Tm (  specialization to audit domain-specific mathematical solvers and backend web APIs.) Tj
+1 0 0 1 48 205 Tm (- Combined quantitative agricultural nutrition modeling with software engineering & AppSec to audit solver APIs.) Tj
 ET
 endstream
 endobj
@@ -111,5 +111,5 @@ xref
 trailer
 << /Size 7 /Root 1 0 R >>
 startxref
-5485
+5627
 %%EOF

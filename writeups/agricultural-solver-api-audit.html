@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>RCA: Unauthenticated Data Exposure &amp; Input Boundary Flaws in an Agricultural Ration Solver API — Fata Fatikhul Karim</title>
+  <meta name="description" content="Technical Root-Cause Analysis (RCA), Threat Model, and Zod/Jest remediation blueprints from an authorized security assessment of an Express.js livestock ration formulation platform." />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="../index.html" class="logo">
+        <span class="logo-bracket">&lt;</span>Fata<span class="logo-accent">Karim</span><span class="logo-bracket">/&gt;</span>
+      </a>
+      <div class="nav-actions">
+        <a href="../index.html#writeups" class="btn btn-outline btn-sm">← All Writeups</a>
+        <a href="../Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-primary btn-sm">Resume (PDF)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 7.5rem; padding-bottom: 5rem; max-width: 860px;">
+    <article class="pillar-card" style="padding: 2.5rem;">
+      <span class="section-tag">AUTHORIZED SECURITY ASSESSMENT • COORDINATED DISCLOSURE</span>
+      <h1 style="font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.25; margin-bottom: 1rem;">
+        Root-Cause Analysis: Unauthenticated Data Exposure &amp; Input Boundary Flaws in an Agricultural Ration Solver API
+      </h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1rem;">
+        <strong>Author:</strong> Fata Fatikhul Karim &bull; <strong>Target Stack:</strong> Express.js / REST API &bull; <strong>Scope:</strong> Authorized Testing &amp; Coordinated Maintainer Disclosure
+      </p>
+
+      <h2 style="font-size: 1.25rem; margin: 1.5rem 0 0.6rem; color: #fff;">1. Context &amp; Threat Model</h2>
+      <p style="color: #cbd5e1; margin-bottom: 1rem;">
+        Agricultural ration formulation platforms compute optimal livestock feed mixtures based on biological constraints such as body weight (BB), Dry Matter percentage (DM%), crude protein, and mineral requirements. During an authorized security review of a web-based ration solver, I evaluated the system across two intersecting threat surfaces:
+      </p>
+      <ul style="color: #cbd5e1; padding-left: 1.25rem; margin-bottom: 1.25rem;">
+        <li><strong>Access Control &amp; Multi-Tenant Privacy:</strong> Whether calculation histories and custom feed definitions were properly scoped to authenticated users.</li>
+        <li><strong>Domain-Math &amp; Input Boundary Integrity:</strong> Whether the backend API enforced biological and mathematical bounds before passing user inputs to the linear solver and database layer.</li>
+      </ul>
+
+      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">2. Root-Cause Analysis (Vulnerable Code Patterns)</h2>
+      <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
+        The assessment uncovered <strong>8 vulnerabilities (3 High, 4 Medium, 1 Low)</strong>. Below are the three high-severity root causes:
+      </p>
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#fca5a5; margin-bottom:1.25rem; border:1px solid rgba(239,68,68,0.25);">// ❌ VULNERABLE PATTERN 1: Unauthenticated History Endpoint (Broken Access Control)
+app.get('/api/history', async (req, res) => {
+  // Missing authentication middleware and tenant ownership filter!
+  // Exposed 38 historical ration records belonging to other users.
+  const history = await db.history.findAll();
+  return res.status(200).json(history);
+});
+
+// ❌ VULNERABLE PATTERN 2: Unvalidated Numeric Mutation on POST /api/feeds
+app.post('/api/feeds', async (req, res) => {
+  // Directly trusts req.body without schema or numeric boundary checks.
+  // Accepting negative Dry Matter (e.g., DM: -500%) caused floating-point
+  // divergence (2.3e+289 kg) in persisted solver outputs.
+  const feed = await db.feeds.create(req.body);
+  return res.status(200).json(feed);
+});</pre>
+
+      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">3. Business &amp; Operational Impact</h2>
+      <ul style="color: #cbd5e1; padding-left: 1.25rem; margin-bottom: 1.25rem;">
+        <li><strong>Tenant Data Leakage (High):</strong> Any unauthenticated visitor querying <code>GET /api/history</code> could read proprietary feed formulation records of other users.</li>
+        <li><strong>Shared Catalog &amp; Solver Integrity (High):</strong> Read-only inspection of the history endpoint revealed pre-existing corrupted float records (<code>2.3e+289 kg</code>) and invalid catalog entries (e.g., non-nutritional strings under the <em>Mineral</em> category). Two controlled verification records were logged by UUID (<code>4e856b17...</code>, <code>a030ba7f...</code>) and immediately disclosed to the maintainer for cleanup.</li>
+        <li><strong>Client Thread Denial-of-Service (High):</strong> Empty HTML <code>min/max</code> attributes allowed zero or negative livestock body-weight inputs to enter the solver loop, freezing the client tab.</li>
+      </ul>
+
+      <h2 style="font-size: 1.25rem; margin: 1.75rem 0 0.6rem; color: #fff;">4. Defensive Remediation &amp; Regression Unit Tests</h2>
+      <p style="color: #cbd5e1; margin-bottom: 0.85rem;">
+        To remediate these flaws without breaking legitimate formulation workflows, I provided the engineering maintainer with a defense-in-depth patch combining <strong>Zod schema validation</strong>, <strong>ownership-scoped authorization middleware</strong>, and <strong>automated Jest regression tests</strong>:
+      </p>
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.82rem; color:#86efac; margin-bottom:1.25rem; border:1px solid rgba(16,185,129,0.25);">// ✅ PATCHED IMPLEMENTATION: Strict Domain-Bound Schema + Ownership Scoping
+import { z } from 'zod';
+import helmet from 'helmet';
+
+app.disable('x-powered-by');
+app.use(helmet());
+
+const FeedPayloadSchema = z.object({
+  name: z.string().trim().min(2).max(80),
+  category: z.enum(['Forage', 'Concentrate', 'Mineral', 'Vitamin']),
+  dryMatterPct: z.number().min(0.5).max(100),   // Biological DM bound: 0.5% - 100%
+  bodyWeightKg: z.number().min(1.0).max(2500)   // Prevents 0/negative solver hang &amp; overflow
+});
+
+app.post('/api/feeds', requireAuth, async (req, res) => {
+  const parsed = FeedPayloadSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ error: 'Invalid feed parameters', details: parsed.error.issues });
+  }
+  const feed = await db.feeds.create({ ...parsed.data, createdBy: req.user.id });
+  return res.status(201).json(feed);
+});
+
+app.get('/api/history', requireAuth, async (req, res) => {
+  const records = await db.history.findMany({ where: { userId: req.user.id } });
+  return res.status(200).json(records);
+});</pre>
+
+      <h3 style="font-size: 1.05rem; margin: 1.25rem 0 0.6rem; color: #a5b4fc;">Automated Regression Test Suite (Jest + Supertest)</h3>
+      <pre style="background:#060911; padding:1.1rem; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:0.8rem; color:#c7d2fe;">describe('Ration Solver API Security Regression Suite', () => {
+  it('rejects unauthenticated access to GET /api/history with 401', async () => {
+    const res = await request(app).get('/api/history');
+    expect(res.status).toBe(401);
+  });
+
+  it('rejects negative Dry Matter percentage on POST /api/feeds with 400', async () => {
+    const res = await request(app)
+      .post('/api/feeds')
+      .set('Authorization', `Bearer ${validUserToken}`)
+      .send({ name: 'Test Concentrate', category: 'Concentrate', dryMatterPct: -500, bodyWeightKg: 400 });
+    expect(res.status).toBe(400);
+  });
+});</pre>
+    </article>
+  </main>
+</body>
+</html>

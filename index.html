@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fata Fatikhul Karim — Security-Focused Software Engineer</title>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Fata Fatikhul Karim — Application Security &amp; Backend Automation Engineer</title>
   <meta name="description" content="Fata Fatikhul Karim — Security-Focused Software Engineer specializing in Application Security (OWASP Top 10), Backend Development (Node.js/Python), and Model Context Protocol (MCP) Automation." />
 
   <!-- Favicon -->
@@ -40,12 +41,10 @@
         <span class="logo-bracket">&lt;</span>Fata<span class="logo-accent">Karim</span><span class="logo-bracket">/&gt;</span>
       </a>
 
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="Primary Navigation">
         <a href="#projects" data-i18n="nav_projects">Case Studies</a>
-        <a href="#writeups" data-i18n="nav_writeups">Security Research</a>
-        <a href="#experience" data-i18n="nav_exp">Experience</a>
-        <a href="#education" data-i18n="nav_edu">Education</a>
-        <a href="#scanner" data-i18n="nav_scanner">DNS Audit Tool</a>
+        <a href="#writeups" data-i18n="nav_writeups">Writeups</a>
+        <a href="#experience" data-i18n="nav_exp">Experience &amp; Education</a>
         <a href="#contact" data-i18n="nav_contact">Contact</a>
       </nav>
 
@@ -54,13 +53,9 @@
           <i data-lucide="globe" class="icon-sm"></i>
           <span id="langLabel">EN</span>
         </button>
-        <a href="Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-outline btn-sm">
+        <a href="Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-primary btn-sm">
           <i data-lucide="download" class="icon-sm"></i>
           <span data-i18n="nav_resume">Resume (PDF)</span>
-        </a>
-        <a href="https://www.linkedin.com/in/fata-fatikhul-karim" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
-          <i data-lucide="linkedin" class="icon-sm"></i>
-          <span>LinkedIn</span>
         </a>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
           <i data-lucide="menu"></i>
@@ -96,20 +91,17 @@
           <div class="hero-cta">
             <a href="#projects" class="btn btn-primary">
               <i data-lucide="layers" class="icon-sm"></i>
-              <span data-i18n="btn_projects">Engineering Case Studies</span>
+              <span data-i18n="btn_projects">View Engineering Case Studies</span>
             </a>
             <a href="Fata-Fatikhul-Karim-Resume.pdf" download class="btn btn-ghost">
               <i data-lucide="file-down" class="icon-sm"></i>
               <span data-i18n="btn_cv">Download ATS Resume (PDF)</span>
             </a>
-            <a href="https://github.com/fatakarim" target="_blank" rel="noopener" class="btn btn-outline">
-              <i data-lucide="github" class="icon-sm"></i>
-              <span>GitHub</span>
-            </a>
-            <a href="https://hackerone.com/zeonmaltius" target="_blank" rel="noopener" class="btn btn-outline">
-              <i data-lucide="shield" class="icon-sm"></i>
-              <span>HackerOne</span>
-            </a>
+          </div>
+
+          <div class="arch-note" style="margin-bottom: 1.5rem;">
+            <i data-lucide="calendar-check" class="icon-xs"></i>
+            <span data-i18n="hero_logistics"><strong>Availability &amp; Logistics:</strong> Expected Graduation: 2027 (UNSOED) &bull; Flexible Schedule for Full-Time / Paid Internship &bull; Open to Remote, Hybrid, or Relocation (Jakarta / Bandung / Java).</span>
           </div>
 
           <div class="hero-stats">
@@ -134,7 +126,7 @@
         <div class="hero-visual">
           <div class="profile-card">
             <div class="profile-header">
-              <img src="https://avatars.githubusercontent.com/u/290970013?v=4" alt="Fata Fatikhul Karim" class="profile-avatar" />
+              <img src="avatar.jpg" alt="Fata Fatikhul Karim" class="profile-avatar" width="78" height="78" />
               <div class="profile-meta">
                 <h2>Fata Fatikhul Karim</h2>
                 <p><i data-lucide="map-pin" class="icon-xs"></i> Central Java, Indonesia (Open to Remote / Relocation)</p>
@@ -296,13 +288,15 @@
               <span class="badge badge-green">Authorized Audit • 8 Findings</span>
               <span class="writeup-time">Coordinated Disclosure</span>
             </div>
-            <h3 class="writeup-title" data-i18n="wrt1_title">Root-Cause Analysis: Unauthenticated Data Exposure &amp; Input Boundary Flaws in an Agricultural Ration Solver API</h3>
+            <h3 class="writeup-title">
+              <a href="writeups/agricultural-solver-api-audit.html" style="color:inherit;text-decoration:none;" data-i18n="wrt1_title">Root-Cause Analysis: Unauthenticated Data Exposure &amp; Input Boundary Flaws in an Agricultural Ration Solver API</a>
+            </h3>
             <p class="writeup-excerpt" data-i18n="wrt1_desc">
-              How combining domain knowledge in livestock nutrition modeling with backend API auditing uncovered 8 vulnerabilities (including unauthenticated GET /api/history exposure and missing schema bounds) during an authorized assessment, along with Zod &amp; Express remediation blueprints.
+              Threat model, vulnerable Express.js endpoint patterns, business impact of unauthenticated GET /api/history exposure, and defense-in-depth remediation using Zod schemas + Jest regression unit tests.
             </p>
-            <button class="writeup-btn" data-article="idor">
-              <span data-i18n="wrt_read">Read Technical RCA &amp; Patch</span> <i data-lucide="book-open" class="icon-xs"></i>
-            </button>
+            <a href="writeups/agricultural-solver-api-audit.html" class="writeup-btn" style="text-decoration:none;">
+              <span data-i18n="wrt_read">Read Full RCA &amp; Unit Tests</span> <i data-lucide="arrow-up-right" class="icon-xs"></i>
+            </a>
           </article>
 
           <article class="writeup-card">
@@ -310,27 +304,31 @@
               <span class="badge badge-purple">System Architecture</span>
               <span class="writeup-time">MCP &amp; Sandboxing</span>
             </div>
-            <h3 class="writeup-title" data-i18n="wrt2_title">Designing Safe Model Context Protocol (MCP) Bridges for Physical Android &amp; Headless Browser Automation</h3>
+            <h3 class="writeup-title">
+              <a href="writeups/mcp-device-browser-architecture.html" style="color:inherit;text-decoration:none;" data-i18n="wrt2_title">Designing Sandboxed Model Context Protocol (MCP) Bridges for Android ADB &amp; Headless Browser E2E Verification</a>
+            </h3>
             <p class="writeup-excerpt" data-i18n="wrt2_desc">
-              Architectural trade-offs in exposing ADB and Chrome DevTools Protocol (CDP) actions over JSON-RPC stdio, accessibility-tree element resolution, and permission boundaries to prevent unintended command execution.
+              Mitigating indirect prompt-injection to shell-execution risks by replacing string-interpolated ADB calls with parameterized execFile subprocesses and XML Accessibility Tree centroid resolution.
             </p>
-            <button class="writeup-btn" data-article="mcp">
-              <span data-i18n="wrt_read">Read Architecture Note</span> <i data-lucide="book-open" class="icon-xs"></i>
-            </button>
+            <a href="writeups/mcp-device-browser-architecture.html" class="writeup-btn" style="text-decoration:none;">
+              <span data-i18n="wrt_read">Read Architecture &amp; Guardrails</span> <i data-lucide="arrow-up-right" class="icon-xs"></i>
+            </a>
           </article>
 
           <article class="writeup-card">
             <div class="writeup-meta">
-              <span class="badge badge-green">AppSec Automation</span>
-              <span class="writeup-time">Recon Pipeline</span>
+              <span class="badge badge-green">AppSec Automation &amp; CI</span>
+              <span class="writeup-time">Python 3 &amp; Unittest</span>
             </div>
-            <h3 class="writeup-title" data-i18n="wrt3_title">Multi-Source Passive Subdomain Enumeration &amp; Non-Destructive API Boundary Auditing in Python</h3>
+            <h3 class="writeup-title">
+              <a href="writeups/passive-osint-boundary-auditing.html" style="color:inherit;text-decoration:none;" data-i18n="wrt3_title">Multi-Source Passive Subdomain Enumeration &amp; Non-Destructive API Boundary Auditing in Python</a>
+            </h3>
             <p class="writeup-excerpt" data-i18n="wrt3_desc">
-              Combining AlienVault OTX, HackerTarget, and Certificate Transparency (crt.sh) telemetry with deterministic HTTP security header and CORS validation to streamline pre-release security reviews.
+              Combining AlienVault OTX, HackerTarget, and crt.sh telemetry with deterministic HTTP header, CORS, and numeric boundary probing backed by GitHub Actions CI unit tests.
             </p>
-            <button class="writeup-btn" data-article="recon">
-              <span data-i18n="wrt_read">Read Methodology</span> <i data-lucide="book-open" class="icon-xs"></i>
-            </button>
+            <a href="writeups/passive-osint-boundary-auditing.html" class="writeup-btn" style="text-decoration:none;">
+              <span data-i18n="wrt_read">Read Engineering Note</span> <i data-lucide="arrow-up-right" class="icon-xs"></i>
+            </a>
           </article>
         </div>
       </div>
@@ -366,10 +364,10 @@
 
           <div class="skill-card">
             <div class="skill-top">
-              <span class="skill-name">Next.js, React &amp; Tailwind CSS</span>
-              <span class="skill-badge">Frontend Web</span>
+              <span class="skill-name">GitHub Actions CI &amp; Unit Testing</span>
+              <span class="skill-badge">Quality &amp; Verification</span>
             </div>
-            <p class="skill-detail">Responsive Web Interfaces, Semantic HTML5, Modern Component Architecture</p>
+            <p class="skill-detail">Automated Regression Tests (Python unittest / Jest), Secret Hygiene, Semantic HTML5 &amp; CSS3</p>
           </div>
 
           <div class="skill-card">
@@ -667,7 +665,7 @@
 
   <footer class="footer">
     <div class="container footer-content">
-      <p>© 2026 <strong>Fata Fatikhul Karim</strong>. Security-Focused Software Engineer.</p>
+      <p>© 2026 <strong>Fata Fatikhul Karim</strong>. Security-Focused Software Engineer &bull; <a href=".well-known/security.txt" style="color:var(--accent-green);text-decoration:none;font-family:var(--font-mono);font-size:0.8rem;">/.well-known/security.txt (RFC 9116)</a></p>
       <p class="footer-quote">All security research and tooling documented on this site adhere to authorized testing and coordinated vulnerability disclosure standards.</p>
     </div>
   </footer>
