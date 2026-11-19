@@ -171,8 +171,8 @@
           <span class="exp-date">2025 – Present</span>
         </div>
         <ul class="bullets">
-          <li><strong>Authorized Agricultural Ration Solver API Assessment:</strong> Executed a coordinated security review of an Express.js livestock ration formulation platform. Identified and responsibly disclosed <strong>8 vulnerabilities (3 High, 4 Medium, 1 Low)</strong>, including unauthenticated sensitive data exposure on <code>GET /api/history</code> (38 user records), missing server-side numeric domain bounds on <code>POST /api/feeds</code>, client solver freeze on non-positive inputs, and permissive CORS wildcard (<code>*</code>) policies.</li>
-          <li><strong>Remediation &amp; Verification:</strong> Authored reproducible Proof-of-Concept documentation, logged controlled test record UUIDs for maintainer cleanup, and delivered schema validation blueprints (Zod) and ownership-scoped authorization middleware.</li>
+          <li><strong>Authorized Agricultural Ration Solver API Assessment:</strong> Executed a coordinated security review of an Express.js livestock ration formulation platform. Identified and responsibly disclosed <strong>8 findings (2 High, 4 Medium, 1 Low, 1 Informational)</strong>, including unauthenticated sensitive data exposure on <code>GET /api/history</code> (38 user records, CVSS 7.5 High), missing server-side numeric domain bounds on <code>POST /api/feeds</code> (CVSS 7.5 High), client solver freeze on non-positive inputs (CVSS 6.5 Medium), and permissive CORS wildcard (<code>*</code>) policies (CVSS 5.3 Medium).</li>
+          <li><strong>Production Remediation &amp; Verification:</strong> All actionable findings were patched by the maintainer and verified via re-testing by October 14, 2026 (published with explicit maintainer permission granted on October 15, 2026). Delivered schema validation blueprints (Zod), ownership-scoped authorization middleware, and Jest regression unit tests.</li>
         </ul>
       </div>
 

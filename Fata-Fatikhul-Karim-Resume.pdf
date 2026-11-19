@@ -15,7 +15,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 6 0 obj
-<< /Length 5476 >>
+<< /Length 5506 >>
 stream
 BT
 /F2 18 Tf
@@ -57,21 +57,21 @@ BT
 /F2 9.5 Tf
 1 0 0 1 48 488 Tm (Application Security Researcher \(Coordinated Disclosure\) | HackerOne \(@zeonmaltius\) [Oct 2026 - Present]) Tj
 /F1 9.2 Tf
-1 0 0 1 48 475 Tm (- Authorized Agricultural Ration Solver API Assessment \(Reported Oct 9, 2026; Maintainer Acknowledged < 24h\):) Tj
+1 0 0 1 48 475 Tm (- Authorized Agricultural Ration Solver API Assessment \(Reported Oct 9, 2026; Deployed & Verified by Oct 14, 2026\):) Tj
 /F1 9.2 Tf
-1 0 0 1 48 462 Tm (  Identified and responsibly disclosed 8 vulnerabilities \(3 High, 4 Medium, 1 Low\) in an Express.js livestock ration) Tj
+1 0 0 1 48 462 Tm (  Identified and responsibly disclosed 8 findings \(2 High, 4 Medium, 1 Low, 1 Informational\) in an Express.js livestock) Tj
 /F1 9.2 Tf
-1 0 0 1 48 449 Tm (  solver, including unauthenticated GET /api/history exposure \(38 user records\), missing numeric bounds on POST /api/feeds,) Tj
+1 0 0 1 48 449 Tm (  ration solver, including unauthenticated GET /api/history exposure \(38 user records, CVSS 7.5 High\), missing numeric) Tj
 /F1 9.2 Tf
-1 0 0 1 48 436 Tm (  client solver freeze on non-positive inputs, and wildcard CORS \(*\). Logged verification UUIDs for cleanup and) Tj
+1 0 0 1 48 436 Tm (  bounds on POST /api/feeds \(CVSS 7.5 High\), client solver freeze on BB <= 0 \(CVSS 6.5 Medium\), and wildcard CORS \(*\).) Tj
 /F1 9.2 Tf
-1 0 0 1 48 423 Tm (  delivered drop-in Zod validation schemas, auth ownership middleware, and Jest regression unit tests.) Tj
+1 0 0 1 48 423 Tm (- Published RCA with explicit maintainer approval \(Oct 15, 2026\), Zod validation schemas, and Jest regression tests.) Tj
 /F2 9.5 Tf
 1 0 0 1 48 407 Tm (Open-Source Security & Automation Developer | GitHub \(@fatakarim\) [Jun 2026 - Present]) Tj
 /F1 9.2 Tf
 1 0 0 1 48 394 Tm (- Maintaining 4 public repositories across Python 3 and Node.js: authored 510+ lines of zero-dependency Python 3) Tj
 /F1 9.2 Tf
-1 0 0 1 48 381 Tm (  security auditing code verified by 5 automated unittest cases and 40 JSON-RPC stdio MCP automation tools.) Tj
+1 0 0 1 48 381 Tm (  security auditing code verified by 5 automated unittest cases and 40+ JSON-RPC stdio MCP automation tools.) Tj
 /F2 10.5 Tf
 1 0 0 1 48 363 Tm (ENGINEERING CASE STUDIES & PROJECTS) Tj
 /F2 9.5 Tf
@@ -85,13 +85,13 @@ BT
 /F2 9.5 Tf
 1 0 0 1 48 293 Tm (Sandboxed Model Context Protocol \(MCP\) Device & Browser Bridge \(Node.js\) | github.com/fatakarim/android-browser-mcp) Tj
 /F1 9.2 Tf
-1 0 0 1 48 280 Tm (- Node.js JSON-RPC stdio MCP server exposing 40 structured automation tools for physical Android hardware \(via ADB XML) Tj
+1 0 0 1 48 280 Tm (- Node.js JSON-RPC stdio MCP server exposing 44 structured automation tools for physical Android hardware \(via ADB XML) Tj
 /F1 9.2 Tf
 1 0 0 1 48 267 Tm (  Accessibility Tree parsing\) and headless Chromium \(via Chrome DevTools Protocol\) with parameterized execFile guardrails.) Tj
 /F2 9.5 Tf
 1 0 0 1 48 251 Tm (JARVIS - Personal WhatsApp AI Triage Prototype \(Node.js\) | github.com/fatakarim/jarvis-whatsapp-ai) Tj
 /F1 9.2 Tf
-1 0 0 1 48 238 Tm (- Personal Baileys WebSocket + Gemini 2.5 Flash prototype \(< 1.8s latency, 100% group-chat filtering saving ~75% tokens\).) Tj
+1 0 0 1 48 238 Tm (- Personal Baileys WebSocket + Gemini 2.5 Flash prototype \(2,000ms typing cadence, 0 group LLM calls via @g.us filter\).) Tj
 /F2 10.5 Tf
 1 0 0 1 48 220 Tm (EDUCATION & AVAILABILITY) Tj
 /F2 9.5 Tf
@@ -115,5 +115,5 @@ xref
 trailer
 << /Size 7 /Root 1 0 R >>
 startxref
-5924
+5954
 %%EOF
