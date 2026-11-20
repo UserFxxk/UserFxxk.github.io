@@ -156,13 +156,13 @@
                 <strong>Engineering Decision &amp; Trade-offs:</strong> Built strictly on Python 3's standard library (<code>urllib.request</code>, <code>ssl</code>, <code>concurrent.futures</code>) for zero-dependency portability. Aggregates passive subdomain OSINT across three independent providers (AlienVault OTX, HackerTarget, and <code>crt.sh</code>), performs non-destructive numeric boundary probing (<code>0</code>, <code>-500</code>, <code>1e308</code>), and generates Markdown remediation reports with code blueprints.
               </p>
               <div class="project-meta-box">
-                <strong>Verification &amp; Safety Guardrails:</strong> Backed by 5 automated <code>unittest</code> regression tests (<code>tests/test_recon.py</code>); active boundary fuzzing requires explicit <code>--confirm-authorized</code> flag to enforce written permission compliance.
+                <strong>CI/CD Verification &amp; Safety Guardrails:</strong> Backed by 10 automated tests in GitHub Actions CI (6 Python <code>unittest</code> cases + 4 Node.js <code>SOLVER-01..08</code> remediation blueprint tests), a reusable Composite GitHub Action (<code>action.yml</code>) with <code>--json-out</code> / <code>--fail-on-high</code> CI gates, and an explicit <code>--confirm-authorized</code> guardrail for active boundary fuzzing.
               </div>
               <div class="project-tags">
                 <span>Python 3</span>
-                <span>OWASP Auditing</span>
+                <span>GitHub Actions CI</span>
+                <span>Composite Action (action.yml)</span>
                 <span>Passive OSINT Failover</span>
-                <span>Boundary Probing</span>
                 <span>unittest</span>
               </div>
             </div>
@@ -186,7 +186,7 @@
                 <strong>Engineering Decision &amp; Trade-offs:</strong> Engineered a Node.js JSON-RPC 2.0 <code>stdio</code> server exposing 44 structured tools for Android Debug Bridge (ADB) and Chrome DevTools Protocol (CDP). Chose XML Accessibility Tree parsing (<code>uiautomator dump</code>) over static X/Y pixel coordinates to ensure layout resilience across screen densities.
               </p>
               <div class="project-meta-box">
-                <strong>Security Guardrails:</strong> All subprocess calls use parameterized <code>child_process.execFile('adb', args)</code> without invoking a shell interpreter, combined with regex allowlists for package identifiers to neutralize indirect prompt injection.
+                <strong>Security Guardrails &amp; CI Tests:</strong> Verified by 5 automated unit tests in GitHub Actions CI (<code>test/guardrails.test.js</code>); all subprocess calls use parameterized <code>child_process.execFile('adb', args)</code> without a shell interpreter, paired with <code>PACKAGE_REGEX</code> allowlists and a default read-only diagnostic prefix allowlist on the <code>shell</code> tool.
               </div>
               <div class="project-tags">
                 <span>Node.js</span>
@@ -464,11 +464,11 @@
                 <span class="timeline-date">Jun 2026 – Present</span>
               </div>
               <p class="timeline-desc" data-i18n="exp2_desc">
-                Maintaining <strong>4 public repositories</strong> across Python 3 and Node.js:
-                (1) <a href="https://github.com/fatakarim/fata-termux-toolkit" target="_blank" rel="noopener" style="color:var(--accent-green);">fata-termux-toolkit</a> — 510+ lines of zero-dependency Python 3 security auditing code verified by 5 automated <code>unittest</code> cases;
-                (2) <a href="https://github.com/fatakarim/android-browser-mcp" target="_blank" rel="noopener" style="color:var(--accent-green);">android-browser-mcp</a> — 44 JSON-RPC 2.0 <code>stdio</code> MCP automation tools with parameterized <code>execFile</code> and <code>PACKAGE_REGEX</code> guardrails;
-                (3) <a href="https://github.com/fatakarim/jarvis-whatsapp-ai" target="_blank" rel="noopener" style="color:var(--accent-green);">jarvis-whatsapp-ai</a> — personal WhatsApp AI triage prototype with <code>.env</code> secret isolation; and
-                (4) <a href="https://github.com/fatakarim/fatakarim.github.io" target="_blank" rel="noopener" style="color:var(--accent-green);">fatakarim.github.io</a> — engineering case studies, standalone RCA writeups, and client-side DoH DNS posture analyzer.
+                Maintaining <strong>4 public repositories</strong> backed by <strong>18 automated unit tests passing in GitHub Actions CI</strong>:
+                (1) <a href="https://github.com/fatakarim/fata-termux-toolkit" target="_blank" rel="noopener" style="color:var(--accent-green);">fata-termux-toolkit</a> — zero-dependency Python 3 security auditing CLI &amp; Composite GitHub Action (<code>action.yml</code>) verified by 6 Python <code>unittest</code> cases and 4 Node.js <code>SOLVER-01..08</code> remediation tests;
+                (2) <a href="https://github.com/fatakarim/android-browser-mcp" target="_blank" rel="noopener" style="color:var(--accent-green);">android-browser-mcp</a> — 44 JSON-RPC 2.0 <code>stdio</code> MCP automation tools with parameterized <code>execFile</code>, <code>PACKAGE_REGEX</code>, and read-only diagnostic shell guardrails verified by 5 unit tests;
+                (3) <a href="https://github.com/fatakarim/jarvis-whatsapp-ai" target="_blank" rel="noopener" style="color:var(--accent-green);">jarvis-whatsapp-ai</a> — personal WhatsApp AI triage prototype verified by 3 unit tests with <code>.env</code> secret isolation; and
+                (4) <a href="https://github.com/fatakarim/fatakarim.github.io" target="_blank" rel="noopener" style="color:var(--accent-green);">fatakarim.github.io</a> — engineering case studies, standalone RCA writeups, Interactive AppSec Remediation Sandbox, and client-side DoH DNS posture analyzer.
               </p>
             </div>
           </div>
