@@ -65,22 +65,28 @@ let lastScanReportMd = [
 let lastScannedDomain = "hackerone.com";
 
 async function queryDoH(name, type) {
-  const url = `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(name)}&type=${encodeURIComponent(type)}`;
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 6000);
-  try {
-    const res = await fetch(url, {
-      headers: { Accept: "application/dns-json" },
-      signal: controller.signal
-    });
-    clearTimeout(timer);
-    if (!res.ok) return [];
-    const data = await res.json();
-    return data.Answer || [];
-  } catch (e) {
-    clearTimeout(timer);
-    return [];
+  const endpoints = [
+    `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(name)}&type=${encodeURIComponent(type)}`,
+    `https://dns.google/resolve?name=${encodeURIComponent(name)}&type=${encodeURIComponent(type)}`
+  ];
+  for (const url of endpoints) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4500);
+    try {
+      const res = await fetch(url, {
+        headers: { Accept: "application/dns-json" },
+        signal: controller.signal
+      });
+      clearTimeout(timer);
+      if (res.ok) {
+        const data = await res.json();
+        return data.Answer || [];
+      }
+    } catch (e) {
+      clearTimeout(timer);
+    }
   }
+  return [];
 }
 
 function cleanDomainInput(raw) {
